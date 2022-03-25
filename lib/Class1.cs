@@ -1,5 +1,9 @@
 ﻿namespace lib;
-public class Class1
+public interface ILibraryItem
 {
-
+    public string CheckOut();
+}
+public class Book
+{
+    
 }

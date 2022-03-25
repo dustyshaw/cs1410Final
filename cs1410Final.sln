@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazor", "blazor\blazor.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{7E4E82C0-B45F-49FB-9D9E-46A9671F8EF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{DF5D34D3-9A90-4E19-8B27-37F80F1AAB21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{7E4E82C0-B45F-49FB-9D9E-46A9671F8EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E4E82C0-B45F-49FB-9D9E-46A9671F8EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E4E82C0-B45F-49FB-9D9E-46A9671F8EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF5D34D3-9A90-4E19-8B27-37F80F1AAB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5D34D3-9A90-4E19-8B27-37F80F1AAB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5D34D3-9A90-4E19-8B27-37F80F1AAB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5D34D3-9A90-4E19-8B27-37F80F1AAB21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
