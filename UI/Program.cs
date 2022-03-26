@@ -5,10 +5,12 @@ namespace MyLibrary
 {
     internal partial class Program
     {
-        public interface IAccount
+        public class NoInputGivenException : Exception
         {
-            string CheckOut();
-            string CheckIn();
+            public NoInputGivenException(string message)
+            {
+                throw new NoInputGivenException(message);
+            }
         }
         public enum ItemType
         {
@@ -27,12 +29,12 @@ namespace MyLibrary
             LostorStolen,       //marked as lost or stolen after a certain period of being overdue or checked out
             Pending,            // bought but not available yet, being repaired by library
             Unavailable = LostorStolen | CheckedOut | Pending,   //unavailable for checkout, but could fullfill these categories
-            // Available = CheckedIn
         }
 
         public interface ICheckoutable
         {
-
+            public string CheckOut(ICheckoutable item, Account account, int[] holdList);
+            public string CheckIn(ICheckoutable item, Account account, int[] holdList);
         }
         public class Book : ICheckoutable
         {
@@ -48,86 +50,81 @@ namespace MyLibrary
                 this.Title = _title;
                 this.Author = _author;
             }
+            public string CheckOut(ICheckoutable item, Account account, int[] holdList)
+            {
+                var bookitem = (Book)item;
+                bookitem.Availability = ItemAvailability.CheckedOut;
+                return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName);
+            }
+            public string CheckIn(ICheckoutable item, Account account, int[] holdList)
+            {
+                var bookitem = (Book)item;
+                bookitem.Availability = ItemAvailability.CheckedIn;
+                return ("Item successfully checked in.");
+            }
         }
 
         public class CD : ICheckoutable
         {
-            private int iSBN;
-            public int ISBN
-            {
-                get { return iSBN; }
-                set { iSBN = value; }
-            }
-            private string title;
-            public string Title
-            {
-                get { return title; }
-                set { title = value; }
-            }
-            private string artist;
-            public string Artist
-            {
-                get { return artist; }
-                set { artist = value; }
-            }
+            private int ISBN { get; set; }
+            private string Title { get; set; }
+            private string Artist { get; set; }
+            public ItemAvailability Availability { get; set; }
+            public ItemType type = ItemType.Book;
             public CD(int _ISBN, string _title, string _artist)
             {
                 this.ISBN = _ISBN;
                 this.Title = _title;
                 this.Artist = _artist;
             }
+            public string CheckOut(ICheckoutable item, Account account, int[] holdList)
+            {
+                var bookitem = (CD)item;
+                bookitem.Availability = ItemAvailability.CheckedOut;
+                return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName);
+            }
+            public string CheckIn(ICheckoutable item, Account account, int[] holdList)
+            {
+                var bookitem = (CD)item;
+                bookitem.Availability = ItemAvailability.CheckedIn;
+                return ("Item successfully checked in.");
+            }
         }
+
         public class Account
         {
-            private string firstName;
-            public string FirstName
+            public Account(string _FirstName, string _LastName, int _ID)
             {
-                get { return firstName; }
-                set { firstName = value; }
+                this.FirstName = _FirstName;
+                this.LastName = _LastName;
+                this.ID = _ID;
             }
-            private string lastName;
-            public string LastName
-            {
-                get { return lastName; }
-                set { lastName = value; }
-            }
-            private int id;
-            public int ID
-            {
-                get { return id; }
-                set { id = value; }
-            }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public int ID { get; set; }
             public static int numOfHoldsDefault = 0;
             public int[] holdList = new int[numOfHoldsDefault];
         }
-        public static string CheckOut(ICheckoutable item, Account account, int[] holdList)
-        {
-            var bookitem = (Book)item;
-            bookitem.availability = ItemAvailability.CheckedOut;
-            return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName);
-        }
-        public static string CheckIn(ICheckoutable item, Account account, int[] holdList)
-        {
-            var bookitem = (Book)item;
-            bookitem.availability = ItemAvailability.CheckedIn;
-            return ("Item successfully checked in.");
-        }
         static void Main(string[] args)
         {
-            // example of adding a library item
             Dictionary<int, Object> LibraryItemList = new Dictionary<int, Object>();
+
+            // example of adding a different type of library item
+            CD newCD = new CD(12346, "Gone With The Wind Soundtrack", "Jim John");
+            LibraryItemList.Add(12346, newCD);
+
+            // example of adding a library item as a book
             Book newBook = new Book(12345, "Gone With the Wind", "Margaret Mitchell");
             LibraryItemList.Add(12345, newBook);
 
             // example of adding an account
             Dictionary<int, Account> AccountList = new Dictionary<int, Account>();
-            Account newAct = new Account();
-            newAct.FirstName = "Dusty";
-            newAct.LastName = "Shaw";
-            newAct.ID = 2301237;
+            Account newAct = new Account("Dusty", "Shaw", 123);
             AccountList.Add(newAct.ID, newAct);
 
-            Console.WriteLine("Enter in one of the following commands:");
+            Console.WriteLine(@"Welcome to the Library App where library workers can keep track of library items,
+            check out library items, renew them, and add library patrons.");
+            Console.WriteLine("Enter in one of the following commands (ex. to check out a book, enter the word 'CheckOut'):");
             Console.WriteLine(@"
                 1. CheckOut
                 2. CheckIn -- unavailable
@@ -143,41 +140,26 @@ namespace MyLibrary
             {
                 Console.WriteLine("Enter Item id to check out: ");
                 int userInputBook = Convert.ToInt32(Console.ReadLine());
-                if (userInputBook == 0)
-                {
-                    throw new Exception();
-                }
-                else
+                try
                 {
                     Console.WriteLine("Enter Account Id: ");
                     var userInput = Convert.ToInt32(Console.ReadLine());
                     if (userInput == 0)
                     {
-                        throw new Exception();
+                        throw new NoInputGivenException("no input given");
                     }
                     else
                     {
                         var requestedAccount = AccountList[userInput];
-                        var requestedBook = LibraryItemList[userInputBook];
-                        
-                        Console.WriteLine(CheckOut((ICheckoutable)requestedBook, requestedAccount, requestedAccount.holdList));
+                        var requestedBook = (Book)LibraryItemList[userInputBook];
+                        Console.WriteLine(requestedBook.CheckOut((ICheckoutable)requestedBook, requestedAccount, requestedAccount.holdList));
                     }
                 }
+                catch
+                {
+                    throw new NoInputGivenException("no input given");
+                }
             }
-
-
-            // example of adding a different type of library item
-            CD newCD = new CD(12346, "Gone With The Wind Soundtrack", "Jim John");
-            LibraryItemList.Add(12346, newCD);
-            // part of a 'display all library items' list maybe
-            // Console.WriteLine("Item Count: " + LibraryItemList.Count);
-
-            // Console.WriteLine(CheckOut(newBook, newAct, newAct.holdList));
-            // Console.WriteLine(newBook.Title + " by " + newBook.Author + " availability: " + newBook.availability);
-
-            // Console.WriteLine(CheckIn(newBook, newAct, newAct.holdList));
-            // Console.WriteLine(newBook.Title + " by " + newBook.Author + " availability: " + newBook.availability);
-
         }
     }
 }
