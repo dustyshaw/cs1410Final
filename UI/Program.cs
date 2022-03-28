@@ -59,15 +59,16 @@ namespace MyLibrary
                 3. Renew -- unavailable
                 4. AddLibraryItem 
                 5. AddNewPatron -- unavailable
-                6. DisplayLibraryItems -- unavailable
-                7. DisplayPatrons -- unavailable
-                8. Exit -- Exits program
+                6. SearchLibraryItems
+                7. DisplayLibraryItems -- unavailable
+                8. DisplayPatrons -- unavailable
+                9. Exit -- Exits program
                 ");
 
             var UserInput = Console.ReadLine();
             while (UserInput != "Exit")
             {
-                if (UserInput == "CheckOut")
+                if (UserInput == "CheckOut" || UserInput == "1")
                 {
                     Console.WriteLine("Enter Item CallNumber to check out: ");
                     string userInputBook = (Console.ReadLine());
@@ -75,9 +76,9 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Account Id: ");
                         var userInput = Convert.ToInt32(Console.ReadLine());
-                        if (userInput == 0)
+                        if (userInput ==0)
                         {
-                            throw new NoInputGivenException("no input given");
+                            throw new Exception("no input given");
                         }
                         else
                         {
@@ -88,22 +89,20 @@ namespace MyLibrary
                     }
                     catch
                     {
-                        throw new NoInputGivenException("no input given");
+                        throw new Exception("no input given");
                     }
                 }
-                if (UserInput == "CheckIn")
+                if (UserInput == "CheckIn" || UserInput == "2")
                 {
                     Console.WriteLine("Enter Item CallNumber to check out: ");
                     string RequestedCallNumber = Console.ReadLine();
                     var requestedBook = (ICheckoutable)LibraryItemList[RequestedCallNumber];
                     Console.WriteLine(requestedBook.CheckIn(requestedBook));
                 }
-                if (UserInput == "AddLibraryItem")
+                if (UserInput == "AddLibraryItem" || UserInput == "4")
                 {
                     Console.WriteLine("Select Library Type:");
-                    Console.WriteLine(@"
-                Book
-                CD");
+                    Console.WriteLine("\nBook \nCD");
                     string BookType = Console.ReadLine();
                     switch (BookType)
                     {
@@ -130,6 +129,10 @@ namespace MyLibrary
                             LibraryItemList.Add(CDCallNumber, NewCDItem);
                             break;
                     }
+                }
+                if (UserInput == "SearchLibraryItems" || UserInput == "6")
+                {
+                    
                 }
             }
         }
