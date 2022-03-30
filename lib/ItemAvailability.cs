@@ -1,5 +1,4 @@
 namespace MyLibrary.lib;
-
 public enum ItemAvailability
 {
     CheckedIn,          //available for check out or can be placed on hold, not assigned to any patron

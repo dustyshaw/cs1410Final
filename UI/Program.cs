@@ -6,7 +6,7 @@ namespace MyLibrary
 {
     internal partial class Program
     {
-        
+
         static void Main(string[] args)
         {
             Dictionary<string, ICheckoutable> LibraryItemList = new Dictionary<string, ICheckoutable>(); //move to lib.library 
@@ -25,8 +25,8 @@ namespace MyLibrary
                 3. Renew -- unavailable
                 4. AddLibraryItem 
                 5. AddNewPatron -- unavailable
-                6. SearchLibraryItems
-                7. DisplayLibraryItems -- unavailable
+                6. SearchLibraryItems -- unavailable
+                7. DisplayLibraryItems
                 8. DisplayPatrons -- unavailable
                 9. Exit -- Exits program
                 ");
@@ -42,7 +42,7 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Account Id: ");
                         var userInput = Convert.ToInt32(Console.ReadLine());
-                        if (userInput ==0)
+                        if (userInput == 0)
                         {
                             throw new Exception("no input given");
                         }
@@ -65,11 +65,13 @@ namespace MyLibrary
                     var requestedBook = (ICheckoutable)LibraryItemList[RequestedCallNumber];
                     Console.WriteLine(requestedBook.CheckIn(requestedBook));
                 }
-                if (UserInput == "AddLibraryItem" || UserInput == "4")
+                if (UserInput == "AddLibraryItems" || UserInput == "4")
                 {
                     Console.WriteLine("Select Library Type:");
                     Console.WriteLine("\nBook \nCD");
                     string BookType = Console.ReadLine();
+                    bool AskingForType = true;
+
                     switch (BookType)
                     {
                         case "Book":
@@ -81,8 +83,10 @@ namespace MyLibrary
                             int ISBN = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine("Enter Author Name");
                             string Author = Console.ReadLine();
+
                             Book NewBookItem = new Book(CallNumber, Title, ISBN, Author);
                             LibraryItemList.Add(CallNumber, NewBookItem);
+
                             break;
                         case "CD":
                             Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
@@ -95,10 +99,16 @@ namespace MyLibrary
                             LibraryItemList.Add(CDCallNumber, NewCDItem);
                             break;
                     }
+
                 }
                 if (UserInput == "SearchLibraryItems" || UserInput == "6")
                 {
-                    
+
+                }
+                if (UserInput == "DisplayLibraryItems" || UserInput == "7")
+                {
+                    //LibraryItemList.ToList().ForEach(x => Console.WriteLine(x.Key));
+
                 }
             }
         }
