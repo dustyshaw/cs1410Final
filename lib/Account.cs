@@ -1,8 +1,6 @@
-namespace MyLibrary
-{
-    internal partial class Program
-    {
-        public class Account
+namespace MyLibrary.lib;
+
+public class Account
         {
             public Account(string _FirstName, string _LastName, int _ID)
             {
@@ -16,5 +14,3 @@ namespace MyLibrary
             public static int numOfHoldsDefault = 0;
             public int[] holdList = new int[numOfHoldsDefault];
         }
-    }
-}

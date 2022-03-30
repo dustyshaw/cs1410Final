@@ -1,8 +1,6 @@
-namespace MyLibrary
-{
-    internal partial class Program
-    {
-        public class CD : ICheckoutable
+namespace MyLibrary.lib;
+
+public class CD : ICheckoutable
         {
             private string CallNumber { get; set; }
             private string Title { get; set; }
@@ -19,7 +17,8 @@ namespace MyLibrary
             {
                 var bookitem = (CD)item;
                 bookitem.Availability = ItemAvailability.CheckedOut;
-                return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName);
+
+                return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName+ ".");
             }
             public string CheckIn(ICheckoutable item)
             {
@@ -28,5 +27,3 @@ namespace MyLibrary
                 return ("Item successfully checked in.");
             }
         }
-    }
-}

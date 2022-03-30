@@ -1,6 +1,5 @@
-using lib;
 using NUnit.Framework;
-
+using MyLibrary.lib;
 
 namespace tests;
 
@@ -20,7 +19,7 @@ public class Tests
     [Test]
     public void CreatingABookTest()
     {
-        Book newBook = new Book(12345, "Gone With the Wind", "Margaret Mitchell");
-        Assert.AreEqual(12345, newBook.ID);
+        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
+        Assert.AreEqual("587.B35", newBook.CallNumber);
     }
 }
