@@ -5,7 +5,7 @@ public class Book : ICheckoutable
     public string Title { get; set; }
     public int ISBN { get; set; }
     private string Author { get; set; }
-    public ItemType type = ItemType.Book;
+    public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
     public Book(string _CallNumber, string _Title, int _ISBN, string _Author)
@@ -28,5 +28,9 @@ public class Book : ICheckoutable
         var bookitem = (Book)item;
         bookitem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
+    }
+    public string GetDetails()
+    {
+        return $"\n \n CallNumber: {CallNumber} Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Availabilty: {Availability}";
     }
 }
