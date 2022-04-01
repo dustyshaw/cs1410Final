@@ -27,16 +27,16 @@ namespace MyLibrary
                 3. Renew -- unavailable
                 4. AddLibraryItem 
                 5. AddNewPatron -- unavailable
-                6. SearchLibraryItems -- unavailable
-                7. DisplayLibraryItems
+                6. SearchLibraryItems 
+                7. DisplayLibraryItems -- unavailable
                 8. DisplayPatrons -- unavailable
                 9. Exit -- Exits program
                 ");
 
             var UserInput = Console.ReadLine();
-            while (UserInput != "Exit")
+            if (UserInput != "Exit")
             {
-                if (UserInput == "CheckOut" || UserInput == "1")
+                if (UserInput == "CheckOut")
                 {
                     Console.WriteLine("Enter Item CallNumber to check out: ");
                     string userInputBook = (Console.ReadLine());
@@ -44,7 +44,7 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Account Id: ");
                         var userInput = Convert.ToInt32(Console.ReadLine());
-                        if (userInput < 0 )
+                        if (userInput < 0)
                         {
                             throw new ArgumentNullException();
                         }
@@ -61,15 +61,15 @@ namespace MyLibrary
                     }
                 }
 
-                if (UserInput == "CheckIn" || UserInput == "2")
+                if (UserInput == "CheckIn")
                 {
                     Console.WriteLine("Enter Item CallNumber to check out: ");
                     string RequestedCallNumber = Console.ReadLine();
-                    var requestedBook = (ICheckoutable)LibraryItemList[RequestedCallNumber];
-                    Console.WriteLine(requestedBook.CheckIn(requestedBook));
+                    var RequestedItem = (ICheckoutable)LibraryItemList[RequestedCallNumber];
+                    Console.WriteLine(RequestedItem.CheckIn(RequestedItem));
                 }
 
-                if (UserInput == "AddLibraryItems" || UserInput == "4")
+                if (UserInput == "AddLibraryItems")
                 {
                     Console.WriteLine("Select Library Type:");
                     Console.WriteLine("\nBook \nCD");
@@ -107,23 +107,30 @@ namespace MyLibrary
                         }
                     }
                 }
-                if (UserInput == "SearchLibraryItems" || UserInput == "6")
+
+                if (UserInput == "SearchLibraryItems")
                 {
                     Console.WriteLine("Enter in Call Number");
-                    string requestedBook = Console.ReadLine();
-                    Console.WriteLine(LibraryItemList[requestedBook].ToString());
+                    string RequestedItem = Console.ReadLine();
+                    Console.WriteLine(LibraryItemList[RequestedItem].Title);
                 }
+
                 if (UserInput == "DisplayLibraryItems" || UserInput == "7")
                 {
                     // projection = from a in MyLibrary.lib.Book
                     //             where a.Type = "Book"
                     //             select a.Title;
-                    foreach(KeyValuePair<string, ICheckoutable> item in LibraryItemList)
+                    foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
                     {
                         Console.WriteLine("CallNumber: {0}, Title: {1}", item.Key, item.Value);
                     }
                 }
-                else {}
+
+                else { }
+            }
+            else 
+            {
+                Console.WriteLine("Goodbye!");
             }
         }
     }

@@ -8,14 +8,15 @@ Abstract class
 *Working with a file on disk
 Tuples
 Events / Delegates
-Anonymous Types
+*Anonymous Types ? huh???
         Dictionary<K,V> or List<T>
 
 To Do ----------------------------------------------------------
 - Add other classes and library Types
-- Get add method to work ( currently stuck in switch statement)
+*- Get add method to work ( currently stuck in switch statement)
 - Create Account class 
 - Update Check out and Check in to be assigned an Account
 - Create library.cs that can get books and print them
-- Fix DisplayLibraryItems item.value.  How to print a classes properties?
-- How to set a due date using date time
+*- Fix DisplayLibraryItems item.value.
+*- How to set a due date using date time
+
