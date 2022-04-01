@@ -17,3 +17,5 @@ To Do ----------------------------------------------------------
 - Create Account class 
 - Update Check out and Check in to be assigned an Account
 - Create library.cs that can get books and print them
+- Fix DisplayLibraryItems item.value.  How to print a classes properties?
+- How to set a due date using date time

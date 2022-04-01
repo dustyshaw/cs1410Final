@@ -44,9 +44,9 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Account Id: ");
                         var userInput = Convert.ToInt32(Console.ReadLine());
-                        if (userInput == 0)
+                        if (userInput < 0 )
                         {
-                            throw new Exception("no input given");
+                            throw new ArgumentNullException();
                         }
                         else
                         {
@@ -57,7 +57,7 @@ namespace MyLibrary
                     }
                     catch
                     {
-                        throw new Exception("no input given");
+                        throw new ArgumentNullException();
                     }
                 }
 
