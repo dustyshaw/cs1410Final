@@ -1,6 +1,6 @@
 *Query expressions (projection, grouping, filtering, sorting, etc.)
 *Linq method syntax (projection, grouping, filtering, sorting, etc.)
-        Generics
+        Generics (used a dictionary)
 *IEnumerable
 Abstract class
 *Logging
@@ -9,14 +9,14 @@ Abstract class
 Tuples
 Events / Delegates
 *Anonymous Types ? huh???
-        Dictionary<K,V> or List<T>
+        Dictionary<K,V> or List<T> (made a Dictionary of library items in order to be able to grab them by their call number)
 
 To Do ----------------------------------------------------------
 - Add other classes and library Types
-*- Get add method to work ( currently stuck in switch statement)
 - Create Account class 
 - Update Check out and Check in to be assigned an Account
 - Create library.cs that can get books and print them
 *- Fix DisplayLibraryItems item.value.
 *- How to set a due date using date time
+- NEED TO LEARN HOW TO DO EXCEPTIONS
 

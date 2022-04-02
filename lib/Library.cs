@@ -2,6 +2,7 @@ namespace MyLibrary.lib;
 
 public class Library
 {
+    Dictionary<string, ICheckoutable> LibraryItemList = new Dictionary<string, ICheckoutable>();
     public string GetItem () 
     {
         throw new Exception();
