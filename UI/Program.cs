@@ -73,7 +73,7 @@ namespace MyLibrary
                         Console.WriteLine(RequestedItem.CheckIn(RequestedItem));
                     }
 
-                    if (UserInput == "AddLibraryItems")
+                    if (UserInput == "AddLibraryItem")
                     {
                         Console.WriteLine("Select Library Type:");
                         Console.WriteLine("\nBook \nCD");
