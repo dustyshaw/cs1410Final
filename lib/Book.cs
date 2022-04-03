@@ -4,7 +4,7 @@ public class Book : ICheckoutable
     public string CallNumber { get; set; }
     public string Title { get; set; }
     public int ISBN { get; set; }
-    private string Author { get; set; }
+    public string Author { get; set; }
     public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
