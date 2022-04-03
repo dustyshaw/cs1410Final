@@ -38,6 +38,9 @@ public class Tests
     [Test]
     public void TestingItemAvailabilityAfterCheckOut ()
     {
-        
+        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
+        Account newAccount = new Account("Dusty", "Shaw", 12345);
+        newBook.CheckOut((ICheckoutable)newBook, newAccount, newAccount.holdList);
+        Assert.AreEqual(ItemAvailability.CheckedOut, newBook.availability);
     }
 }
