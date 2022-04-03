@@ -126,7 +126,7 @@ namespace MyLibrary
                         //             select a.Title;
                         foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
                         {
-                            Console.WriteLine("CallNumber: {0}, Title: {1}", item.Key, item.Value);
+                            Console.WriteLine("CallNumber: {0}, Title: {1}", item.Key, item.Value.GetDetails());
                             //Console.WriteLine(LibraryItemList[item].GetDetails());
                         }
                     }

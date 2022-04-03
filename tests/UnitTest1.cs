@@ -6,22 +6,14 @@ namespace tests;
 public class Tests
 {
     [SetUp]
-    public void Setup()
-    {
-    }
-
-    [Test]
-    public void Test1()
-    {
-        Assert.Pass();
-    }
+    public void Setup() { }
 
     [Test]
     public void TestingBookConstruction()
     {
         Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
         Assert.AreEqual("587.B35", newBook.CallNumber);
-        Assert.AreEqual( "Gone With the Wind", newBook.Title);
+        Assert.AreEqual("Gone With the Wind", newBook.Title);
         Assert.AreEqual(124567, newBook.ISBN);
         Assert.AreEqual("Margaret Mitchell", newBook.Author);
     }
@@ -36,7 +28,7 @@ public class Tests
     }
 
     [Test]
-    public void TestingItemAvailabilityAfterCheckOut ()
+    public void TestingItemAvailabilityAfterCheckOut()
     {
         Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
         Account newAccount = new Account("Dusty", "Shaw", 12345);
