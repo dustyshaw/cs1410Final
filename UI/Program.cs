@@ -38,9 +38,9 @@ namespace MyLibrary
                 ");
 
                 var UserInput = Console.ReadLine();
-                if (UserInput != "Exit")
+                if (UserInput != "Exit") // || Convert.ToInt32(UserInput) != 9
                 {
-                    if (UserInput == "CheckOut")
+                    if (UserInput == "CheckOut")// Convert.ToInt32(UserInput) == 1
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
                         string userInputBook = (Console.ReadLine());
@@ -63,17 +63,31 @@ namespace MyLibrary
                         {
                             throw new ArgumentNullException();
                         }
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
                     }
 
-                    if (UserInput == "CheckIn")
+                    if (UserInput == "CheckIn")//|| Convert.ToInt32(UserInput) == 2
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
                         string RequestedCallNumber = Console.ReadLine();
                         var RequestedItem = (ICheckoutable)LibraryItemList[RequestedCallNumber];
                         Console.WriteLine(RequestedItem.CheckIn(RequestedItem));
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
                     }
 
-                    if (UserInput == "AddLibraryItem")
+                    if (UserInput == "Renew")
+                    {
+                        Console.WriteLine("Enter Item CallNumber to renew: ");
+                        string RequestedCallNumber = Console.ReadLine();
+                        var RequestedItem = (ICheckoutable)LibraryItemList[RequestedCallNumber];
+                        Console.WriteLine(RequestedItem.CheckIn(RequestedItem));
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
+                    }
+
+                    if (UserInput == "AddLibraryItem")//|| Convert.ToInt32(UserInput) == 4
                     {
                         Console.WriteLine("Select Library Type:");
                         Console.WriteLine("\nBook \nCD");
@@ -95,6 +109,9 @@ namespace MyLibrary
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author);
                                     LibraryItemList.Add(CallNumber, NewBookItem);
+                                    Console.WriteLine($"one {NewBookItem.Type} added: " + NewBookItem.GetDetails());
+                                    Console.WriteLine("Press Enter to continue");
+                                    Console.ReadLine();
                                     AskingForType = false;
                                     break;
                                 case "CD":
@@ -112,14 +129,14 @@ namespace MyLibrary
                         }
                     }
 
-                    if (UserInput == "SearchLibraryItems")
+                    if (UserInput == "SearchLibraryItems") //|| Convert.ToInt32(UserInput) == 6
                     {
                         Console.WriteLine("Enter in Call Number");
                         string RequestedItem = Console.ReadLine();
                         Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
                     }
 
-                    if (UserInput == "DisplayLibraryItems" || UserInput == "7")
+                    if (UserInput == "DisplayLibraryItems")//|| Convert.ToInt32(UserInput) == 7
                     {
                         // projection = from a in MyLibrary.lib.Book
                         //             where a.Type = "Book"
@@ -129,6 +146,8 @@ namespace MyLibrary
                             Console.WriteLine("CallNumber: {0}, Title: {1}", item.Key, item.Value.GetDetails());
                             //Console.WriteLine(LibraryItemList[item].GetDetails());
                         }
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
                     }
 
                     else { }

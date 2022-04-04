@@ -5,6 +5,7 @@ public class Book : ICheckoutable
     public string Title { get; set; }
     public int ISBN { get; set; }
     public string Author { get; set; }
+    public DateTime DueDate { get; set; }
     public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
@@ -19,15 +20,20 @@ public class Book : ICheckoutable
     {
         var bookitem = (Book)item;
         bookitem.Availability = ItemAvailability.CheckedOut;
-        DateTime today = DateTime.Today;
-        var DueDate = today;
-        return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName);
+        var DueDate = DateTime.Today.AddDays(21);
+        return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + " and is due on " + DueDate);
     }
     public string CheckIn(ICheckoutable item)
     {
         var bookitem = (Book)item;
         bookitem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
+    }
+    public string Renew(ICheckoutable item)
+    {
+        var bookitem = (Book)item;
+        var DueDate = DateTime.Today.AddDays(21);
+        return ("Item successfully renewed. Now due on: " + DueDate);
     }
     public string GetDetails()
     {

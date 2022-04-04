@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using MyLibrary.lib;
+using System;
 
 namespace tests;
 
@@ -34,5 +35,14 @@ public class Tests
         Account newAccount = new Account("Dusty", "Shaw", 12345);
         newBook.CheckOut((ICheckoutable)newBook, newAccount, newAccount.holdList);
         Assert.AreEqual(ItemAvailability.CheckedOut, newBook.Availability);
+    }
+
+    [Test]
+    public void TestingRenewFunction()
+    {
+        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
+        var DueDate = DateTime.Today.AddDays(2);
+        newBook.Renew((ICheckoutable)newBook);
+        Assert.AreEqual(DueDate.AddDays(23), newBook.DueDate);
     }
 }
