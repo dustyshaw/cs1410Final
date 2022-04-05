@@ -32,7 +32,7 @@ public class Book : ICheckoutable
     public string Renew(ICheckoutable item)
     {
         var bookitem = (Book)item;
-        var DueDate = DateTime.Today.AddDays(21);
+        this.DueDate = DateTime.Today.AddDays(21);
         return ("Item successfully renewed. Now due on: " + DueDate);
     }
     public string GetDetails()

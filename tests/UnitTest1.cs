@@ -41,8 +41,8 @@ public class Tests
     public void TestingRenewFunction()
     {
         Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
-        var DueDate = DateTime.Today.AddDays(2);
+        var DueDate = new DateTime(2022, 4, 25);
         newBook.Renew((ICheckoutable)newBook);
-        Assert.AreEqual(DueDate.AddDays(23), newBook.DueDate);
+        Assert.AreEqual(DueDate, newBook.DueDate);
     }
 }
