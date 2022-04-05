@@ -28,6 +28,6 @@ public class CD : ICheckoutable
     }
     public string GetDetails()
     {
-        return $"Title: {Title} \n Author: {Artist} ";
+        return $"\n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Artist} \n Availability: {this.Availability} \n";
     }
 }

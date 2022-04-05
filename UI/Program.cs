@@ -119,7 +119,7 @@ namespace MyLibrary
                                     string CDCallNumber = Console.ReadLine();
                                     Console.WriteLine("Enter Item Title");
                                     string CDTitle = Console.ReadLine();
-                                    Console.WriteLine("Enter Author Name");
+                                    Console.WriteLine("Enter Artist Name");
                                     string CDAuthor = Console.ReadLine();
                                     CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor);
                                     LibraryItemList.Add(CDCallNumber, NewCDItem);
@@ -143,7 +143,7 @@ namespace MyLibrary
                         //             select a.Title;
                         foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
                         {
-                            Console.WriteLine("CallNumber: {0}, Title: {1}", item.Key, item.Value.GetDetails());
+                            Console.WriteLine(item.Value.GetDetails());
                             //Console.WriteLine(LibraryItemList[item].GetDetails());
                         }
                         Console.WriteLine("Press Enter to continue");
