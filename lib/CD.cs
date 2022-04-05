@@ -7,7 +7,7 @@ public class CD : ICheckoutable
     public string Artist { get; set; }
     public DateTime DueDate { get; set; }
     public ItemAvailability Availability { get; set; }
-    public ItemType type = ItemType.Book;
+    public ItemType Type = ItemType.CD;
     public CD(string _CallNumber, string _title, string _artist)
     {
         this.CallNumber = _CallNumber;

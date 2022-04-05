@@ -109,7 +109,7 @@ namespace MyLibrary
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author);
                                     LibraryItemList.Add(CallNumber, NewBookItem);
-                                    Console.WriteLine($"one {NewBookItem.Type} added: " + NewBookItem.GetDetails());
+                                    Console.WriteLine($" \n one {NewBookItem.Type} added: " + NewBookItem.GetDetails());
 
                                     Console.WriteLine("Press Enter to continue");
                                     Console.ReadLine();
@@ -125,6 +125,7 @@ namespace MyLibrary
 
                                     CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor);
                                     LibraryItemList.Add(CDCallNumber, NewCDItem);
+                                    Console.WriteLine($" \n one {NewCDItem.Type} added: " + NewCDItem.GetDetails());
 
                                     Console.WriteLine("Press Enter to continue");
                                     Console.ReadLine();
