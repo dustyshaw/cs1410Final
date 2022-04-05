@@ -56,7 +56,7 @@ namespace MyLibrary
                             {
                                 var requestedAccount = AccountList[userInput];
                                 var requestedBook = (ICheckoutable)LibraryItemList[userInputBook];
-                                Console.WriteLine(requestedBook.CheckOut(requestedBook, requestedAccount, requestedAccount.holdList));
+                                Console.WriteLine(requestedBook.CheckOut(requestedBook, requestedAccount));
                             }
                         }
                         catch
@@ -82,7 +82,7 @@ namespace MyLibrary
                         Console.WriteLine("Enter Item CallNumber to renew: ");
                         string RequestedCallNumber = Console.ReadLine();
                         var RequestedItem = (ICheckoutable)LibraryItemList[RequestedCallNumber];
-                        Console.WriteLine(RequestedItem.CheckIn(RequestedItem));
+                        Console.WriteLine(RequestedItem.Renew(RequestedItem));
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
@@ -110,6 +110,7 @@ namespace MyLibrary
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author);
                                     LibraryItemList.Add(CallNumber, NewBookItem);
                                     Console.WriteLine($"one {NewBookItem.Type} added: " + NewBookItem.GetDetails());
+
                                     Console.WriteLine("Press Enter to continue");
                                     Console.ReadLine();
                                     AskingForType = false;
@@ -121,8 +122,12 @@ namespace MyLibrary
                                     string CDTitle = Console.ReadLine();
                                     Console.WriteLine("Enter Artist Name");
                                     string CDAuthor = Console.ReadLine();
+
                                     CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor);
                                     LibraryItemList.Add(CDCallNumber, NewCDItem);
+
+                                    Console.WriteLine("Press Enter to continue");
+                                    Console.ReadLine();
                                     AskingForType = false;
                                     break;
                             }

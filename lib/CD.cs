@@ -5,6 +5,7 @@ public class CD : ICheckoutable
     public string CallNumber { get; set; }
     public string Title { get; set; }
     public string Artist { get; set; }
+    public DateTime DueDate { get; set; }
     public ItemAvailability Availability { get; set; }
     public ItemType type = ItemType.Book;
     public CD(string _CallNumber, string _title, string _artist)
@@ -13,7 +14,7 @@ public class CD : ICheckoutable
         this.Title = _title;
         this.Artist = _artist;
     }
-    public string CheckOut(ICheckoutable item, Account account, int[] holdList)
+    public string CheckOut(ICheckoutable item, Account account)
     {
         var bookitem = (CD)item;
         bookitem.Availability = ItemAvailability.CheckedOut;
@@ -25,6 +26,12 @@ public class CD : ICheckoutable
         var bookitem = (CD)item;
         bookitem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
+    }
+    public string Renew(ICheckoutable item)
+    {
+        var bookitem = (CD)item;
+        this.DueDate = DateTime.Today.AddDays(21);
+        return ("Item successfully renewed. Now due on: " + DueDate);
     }
     public string GetDetails()
     {

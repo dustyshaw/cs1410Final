@@ -16,10 +16,11 @@ public class Book : ICheckoutable
         this.ISBN = _ISBN;
         this.Author = _Author;
     }
-    public string CheckOut(ICheckoutable item, Account account, int[] holdList)
+    public string CheckOut(ICheckoutable item, Account account)
     {
         var bookitem = (Book)item;
         bookitem.Availability = ItemAvailability.CheckedOut;
+        account.holdList.Add(bookitem);
         var DueDate = DateTime.Today.AddDays(21);
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + " and is due on " + DueDate);
     }
@@ -47,7 +48,7 @@ public abstract class AudioBook : Book
     {
 
     }
-    public string CheckOut(ICheckoutable item, Account account, int[] holdList)
+    public string CheckOut(ICheckoutable item, Account account, List<ICheckoutable> holdList)
     {
         var bookitem = (AudioBook)item;
         bookitem.Availability = ItemAvailability.CheckedOut;

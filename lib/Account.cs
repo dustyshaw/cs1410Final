@@ -12,5 +12,5 @@ public class Account
             public string LastName { get; set; }
             public int ID { get; set; }
             public static int numOfHoldsDefault = 0;
-            public int[] holdList = new int[numOfHoldsDefault];
+            public List<ICheckoutable> holdList = new List<ICheckoutable>();
         }
