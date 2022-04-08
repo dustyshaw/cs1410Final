@@ -3,18 +3,20 @@ public class Book : ICheckoutable
 {
     public string CallNumber { get; set; }
     public string Title { get; set; }
-    public int ISBN { get; set; }
+    public string ISBN { get; set; }
+    public string Barcode {get; set;}
     public string Author { get; set; }
     public DateTime DueDate { get; set; }
     public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
-    public Book(string _CallNumber, string _Title, int _ISBN, string _Author)
+    public Book(string _CallNumber, string _Title, string _ISBN, string _Author, string _Barcode)
     {
         this.CallNumber = _CallNumber;
         this.Title = _Title;
         this.ISBN = _ISBN;
         this.Author = _Author;
+        this.Barcode = _Barcode;
     }
     public string CheckOut(ICheckoutable item, Account account)
     {

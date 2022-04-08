@@ -11,7 +11,7 @@ namespace MyLibrary
         {
             Dictionary<string, ICheckoutable> LibraryItemList = new Dictionary<string, ICheckoutable>(); //move to lib.library 
 
-            Book newBook = new Book("123.abc", "Wonder", 123456789, "Lewis Carol");
+            Book newBook = new Book("123.abc", "Wonder", "123456789", "Lewis Carol", "34230000109820");
             LibraryItemList.Add(newBook.CallNumber, newBook);
 
             // example of adding an account
@@ -28,7 +28,7 @@ namespace MyLibrary
                 Console.WriteLine(@"
                 1. CheckOut
                 2. CheckIn
-                3. Renew -- unavailable
+                3. Renew 
                 4. AddLibraryItem 
                 5. AddNewPatron -- unavailable
                 6. SearchLibraryItems 
@@ -103,11 +103,13 @@ namespace MyLibrary
                                     Console.WriteLine("Enter Item Title");
                                     string Title = Console.ReadLine();
                                     Console.WriteLine("Enter ISBN");
-                                    int ISBN = Convert.ToInt32(Console.ReadLine());
+                                    string ISBN = Console.ReadLine();
                                     Console.WriteLine("Enter Author Name");
                                     string Author = Console.ReadLine();
+                                    Console.WriteLine("Enter Barcode");
+                                    string Barcode = Console.ReadLine();
 
-                                    Book NewBookItem = new Book(CallNumber, Title, ISBN, Author);
+                                    Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
                                     LibraryItemList.Add(CallNumber, NewBookItem);
                                     Console.WriteLine($" \n one {NewBookItem.Type} added: " + NewBookItem.GetDetails());
 
@@ -158,8 +160,7 @@ namespace MyLibrary
 
                     else { }
                 }
-                else
-                {
+                else{
                     Console.WriteLine("Goodbye!");
                     programRunning = false;
                 }

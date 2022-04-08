@@ -12,7 +12,7 @@ public class Tests
     [Test]
     public void TestingBookConstruction()
     {
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
+        Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
         Assert.AreEqual("587.B35", newBook.CallNumber);
         Assert.AreEqual("Gone With the Wind", newBook.Title);
         Assert.AreEqual(124567, newBook.ISBN);
@@ -31,7 +31,7 @@ public class Tests
     [Test]
     public void TestingItemAvailabilityAfterCheckOut()
     {
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
+        Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
         Account newAccount = new Account("Dusty", "Shaw", 12345);
         newBook.CheckOut((ICheckoutable)newBook, newAccount);
         Assert.AreEqual(ItemAvailability.CheckedOut, newBook.Availability);
@@ -40,7 +40,7 @@ public class Tests
     [Test]
     public void TestingRenewFunction()
     {
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell");
+        Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
         var DueDate = new DateTime(2022, 4, 25);
         newBook.Renew((ICheckoutable)newBook);
         Assert.AreEqual(DueDate, newBook.DueDate);
