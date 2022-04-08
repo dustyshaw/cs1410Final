@@ -18,6 +18,8 @@ To Do ----------------------------------------------------------
 - Create library.cs that can get books and print them
 - NEED TO LEARN HOW TO DO EXCEPTIONS
 - Write to file
+        - every item that gets added could be written to a file so when you close your program, it is still there. 
+        - would need to impliment read file when getting details of book.  
 - Update ICheckOutAble interface?
 
 

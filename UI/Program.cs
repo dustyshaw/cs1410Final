@@ -19,6 +19,21 @@ namespace MyLibrary
             Account newAct = new Account("Dusty", "Shaw", 123);
             AccountList.Add(newAct.ID, newAct);
 
+            // Create a string array with the lines of text
+            string[] lines = { newBook.GetDetails() };
+
+            // Set a variable to the Documents path.
+            string docPath =
+              Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            // Write the string array to a new file named "WriteLines.txt".
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "WriteLines.txt")))
+            {
+                foreach (string line in lines)
+                    outputFile.WriteLine(line);
+            }
+
+
             bool programRunning = true;
             while (programRunning == true)
             {
@@ -40,6 +55,7 @@ namespace MyLibrary
                 var UserInput = Console.ReadLine();
                 if (UserInput != "Exit") // || Convert.ToInt32(UserInput) != 9
                 {
+
                     if (UserInput == "CheckOut")// Convert.ToInt32(UserInput) == 1
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
@@ -51,6 +67,7 @@ namespace MyLibrary
                             if (userInput < 0)
                             {
                                 throw new ArgumentNullException();
+                
                             }
                             else
                             {
@@ -104,9 +121,10 @@ namespace MyLibrary
                                     string Title = Console.ReadLine();
                                     Console.WriteLine("Enter ISBN");
                                     string ISBN = Console.ReadLine();
-                                    Console.WriteLine("Enter Author Name");
+                                    Console.WriteLine("Enter Authors Full Name");
                                     string Author = Console.ReadLine();
                                     Console.WriteLine("Enter Barcode");
+
                                     string Barcode = Console.ReadLine();
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
@@ -117,6 +135,7 @@ namespace MyLibrary
                                     Console.ReadLine();
                                     AskingForType = false;
                                     break;
+
                                 case "CD":
                                     Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
                                     string CDCallNumber = Console.ReadLine();
@@ -137,30 +156,37 @@ namespace MyLibrary
                         }
                     }
 
-                    if (UserInput == "SearchLibraryItems") //|| Convert.ToInt32(UserInput) == 6
+                    if (UserInput == "SearchLibraryItems")
                     {
                         Console.WriteLine("Enter in Call Number");
                         string RequestedItem = Console.ReadLine();
                         Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
-                    }
 
-                    if (UserInput == "DisplayLibraryItems")//|| Convert.ToInt32(UserInput) == 7
-                    {
-                        // projection = from a in MyLibrary.lib.Book
-                        //             where a.Type = "Book"
-                        //             select a.Title;
-                        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
-                        {
-                            Console.WriteLine(item.Value.GetDetails());
-                            //Console.WriteLine(LibraryItemList[item].GetDetails());
-                        }
+                        // Put projection here somehow!
+
+                        // var find = LibraryItemList.FirstOrDefault(x => x.Title == "test");
+                        // if (find != null)
+                        // {
+                        //     find.Name = "Value";
+                        // }
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
 
+                    if (UserInput == "DisplayLibraryItems")
+                    {
+                        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
+                        {
+                            Console.WriteLine(item.Value.GetDetails());
+                        }
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
+                    }
                     else { }
                 }
-                else{
+
+                else
+                {
                     Console.WriteLine("Goodbye!");
                     programRunning = false;
                 }

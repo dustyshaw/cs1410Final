@@ -42,6 +42,7 @@ public class Book : ICheckoutable
     {
         return $"\n \n CallNumber: {CallNumber} Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Availabilty: {Availability}";
     }
+    
 }
 
 // public abstract class AudioBook : Book
