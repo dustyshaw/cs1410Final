@@ -57,10 +57,13 @@ namespace MyLibrary
 
                     if (UserInput == "CheckIn")
                     {
-                        Console.WriteLine("Enter Item CallNumber to check out: ");
+                        Console.WriteLine("Enter Item CallNumber to check in: ");
                         string RequestedCallNumber = Console.ReadLine();
+                        Console.WriteLine("Enter Account Id: ");
+                        var userInputID = Convert.ToInt32(Console.ReadLine());
+                        var requestedAccount = AccountList[userInputID];
                         var RequestedItem = (ICheckoutable)LibraryItemList[RequestedCallNumber];
-                        Console.WriteLine(RequestedItem.CheckIn(RequestedItem));
+                        Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
@@ -171,7 +174,7 @@ namespace MyLibrary
                         {
                             Console.WriteLine(item.Value.GetDetails());
                         }
-                        
+
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }

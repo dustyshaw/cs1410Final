@@ -13,7 +13,6 @@ Events / Delegates
 
 To Do ----------------------------------------------------------
 - Add other classes and library Types
-- Create Account class 
 - Update Check out and Check in to be assigned an Account
 - Create library.cs that can get books and print them
 - NEED TO LEARN HOW TO DO EXCEPTIONS
@@ -21,5 +20,6 @@ To Do ----------------------------------------------------------
         - every item that gets added could be written to a file so when you close your program, it is still there. 
         - would need to impliment read file when getting details of book.  
 - Update ICheckOutAble interface?
+- Get DisplayHoldsList working in Account class
 
 

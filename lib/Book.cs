@@ -29,9 +29,10 @@ public class Book : ICheckoutable
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + " and is due on " + DueDate);
     }
 
-    public string CheckIn(ICheckoutable item)
+    public string CheckIn(ICheckoutable item, Account account)
     {
         var bookitem = (Book)item;
+        account.holdList.Remove(bookitem);
         bookitem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
     }

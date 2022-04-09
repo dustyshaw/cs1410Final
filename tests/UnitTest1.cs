@@ -52,7 +52,7 @@ public class Tests
     }
 
     [Test]
-    public void TestingPatronsHoldList()
+    public void TestingPatronsHoldListAfterCheckOut()
     {
         Account newAccount = new Account("Dusty", "Shaw", 12345);
         Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
@@ -60,5 +60,12 @@ public class Tests
         Assert.AreEqual(newBook, newAccount.holdList[0]);
     }
 
-    
+    [Test]
+    public void TestingPatronsHoldListAfterCheckIn()
+    {
+        Account newAccount = new Account("Dusty", "Shaw", 12345);
+        Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
+        newBook.CheckIn((ICheckoutable)newBook, newAccount);
+        Assert.AreEqual(null, newAccount.holdList[0]);
+    }
 }
