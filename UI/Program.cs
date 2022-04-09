@@ -53,10 +53,10 @@ namespace MyLibrary
                 ");
 
                 var UserInput = Console.ReadLine();
-                if (UserInput != "Exit") // || Convert.ToInt32(UserInput) != 9
+                if (UserInput != "Exit")
                 {
 
-                    if (UserInput == "CheckOut")// Convert.ToInt32(UserInput) == 1
+                    if (UserInput == "CheckOut")
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
                         string userInputBook = (Console.ReadLine());
@@ -67,7 +67,7 @@ namespace MyLibrary
                             if (userInput < 0)
                             {
                                 throw new ArgumentNullException();
-                
+
                             }
                             else
                             {
@@ -84,7 +84,7 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
-                    if (UserInput == "CheckIn")//|| Convert.ToInt32(UserInput) == 2
+                    if (UserInput == "CheckIn")
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
                         string RequestedCallNumber = Console.ReadLine();
@@ -104,7 +104,7 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
-                    if (UserInput == "AddLibraryItem")//|| Convert.ToInt32(UserInput) == 4
+                    if (UserInput == "AddLibraryItem")
                     {
                         Console.WriteLine("Select Library Type:");
                         Console.WriteLine("\nBook \nCD");
@@ -158,9 +158,26 @@ namespace MyLibrary
 
                     if (UserInput == "SearchLibraryItems")
                     {
-                        Console.WriteLine("Enter in Call Number");
+                        Console.WriteLine("Enter in Call Number or Title");
                         string RequestedItem = Console.ReadLine();
-                        Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
+
+                        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
+                        {
+                            if (item.Value.Title == RequestedItem)
+                            {
+                                Console.WriteLine(item.Value.GetDetails().ToString());
+                            }
+                            else
+                            {
+                                Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
+                            }
+                        }
+
+                        // if (LibraryItemList[RequestedItem].Title == RequestedItem)
+                        // {
+                        //     Console.WriteLine(LibraryItemList[RequestedItem].Title);
+                        // }
+                        //
 
                         // Put projection here somehow!
 

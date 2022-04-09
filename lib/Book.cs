@@ -4,7 +4,7 @@ public class Book : ICheckoutable
     public string CallNumber { get; set; }
     public string Title { get; set; }
     public string ISBN { get; set; }
-    public string Barcode {get; set;}
+    public string Barcode { get; set; }
     public string Author { get; set; }
     public DateTime DueDate { get; set; }
     public ItemType Type = ItemType.Book;
@@ -40,9 +40,9 @@ public class Book : ICheckoutable
     }
     public string GetDetails()
     {
-        return $"\n \n CallNumber: {CallNumber} Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Availabilty: {Availability}";
+        return $"\n \n CallNumber: {CallNumber} Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Barcode: {Barcode} \n Availabilty: {Availability}";
     }
-    
+
 }
 
 // public abstract class AudioBook : Book
