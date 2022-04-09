@@ -10,6 +10,7 @@ public class Book : ICheckoutable
     public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
+
     public Book(string _CallNumber, string _Title, string _ISBN, string _Author, string _Barcode)
     {
         this.CallNumber = _CallNumber;
@@ -18,6 +19,7 @@ public class Book : ICheckoutable
         this.Author = _Author;
         this.Barcode = _Barcode;
     }
+
     public string CheckOut(ICheckoutable item, Account account)
     {
         var bookitem = (Book)item;
@@ -26,21 +28,24 @@ public class Book : ICheckoutable
         var DueDate = DateTime.Today.AddDays(21);
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + " and is due on " + DueDate);
     }
+
     public string CheckIn(ICheckoutable item)
     {
         var bookitem = (Book)item;
         bookitem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
     }
+
     public string Renew(ICheckoutable item)
     {
         var bookitem = (Book)item;
         this.DueDate = DateTime.Today.AddDays(21);
         return ("Item successfully renewed. Now due on: " + DueDate);
     }
+
     public string GetDetails()
     {
-        return $"\n \n CallNumber: {CallNumber} Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Barcode: {Barcode} \n Availabilty: {Availability}";
+        return $"\n \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Barcode: {Barcode} \n Availabilty: {Availability}";
     }
 
 }

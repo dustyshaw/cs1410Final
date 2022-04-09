@@ -19,21 +19,6 @@ namespace MyLibrary
             Account newAct = new Account("Dusty", "Shaw", 123);
             AccountList.Add(newAct.ID, newAct);
 
-            // Create a string array with the lines of text
-            string[] lines = { newBook.GetDetails() };
-
-            // Set a variable to the Documents path.
-            string docPath =
-              Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-            // Write the string array to a new file named "WriteLines.txt".
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "WriteLines.txt")))
-            {
-                foreach (string line in lines)
-                    outputFile.WriteLine(line);
-            }
-
-
             bool programRunning = true;
             while (programRunning == true)
             {
@@ -46,9 +31,9 @@ namespace MyLibrary
                 3. Renew 
                 4. AddLibraryItem 
                 5. AddNewPatron -- unavailable
-                6. SearchLibraryItems 
-                7. DisplayLibraryItems -- unavailable
-                8. DisplayPatrons -- unavailable
+                6. SearchLibraryItems
+                7. DisplayLibraryItems
+                8. DisplayPatrons
                 9. Exit -- Exits program
                 ");
 
@@ -60,26 +45,12 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
                         string userInputBook = (Console.ReadLine());
-                        try
-                        {
-                            Console.WriteLine("Enter Account Id: ");
-                            var userInput = Convert.ToInt32(Console.ReadLine());
-                            if (userInput < 0)
-                            {
-                                throw new ArgumentNullException();
+                        Console.WriteLine("Enter Account Id: ");
+                        var userInputID = Convert.ToInt32(Console.ReadLine());
+                        var requestedAccount = AccountList[userInputID];
+                        var RequestedItem = (ICheckoutable)LibraryItemList[userInputBook];
+                        Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount));
 
-                            }
-                            else
-                            {
-                                var requestedAccount = AccountList[userInput];
-                                var requestedBook = (ICheckoutable)LibraryItemList[userInputBook];
-                                Console.WriteLine(requestedBook.CheckOut(requestedBook, requestedAccount));
-                            }
-                        }
-                        catch
-                        {
-                            throw new ArgumentNullException();
-                        }
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
@@ -106,7 +77,7 @@ namespace MyLibrary
 
                     if (UserInput == "AddLibraryItem")
                     {
-                        Console.WriteLine("Select Library Type:");
+                        Console.WriteLine("Select Item Type:");
                         Console.WriteLine("\nBook \nCD");
                         string BookType = Console.ReadLine();
                         bool AskingForType = true;
@@ -128,7 +99,7 @@ namespace MyLibrary
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
                                     LibraryItemList.Add(CallNumber, NewBookItem);
-                                    Console.WriteLine($" \n one {NewBookItem.Type} added: " + NewBookItem.GetDetails());
+                                    Console.WriteLine($" \n One {NewBookItem.Type} added: " + NewBookItem.GetDetails());
 
                                     Console.WriteLine("Press Enter to continue");
                                     Console.ReadLine();
@@ -153,6 +124,24 @@ namespace MyLibrary
                                     break;
                             }
                         }
+                    }
+
+                    if (UserInput == "AddNewPatron")
+                    {
+                        Console.WriteLine("Enter Patrons First Name: ");
+                        string FName = Console.ReadLine();
+                        Console.WriteLine("Enter Patrons Last Name: ");
+                        string LName = Console.ReadLine();
+                        Console.WriteLine("Enter Patrons ID");
+                        int PatronID = Convert.ToInt32(Console.ReadLine());
+
+                        Account newAccount = new Account(FName, LName, PatronID);
+                        AccountList.Add(PatronID, newAccount);
+
+                        Console.WriteLine("New Patron Added: " + newAccount.GetAccountDetails());
+
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
                     }
 
                     if (UserInput == "SearchLibraryItems")
@@ -182,9 +171,22 @@ namespace MyLibrary
                         {
                             Console.WriteLine(item.Value.GetDetails());
                         }
+                        
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
+
+                    if(UserInput == "DisplayPatrons")
+                    {
+                        foreach (KeyValuePair<int, Account> item in AccountList)
+                        {
+                            Console.WriteLine(item.Value.GetAccountDetails());
+                        }
+
+                        Console.WriteLine("Press Enter to continue");
+                        Console.ReadLine();
+                    }
+
                     else { }
                 }
 

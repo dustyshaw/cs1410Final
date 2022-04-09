@@ -11,6 +11,14 @@ public class Account
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public int ID { get; set; }
-            public static int numOfHoldsDefault = 0;
+            //public static int numOfHoldsDefault = 0;
             public List<ICheckoutable> holdList = new List<ICheckoutable>();
+            public string DisplayHoldsList()
+            {
+                return "hi";
+            }
+            public string GetAccountDetails() 
+            {
+                return $"\n First Name: {FirstName} \n Last Name: {LastName} \n Account ID: {ID} \n Holds List: {holdList.ToString}";
+            }
         }
