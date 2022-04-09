@@ -124,7 +124,6 @@ namespace MyLibrary
                                     Console.WriteLine("Enter Authors Full Name");
                                     string Author = Console.ReadLine();
                                     Console.WriteLine("Enter Barcode");
-
                                     string Barcode = Console.ReadLine();
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
@@ -173,19 +172,6 @@ namespace MyLibrary
                             }
                         }
 
-                        // if (LibraryItemList[RequestedItem].Title == RequestedItem)
-                        // {
-                        //     Console.WriteLine(LibraryItemList[RequestedItem].Title);
-                        // }
-                        //
-
-                        // Put projection here somehow!
-
-                        // var find = LibraryItemList.FirstOrDefault(x => x.Title == "test");
-                        // if (find != null)
-                        // {
-                        //     find.Name = "Value";
-                        // }
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
