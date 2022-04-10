@@ -30,7 +30,7 @@ namespace MyLibrary
                 2. CheckIn
                 3. Renew 
                 4. AddLibraryItem 
-                5. AddNewPatron -- unavailable
+                5. AddNewPatron
                 6. SearchLibraryItems
                 7. DisplayLibraryItems
                 8. DisplayPatrons
@@ -102,6 +102,7 @@ namespace MyLibrary
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
                                     LibraryItemList.Add(CallNumber, NewBookItem);
+                                    NewBookItem.WriteToFile(NewBookItem);
                                     Console.WriteLine($" \n One {NewBookItem.Type} added: " + NewBookItem.GetDetails());
 
                                     Console.WriteLine("Press Enter to continue");
