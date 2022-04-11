@@ -9,6 +9,9 @@ namespace MyLibrary
 
         static void Main(string[] args)
         {
+            AccountJsonFileStorageService storage = new AccountJsonFileStorageService();
+
+            Library SnowCollegeLibrary = new Library(storage);
             Dictionary<string, ICheckoutable> LibraryItemList = new Dictionary<string, ICheckoutable>(); //move to lib.library 
 
             Book newBook = new Book("123.abc", "Wonder", "123456789", "Lewis Carol", "34230000109820");
@@ -152,18 +155,20 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter in Call Number or Title");
                         string RequestedItem = Console.ReadLine();
-
-                        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
-                        {
-                            if (item.Value.Title == RequestedItem)
-                            {
-                                Console.WriteLine(item.Value.GetDetails().ToString());
-                            }
-                            else
-                            {
-                                Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
-                            }
-                        }
+                        
+                        Library.SearchLibraryItems(RequestedItem, LibraryItemList);
+        
+                        // foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
+                        // {
+                        //     if (item.Value.Title == RequestedItem)
+                        //     {
+                        //         Console.WriteLine(item.Value.GetDetails().ToString());
+                        //     }
+                        //     else
+                        //     {
+                        //         Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
+                        //     }
+                        // }
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
