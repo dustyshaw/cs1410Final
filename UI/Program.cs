@@ -157,18 +157,6 @@ namespace MyLibrary
                         string RequestedItem = Console.ReadLine();
                         
                         Library.SearchLibraryItems(RequestedItem, LibraryItemList);
-        
-                        // foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
-                        // {
-                        //     if (item.Value.Title == RequestedItem)
-                        //     {
-                        //         Console.WriteLine(item.Value.GetDetails().ToString());
-                        //     }
-                        //     else
-                        //     {
-                        //         Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
-                        //     }
-                        // }
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -176,11 +164,8 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
-                        {
-                            Console.WriteLine(item.Value.GetDetails());
-                        }
-
+                        Library.DisplayLibraryItems(LibraryItemList);
+                        
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }

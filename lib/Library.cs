@@ -38,4 +38,12 @@ public class Library
             }
         }
     }
+
+    public static void DisplayLibraryItems(Dictionary<string, ICheckoutable> LibraryItemList)
+    {
+        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
+        {
+            Console.WriteLine(item.Value.GetDetails());
+        }
+    }
 }
