@@ -38,7 +38,7 @@ public class Tests
     {
         Account newAccount = new Account("Dusty", "Shaw", 12345);
         Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
-        newBook.CheckOut((ICheckoutable)newBook, newAccount);
+        newBook.CheckOut((ILibraryItem)newBook, newAccount);
         Assert.AreEqual(ItemAvailability.CheckedOut, newBook.Availability);
     }
 
@@ -47,7 +47,7 @@ public class Tests
     {
         Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
         var DueDate = new DateTime(2022, 4, 30);
-        newBook.Renew((ICheckoutable)newBook);
+        newBook.Renew((ILibraryItem)newBook);
         Assert.AreEqual(DueDate, newBook.DueDate);
     }
 
@@ -56,7 +56,7 @@ public class Tests
     {
         Account newAccount = new Account("Dusty", "Shaw", 12345);
         Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
-        newBook.CheckOut((ICheckoutable)newBook, newAccount);
+        newBook.CheckOut((ILibraryItem)newBook, newAccount);
         Assert.AreEqual(newBook, newAccount.holdList[0]);
     }
 
@@ -65,7 +65,7 @@ public class Tests
     {
         Account newAccount = new Account("Dusty", "Shaw", 12345);
         Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
-        newBook.CheckIn((ICheckoutable)newBook, newAccount);
+        newBook.CheckIn((ILibraryItem)newBook, newAccount);
         Assert.AreEqual(null, newAccount.holdList[0]);
     }
 }

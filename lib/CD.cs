@@ -1,6 +1,6 @@
 namespace MyLibrary.lib;
 
-public class CD : ICheckoutable
+public class CD : ILibraryItem
 {
     public string CallNumber { get; set; }
     public string Title { get; set; }
@@ -14,20 +14,20 @@ public class CD : ICheckoutable
         this.Title = _title;
         this.Artist = _artist;
     }
-    public string CheckOut(ICheckoutable item, Account account)
+    public string CheckOut(ILibraryItem item, Account account)
     {
         var bookitem = (CD)item;
         bookitem.Availability = ItemAvailability.CheckedOut;
 
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + ".");
     }
-    public string CheckIn(ICheckoutable item, Account account)
+    public string CheckIn(ILibraryItem item, Account account)
     {
         var bookitem = (CD)item;
         bookitem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
     }
-    public string Renew(ICheckoutable item)
+    public string Renew(ILibraryItem item)
     {
         var bookitem = (CD)item;
         this.DueDate = DateTime.Today.AddDays(21);

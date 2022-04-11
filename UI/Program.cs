@@ -9,15 +9,15 @@ namespace MyLibrary
 
         static void Main(string[] args)
         {
+            //all logic needs to be moved
             AccountJsonFileStorageService storage = new AccountJsonFileStorageService();
 
             Library SnowCollegeLibrary = new Library(storage);
-            Dictionary<string, ICheckoutable> LibraryItemList = new Dictionary<string, ICheckoutable>(); //move to lib.library 
+            Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>(); //move to lib.library 
 
             Book newBook = new Book("123.abc", "Wonder", "123456789", "Lewis Carol", "34230000109820");
             LibraryItemList.Add(newBook.CallNumber, newBook);
 
-            // example of adding an account
             Dictionary<int, Account> AccountList = new Dictionary<int, Account>();
             Account newAct = new Account("Dusty", "Shaw", 123);
             AccountList.Add(newAct.ID, newAct);
@@ -50,9 +50,10 @@ namespace MyLibrary
                         string userInputBook = (Console.ReadLine());
                         Console.WriteLine("Enter Account Id: ");
                         var userInputID = Convert.ToInt32(Console.ReadLine());
-                        var requestedAccount = AccountList[userInputID];
-                        var RequestedItem = (ICheckoutable)LibraryItemList[userInputBook];
-                        Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount));
+
+                        var requestedAccount = AccountList[userInputID];  //grabs account from list
+                        var RequestedItem = (ILibraryItem)LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
+                        Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -65,7 +66,7 @@ namespace MyLibrary
                         Console.WriteLine("Enter Account Id: ");
                         var userInputID = Convert.ToInt32(Console.ReadLine());
                         var requestedAccount = AccountList[userInputID];
-                        var RequestedItem = (ICheckoutable)LibraryItemList[RequestedCallNumber];
+                        var RequestedItem = (ILibraryItem)LibraryItemList[RequestedCallNumber];
                         Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -75,7 +76,7 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Item CallNumber to renew: ");
                         string RequestedCallNumber = Console.ReadLine();
-                        var RequestedItem = (ICheckoutable)LibraryItemList[RequestedCallNumber];
+                        var RequestedItem = (ILibraryItem)LibraryItemList[RequestedCallNumber];
                         Console.WriteLine(RequestedItem.Renew(RequestedItem));
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -103,6 +104,7 @@ namespace MyLibrary
                                     Console.WriteLine("Enter Barcode");
                                     string Barcode = Console.ReadLine();
 
+                                    //logic
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
                                     LibraryItemList.Add(CallNumber, NewBookItem);
                                     NewBookItem.WriteToFile(NewBookItem);
@@ -121,6 +123,7 @@ namespace MyLibrary
                                     Console.WriteLine("Enter Artist Name");
                                     string CDAuthor = Console.ReadLine();
 
+                                    //logic
                                     CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor);
                                     LibraryItemList.Add(CDCallNumber, NewCDItem);
                                     Console.WriteLine($" \n one {NewCDItem.Type} added: " + NewCDItem.GetDetails());
@@ -141,7 +144,8 @@ namespace MyLibrary
                         string LName = Console.ReadLine();
                         Console.WriteLine("Enter Patrons ID");
                         int PatronID = Convert.ToInt32(Console.ReadLine());
-
+                        
+                        //logic
                         Account newAccount = new Account(FName, LName, PatronID);
                         AccountList.Add(PatronID, newAccount);
 

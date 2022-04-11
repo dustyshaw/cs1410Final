@@ -2,19 +2,21 @@ namespace MyLibrary.lib;
 
 public class Library
 {
-    public Dictionary<string, ICheckoutable> LibraryItemList = new Dictionary<string, ICheckoutable>();
+    public Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
+    
     public List<Account> accounts = new List<Account>();
+
     public Library(IAccountStorageService storage)
     {
         List<Account> accounts = new List<Account>();
     }
 
-    public ICheckoutable AddItem(ICheckoutable item)
+    public ILibraryItem AddItem(ILibraryItem item)
     {
         throw new Exception();
     }
 
-    public ICheckoutable AddAccount(ICheckoutable item)
+    public ILibraryItem AddAccount(ILibraryItem item)
     {
         throw new Exception();
     }
@@ -24,9 +26,9 @@ public class Library
         //TextFileStorageService.SaveAccounts(accounts);
     }
 
-    public static void SearchLibraryItems(string RequestedItem, Dictionary<string, ICheckoutable> LibraryItemList)
+    public static void SearchLibraryItems(string RequestedItem, Dictionary<string, ILibraryItem> LibraryItemList)
     {
-        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
+        foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
         {
             if (item.Value.Title == RequestedItem)
             {
@@ -39,9 +41,9 @@ public class Library
         }
     }
 
-    public static void DisplayLibraryItems(Dictionary<string, ICheckoutable> LibraryItemList)
+    public static void DisplayLibraryItems(Dictionary<string, ILibraryItem> LibraryItemList)
     {
-        foreach (KeyValuePair<string, ICheckoutable> item in LibraryItemList)
+        foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
         {
             Console.WriteLine(item.Value.GetDetails());
         }

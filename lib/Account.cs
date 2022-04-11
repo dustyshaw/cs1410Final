@@ -7,11 +7,14 @@ public class Account
         this.LastName = _LastName;
         this.ID = _ID;
     }
+    
     public string FirstName { get; set; }
+
     public string LastName { get; set; }
+
     public int ID { get; set; }
-    //public static int numOfHoldsDefault = 0;
-    public List<ICheckoutable> holdList = new List<ICheckoutable>();
+    
+    public List<ILibraryItem> holdList = new List<ILibraryItem>();
 
     public string DisplayHoldsList()
     {
@@ -22,14 +25,4 @@ public class Account
     {
         return $"\n First Name: {FirstName} \n Last Name: {LastName} \n Account ID: {ID} \n Holds List: {DisplayHoldsList()}";
     }
-
-    // public void Load()
-    // {
-
-    // }
-
-    // public void Save()
-    // {
-
-    // }
 }

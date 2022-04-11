@@ -1,6 +1,6 @@
 using System;
 namespace MyLibrary.lib;
-public class Book : ICheckoutable
+public class Book : ILibraryItem
 {
     public string CallNumber { get; set; }
     public string Title { get; set; }
@@ -11,6 +11,7 @@ public class Book : ICheckoutable
     public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
+    
     public Book(string _CallNumber, string _Title, string _ISBN, string _Author, string _Barcode)
     {
         this.CallNumber = _CallNumber;
@@ -20,7 +21,7 @@ public class Book : ICheckoutable
         this.Barcode = _Barcode;
     }
 
-    public string CheckOut(ICheckoutable item, Account account)
+    public string CheckOut(ILibraryItem item, Account account)
     {
         var bookitem = (Book)item;
         bookitem.Availability = ItemAvailability.CheckedOut;
@@ -29,7 +30,7 @@ public class Book : ICheckoutable
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + " and is due on " + DueDate);
     }
 
-    public string CheckIn(ICheckoutable item, Account account)
+    public string CheckIn(ILibraryItem item, Account account)
     {
         var bookitem = (Book)item;
         account.holdList.Remove(bookitem);
@@ -37,7 +38,7 @@ public class Book : ICheckoutable
         return ("Item successfully checked in.");
     }
 
-    public string Renew(ICheckoutable item)
+    public string Renew(ILibraryItem item)
     {
         var bookitem = (Book)item;
         this.DueDate = DateTime.Today.AddDays(21);
@@ -49,7 +50,7 @@ public class Book : ICheckoutable
         return $"\n \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Barcode: {Barcode} \n Availabilty: {Availability}";
     }
 
-    public async void WriteToFile(ICheckoutable item)
+    public async void WriteToFile(ILibraryItem item)
     {
         using StreamWriter file = new("data.txt", append: true);
         await file.WriteLineAsync(item.GetDetails());

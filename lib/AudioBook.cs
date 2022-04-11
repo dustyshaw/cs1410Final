@@ -6,7 +6,7 @@ public abstract class AudioBook : Book
     {
 
     }
-    public string CheckOut(ICheckoutable item, Account account, List<ICheckoutable> holdList)
+    public string CheckOut(ILibraryItem item, Account account, List<ILibraryItem> holdList)
     {
         var bookitem = (AudioBook)item;
         bookitem.Availability = ItemAvailability.CheckedOut;
@@ -14,7 +14,7 @@ public abstract class AudioBook : Book
         var DueDate = today;
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName);
     }
-    public string CheckIn(ICheckoutable item)
+    public string CheckIn(ILibraryItem item)
     {
         var bookitem = (Book)item;
         bookitem.Availability = ItemAvailability.CheckedIn;
