@@ -155,7 +155,7 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter in Call Number or Title");
                         string RequestedItem = Console.ReadLine();
-                        
+
                         Library.SearchLibraryItems(RequestedItem, LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
@@ -165,17 +165,14 @@ namespace MyLibrary
                     if (UserInput == "DisplayLibraryItems")
                     {
                         Library.DisplayLibraryItems(LibraryItemList);
-                        
+
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
 
-                    if(UserInput == "DisplayPatrons")
+                    if (UserInput == "DisplayPatrons")
                     {
-                        foreach (KeyValuePair<int, Account> item in AccountList)
-                        {
-                            Console.WriteLine(item.Value.GetAccountDetails());
-                        }
+                        Library.DisplayPatrons(AccountList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();

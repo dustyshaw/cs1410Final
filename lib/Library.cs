@@ -46,4 +46,12 @@ public class Library
             Console.WriteLine(item.Value.GetDetails());
         }
     }
+
+    public static void DisplayPatrons(Dictionary<int, Account> AccountList)
+    {
+        foreach (KeyValuePair<int, Account> item in AccountList)
+        {
+            Console.WriteLine(item.Value.GetAccountDetails());
+        }
+    }
 }
