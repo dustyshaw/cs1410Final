@@ -101,7 +101,7 @@ namespace MyLibrary
                                         Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
                                         try
                                         {
-                                            CallNumber = Book.ParseCallNumbers(Console.ReadLine());
+                                            CallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
                                             break;
                                         }
                                         catch
@@ -142,15 +142,29 @@ namespace MyLibrary
                                     break;
 
                                 case "CD":
-                                    Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
-                                    string CDCallNumber = Console.ReadLine();
+                                    string CDCallNumber;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
+                                        try
+                                        {
+                                            CDCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("Invalid CallNumber");
+                                        }
+                                    }
+                                    Console.WriteLine("Enter Barcode");
+                                    Int64 CDBarcode = Convert.ToInt64(Console.ReadLine());
                                     Console.WriteLine("Enter Item Title");
                                     string CDTitle = Console.ReadLine();
                                     Console.WriteLine("Enter Artist Name");
                                     string CDAuthor = Console.ReadLine();
 
                                     //logic
-                                    CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor);
+                                    CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor, CDBarcode);
                                     LibraryItemList.Add(CDCallNumber, NewCDItem);
                                     Console.WriteLine($" \n one {NewCDItem.Type} added: " + NewCDItem.GetDetails());
 

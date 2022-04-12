@@ -27,7 +27,7 @@ public class Tests
     public void TestingCDConstruction()
     {
         Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell", 34230000109820);
-        CD newCD = new CD("123.abc", "Circles", "Mac Miller");
+        CD newCD = new CD("123.abc", "Circles", "Mac Miller", 999999999999);
         Assert.AreEqual("123.abc", newCD.CallNumber);
         Assert.AreEqual("Circles", newCD.Title);
         Assert.AreEqual("Mac Miller", newCD.Artist);

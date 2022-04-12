@@ -14,4 +14,21 @@ public interface ILibraryItem
 
     public string GetDetails();
 
+    public static string ParseCallNumbers(string input)
+    {
+        if (input.Contains("."))
+        {
+            string[] callNumberParts = input.Split(".");
+            int numVal = Int32.Parse(callNumberParts[0]);
+            if (numVal < 0 || numVal > 999)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+        if (input == null)
+        {
+            throw new ArgumentNullException();
+        }
+        return "input accepted";
+    }
 }

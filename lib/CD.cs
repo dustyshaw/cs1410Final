@@ -5,10 +5,11 @@ public class CD : ILibraryItem
     public string CallNumber { get; set; }
     public string Title { get; set; }
     public string Artist { get; set; }
+    public Int64 Barcode { get; set; }
     public DateTime DueDate { get; set; }
     public ItemAvailability Availability { get; set; }
     public ItemType Type = ItemType.CD;
-    public CD(string _CallNumber, string _title, string _artist)
+    public CD(string _CallNumber, string _title, string _artist, Int64 _Barcode)
     {
         this.CallNumber = _CallNumber;
         this.Title = _title;
