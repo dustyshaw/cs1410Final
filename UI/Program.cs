@@ -65,9 +65,10 @@ namespace MyLibrary
                         string RequestedCallNumber = Console.ReadLine();
                         Console.WriteLine("Enter Account Id: ");
                         var userInputID = Convert.ToInt32(Console.ReadLine());
-                        var requestedAccount = AccountList[userInputID];
-                        var RequestedItem = (ILibraryItem)LibraryItemList[RequestedCallNumber];
-                        Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));
+                        var requestedAccount = AccountList[userInputID];  //grabs account
+                        var RequestedItem = (ILibraryItem)LibraryItemList[RequestedCallNumber];  //grabs item from list
+                        Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));      //checks it in using ILibraryItem check in method
+
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
@@ -78,6 +79,7 @@ namespace MyLibrary
                         string RequestedCallNumber = Console.ReadLine();
                         var RequestedItem = (ILibraryItem)LibraryItemList[RequestedCallNumber];
                         Console.WriteLine(RequestedItem.Renew(RequestedItem));
+
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
@@ -99,8 +101,20 @@ namespace MyLibrary
                                     string Title = Console.ReadLine();
                                     Console.WriteLine("Enter Authors Full Name");
                                     string Author = Console.ReadLine();
-                                    Console.WriteLine("Enter ISBN");
-                                    Int64 ISBN = Convert.ToInt64(Console.ReadLine());
+                                    Int64 ISBN;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter ISBN");
+                                        try
+                                        {
+                                            ISBN = Book.ParseISBN(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid ISBN.  Must be 10 or 13 characters.");
+                                        }
+                                    }
                                     Console.WriteLine("Enter Barcode");
                                     Int64 Barcode = Convert.ToInt64(Console.ReadLine());
 
@@ -144,7 +158,7 @@ namespace MyLibrary
                         string LName = Console.ReadLine();
                         Console.WriteLine("Enter Patrons ID");
                         int PatronID = Convert.ToInt32(Console.ReadLine());
-                        
+
                         //logic
                         Account newAccount = new Account(FName, LName, PatronID);
                         AccountList.Add(PatronID, newAccount);

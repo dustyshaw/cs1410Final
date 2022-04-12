@@ -11,7 +11,7 @@ public class Book : ILibraryItem
     public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
-    
+
     public Book(string _CallNumber, string _Title, Int64 _ISBN, string _Author, Int64 _Barcode)
     {
         this.CallNumber = _CallNumber;
@@ -54,6 +54,19 @@ public class Book : ILibraryItem
     {
         using StreamWriter file = new("data.txt", append: true);
         await file.WriteLineAsync(item.GetDetails());
+    }
+
+    public static Int64 ParseISBN (string input)
+    {
+        if(input == null)
+        {
+            throw new ArgumentNullException();
+        }
+        if(input.Length != 10 && input.Length != 13)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+        return Int64.Parse(input);
     }
 
 }
