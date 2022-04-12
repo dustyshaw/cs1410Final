@@ -4,15 +4,15 @@ public class Book : ILibraryItem
 {
     public string CallNumber { get; set; }
     public string Title { get; set; }
-    public string ISBN { get; set; }
-    public string Barcode { get; set; }
+    public Int64 ISBN { get; set; }
+    public Int64 Barcode { get; set; }
     public string Author { get; set; }
     public DateTime DueDate { get; set; }
     public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
     
-    public Book(string _CallNumber, string _Title, string _ISBN, string _Author, string _Barcode)
+    public Book(string _CallNumber, string _Title, Int64 _ISBN, string _Author, Int64 _Barcode)
     {
         this.CallNumber = _CallNumber;
         this.Title = _Title;

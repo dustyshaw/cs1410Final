@@ -2,9 +2,9 @@ namespace MyLibrary.lib;
 
 public interface ILibraryItem
 {
-    // public string Title { get; set; }
+    public string Title { get; set; }
 
-    // public string CallNumber { get; set; }  Do I really need these?
+    public string CallNumber { get; set; }
 
     public string CheckOut(ILibraryItem item, Account account);
 

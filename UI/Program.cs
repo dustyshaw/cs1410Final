@@ -15,7 +15,7 @@ namespace MyLibrary
             Library SnowCollegeLibrary = new Library(storage);
             Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>(); //move to lib.library 
 
-            Book newBook = new Book("123.abc", "Wonder", "123456789", "Lewis Carol", "34230000109820");
+            Book newBook = new Book("123.abc", "Wonder", 123456789, "Lewis Carol", 34230000109820);
             LibraryItemList.Add(newBook.CallNumber, newBook);
 
             Dictionary<int, Account> AccountList = new Dictionary<int, Account>();
@@ -97,12 +97,12 @@ namespace MyLibrary
                                     string CallNumber = Console.ReadLine();
                                     Console.WriteLine("Enter Item Title");
                                     string Title = Console.ReadLine();
-                                    Console.WriteLine("Enter ISBN");
-                                    string ISBN = Console.ReadLine();
                                     Console.WriteLine("Enter Authors Full Name");
                                     string Author = Console.ReadLine();
+                                    Console.WriteLine("Enter ISBN");
+                                    Int64 ISBN = Convert.ToInt64(Console.ReadLine());
                                     Console.WriteLine("Enter Barcode");
-                                    string Barcode = Console.ReadLine();
+                                    Int64 Barcode = Convert.ToInt64(Console.ReadLine());
 
                                     //logic
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);

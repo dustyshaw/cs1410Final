@@ -1,0 +1,9 @@
+
+ 
+ CallNumber: 144.a 
+ Title: Title 
+ Author: Full Name 
+ ISBN: 88888888 
+ Item Type: Book 
+ Barcode: 999999999999 
+ Availabilty: CheckedIn

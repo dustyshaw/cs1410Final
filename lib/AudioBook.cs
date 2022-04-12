@@ -2,7 +2,7 @@ namespace MyLibrary.lib;
 
 public abstract class AudioBook : Book
 {
-    public AudioBook(string _CallNumber, string _Title, string _ISBN, string _Author, string _Barcode) : base(_CallNumber, _Title, _ISBN, _Author, _Barcode)
+    public AudioBook(string _CallNumber, string _Title, Int64 _ISBN, string _Author, Int64 _Barcode) : base(_CallNumber, _Title, _ISBN, _Author, _Barcode)
     {
 
     }
