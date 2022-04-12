@@ -56,17 +56,34 @@ public class Book : ILibraryItem
         await file.WriteLineAsync(item.GetDetails());
     }
 
-    public static Int64 ParseISBN (string input)
+    public static Int64 ParseISBN(string input)
     {
-        if(input == null)
+        if (input == null)
         {
             throw new ArgumentNullException();
         }
-        if(input.Length != 10 && input.Length != 13)
+        if (input.Length != 10 && input.Length != 13)
         {
             throw new ArgumentOutOfRangeException();
         }
         return Int64.Parse(input);
     }
 
+    public static string ParseCallNumbers(string input)
+    {
+        if (input.Contains("."))
+        {
+            string[] callNumberParts = input.Split(".");
+            int numVal = Int32.Parse(callNumberParts[0]);
+            if(numVal < 0 || numVal>999)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+        if (input == null)
+        {
+            throw new ArgumentNullException();
+        }
+        return "input accepted";
+    }
 }

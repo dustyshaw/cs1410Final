@@ -95,8 +95,20 @@ namespace MyLibrary
                             switch (BookType)
                             {
                                 case "Book":
-                                    Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
-                                    string CallNumber = Console.ReadLine();
+                                    string CallNumber;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
+                                        try
+                                        {
+                                            CallNumber = Book.ParseCallNumbers(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("Invalid CallNumber");
+                                        }
+                                    }
                                     Console.WriteLine("Enter Item Title");
                                     string Title = Console.ReadLine();
                                     Console.WriteLine("Enter Authors Full Name");

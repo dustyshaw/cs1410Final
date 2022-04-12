@@ -16,3 +16,12 @@
  Item Type: Book 
  Barcode: 999999999999 
  Availabilty: CheckedIn
+
+ 
+ CallNumber: input accepted 
+ Title: Title 
+ Author: Author 
+ ISBN: 1111111111 
+ Item Type: Book 
+ Barcode: 999 
+ Availabilty: CheckedIn
