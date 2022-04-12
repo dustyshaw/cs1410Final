@@ -1,6 +1,6 @@
-using System;
 namespace MyLibrary.lib;
-public class Book : ILibraryItem
+
+public class Magazine : ILibraryItem
 {
     public string CallNumber { get; set; }
     public string Title { get; set; }
@@ -12,7 +12,7 @@ public class Book : ILibraryItem
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
 
-    public Book(string _CallNumber, string _Title, Int64 _ISBN, string _Author, Int64 _Barcode)
+    public Magazine(string _CallNumber, string _Title, Int64 _ISBN, string _Author, Int64 _Barcode)
     {
         this.CallNumber = _CallNumber;
         this.Title = _Title;
@@ -70,13 +70,3 @@ public class Book : ILibraryItem
     }
 }
 
-public class OversizedBook : Book
-{
-    ItemType Type = ItemType.OversizedBook;
-    public ItemAvailability Availability { get; set; }
-    public ItemAvailability availability = ItemAvailability.CheckedIn;
-    public OversizedBook(string _CallNumber, string _Title, long _ISBN, string _Author, long _Barcode) : base(_CallNumber, _Title, _ISBN, _Author, _Barcode)
-    {
-    }
-
-}

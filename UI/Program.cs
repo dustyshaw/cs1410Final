@@ -9,6 +9,8 @@ namespace MyLibrary
 
         static void Main(string[] args)
         {
+            OversizedBook ovBook = new OversizedBook("989.a1", "Title", 144444444444, "Author Name", 999999999909);
+
             //all logic needs to be moved
             AccountJsonFileStorageService storage = new AccountJsonFileStorageService();
 

@@ -3,6 +3,7 @@ namespace MyLibrary.lib;
 public enum ItemType
 {
     Book,       //title, author, publication date
+    OversizedBook,
     CD,         //title, artist, run time
     Magazine,   //publication/ journal, Issue, publication date
     DVD,        //title, director, release date, run time, 
