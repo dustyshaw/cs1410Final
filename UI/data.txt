@@ -25,3 +25,39 @@
  Item Type: Book 
  Barcode: 999 
  Availabilty: CheckedIn
+
+ 
+ CallNumber: 155.ajj 
+ Title: Titleeee 
+ Author: Authoroooo 
+ ISBN: 8765432456 
+ Item Type: Book 
+ Barcode: 765432654317 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 133.a10087bc 
+ Title: Title 98 
+ Author: Hello World 
+ ISBN: 8765456788888 
+ Item Type: Book 
+ Barcode: 8776555 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 155.199990 
+ Title: Title Title 
+ Author: Authors Name 
+ ISBN: 8768998789876 
+ Item Type: Book 
+ Barcode: 99987666 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 166.a 
+ Title: Title 
+ Author: Authors full Name 
+ ISBN: 9889889889889 
+ Item Type: Book 
+ Barcode: 9889999 
+ Availabilty: CheckedIn

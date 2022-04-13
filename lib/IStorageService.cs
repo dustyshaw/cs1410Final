@@ -1,5 +1,3 @@
-
-
 namespace MyLibrary.lib;
 
 //whenever you make a library.cs, you need to pass in a Istorage service

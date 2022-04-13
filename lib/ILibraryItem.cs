@@ -1,3 +1,4 @@
+using System;
 namespace MyLibrary.lib;
 
 public interface ILibraryItem
@@ -16,6 +17,21 @@ public interface ILibraryItem
 
     public static string ParseCallNumbers(string input)
     {
+        if (!input.Contains("."))
+        {
+            var numMaxCharacters = 25;
+            int i=0;
+            char[] characters = input.ToCharArray();
+            foreach (char character in characters)
+            {
+                if (Char.IsDigit(character))
+                {
+                    int[] digits = new int[numMaxCharacters];
+                    digits[i] = character;
+                    i++;
+                }
+            }
+        }
         if (input.Contains("."))
         {
             string[] callNumberParts = input.Split(".");
@@ -29,6 +45,6 @@ public interface ILibraryItem
         {
             throw new ArgumentNullException();
         }
-        return "input accepted";
+        return input;
     }
 }

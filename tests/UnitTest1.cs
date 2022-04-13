@@ -9,64 +9,72 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        // Book newBook = new Book("587.B35", "Gone With the Wind", "124567", "Margaret Mitchell", "34230000109820");
-        // Account newAccount = new Account("Dusty", "Shaw", 12345);
+        newBook = new Book("587.B35", "Gone With the Wind", 1245670000000, "Margaret Mitchell", 34230000109820);
+        newOVBook = new OversizedBook("989.a98", "Photos of the Ages", 1989763876, "Carmal Machiato", 9998987698798);
+        newCD = new CD("873.a87", "Gone With the Wind Soundtrack", "Johnny Bob", 90876095876);
+        newAccount = new Account("Dusty", "Shaw", 12345);
     }
 
+    Book newBook;
+    OversizedBook newOVBook;
+    CD newCD;
+    Account newAccount;
+
+
     [Test]
-    public void TestingBookConstruction()
+    public void Testing_BookConstruction()
     {
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell", 34230000109820);
         Assert.AreEqual("587.B35", newBook.CallNumber);
         Assert.AreEqual("Gone With the Wind", newBook.Title);
-        Assert.AreEqual(124567, newBook.ISBN);
+        Assert.AreEqual(1245670000000, newBook.ISBN);
         Assert.AreEqual("Margaret Mitchell", newBook.Author);
     }
 
     [Test]
-    public void TestingCDConstruction()
+    public void Testing_CDConstruction()
     {
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell", 34230000109820);
-        CD newCD = new CD("123.abc", "Circles", "Mac Miller", 999999999999);
         Assert.AreEqual("123.abc", newCD.CallNumber);
         Assert.AreEqual("Circles", newCD.Title);
         Assert.AreEqual("Mac Miller", newCD.Artist);
     }
 
     [Test]
-    public void TestingItemAvailabilityAfterCheckOut()
+    public void Testing_Item_Availability_After_CheckOut()
     {
-        Account newAccount = new Account("Dusty", "Shaw", 12345);
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell", 34230000109820);
         newBook.CheckOut((ILibraryItem)newBook, newAccount);
         Assert.AreEqual(ItemAvailability.CheckedOut, newBook.Availability);
     }
 
     // [Test]
-    // public void TestingRenewFunction()
+    // public void Testing_Renew_Function()
     // {
-    //     Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell", 34230000109820);
     //     var DueDate = new DateTime(2022-05-12);
     //     newBook.Renew((ILibraryItem)newBook);
     //     Assert.AreEqual(DueDate, newBook.DueDate);
     // }
 
     [Test]
-    public void TestingPatronsHoldListAfterCheckOut()
+    public void Testing_Patron_HoldList_After_CheckOut()
     {
-        Account newAccount = new Account("Dusty", "Shaw", 12345);
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell", 34230000109820);
         newBook.CheckOut((ILibraryItem)newBook, newAccount);
         Assert.AreEqual(newBook, newAccount.holdList[0]);
     }
 
     [Test]
-    public void TestingPatronsHoldListAfterCheckIn()
+    public void Testing_Patron_HoldList_After_CheckIn()
     {
         //tests if patrons hold list is empty after checking in one item.
-        Account newAccount = new Account("Dusty", "Shaw", 12345);
-        Book newBook = new Book("587.B35", "Gone With the Wind", 124567, "Margaret Mitchell", 34230000109820);
         newBook.CheckIn((ILibraryItem)newBook, newAccount);
         Assert.AreEqual(newAccount.holdList.Count, 0);
     }
+
+    //example of test cases
+    // [TestCase("144.a23")]
+    // [TestCase("999.a")]
+    // [TestCase("888.abckjsigh1000")]
+    // public void Testing_CallNumber_Exceptions(string CallNumber)
+    // {
+    //     Assert.AreEqual()
+    // }
+
 }

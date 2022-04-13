@@ -1,4 +1,3 @@
-using System;
 namespace MyLibrary.lib;
 public class Book : ILibraryItem
 {
@@ -50,7 +49,7 @@ public class Book : ILibraryItem
         return $"\n \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Barcode: {Barcode} \n Availabilty: {Availability}";
     }
 
-    public async void WriteToFile(ILibraryItem item)
+    public async void WriteToTextFile(ILibraryItem item)
     {
         using StreamWriter file = new("data.txt", append: true);
         await file.WriteLineAsync(item.GetDetails());
@@ -68,15 +67,4 @@ public class Book : ILibraryItem
         }
         return Int64.Parse(input);
     }
-}
-
-public class OversizedBook : Book
-{
-    ItemType Type = ItemType.OversizedBook;
-    public ItemAvailability Availability { get; set; }
-    public ItemAvailability availability = ItemAvailability.CheckedIn;
-    public OversizedBook(string _CallNumber, string _Title, long _ISBN, string _Author, long _Barcode) : base(_CallNumber, _Title, _ISBN, _Author, _Barcode)
-    {
-    }
-
 }

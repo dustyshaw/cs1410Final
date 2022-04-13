@@ -2,8 +2,8 @@ namespace MyLibrary.lib;
 
 public class Library
 {
-    public Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
-    
+    public static Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
+
     public List<Account> accounts = new List<Account>();
 
     public Library(IAccountStorageService storage)
@@ -11,9 +11,10 @@ public class Library
         List<Account> accounts = new List<Account>();
     }
 
-    public ILibraryItem AddItem(ILibraryItem item)
+    public string AddItem(string key, ILibraryItem item)
     {
-        throw new Exception();
+        LibraryItemList.Add(key, item);
+        return "item added";
     }
 
     public ILibraryItem AddAccount(ILibraryItem item)

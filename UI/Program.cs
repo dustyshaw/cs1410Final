@@ -1,5 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// CS1410 Final Project
+// Library App
+// Dusty Shaw
+
 using MyLibrary.lib;
 
 namespace MyLibrary
@@ -9,16 +11,19 @@ namespace MyLibrary
 
         static void Main(string[] args)
         {
+
             OversizedBook ovBook = new OversizedBook("989.a1", "Title", 144444444444, "Author Name", 999999999909);
 
-            //all logic needs to be moved
+
             AccountJsonFileStorageService storage = new AccountJsonFileStorageService();
 
             Library SnowCollegeLibrary = new Library(storage);
-            Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>(); //move to lib.library 
+            //Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>(); //move to lib.library 
 
             Book newBook = new Book("123.abc", "Wonder", 123456789, "Lewis Carol", 34230000109820);
-            LibraryItemList.Add(newBook.CallNumber, newBook);
+            Library.LibraryItemList.Add(newBook.CallNumber, newBook);
+
+
 
             Dictionary<int, Account> AccountList = new Dictionary<int, Account>();
             Account newAct = new Account("Dusty", "Shaw", 123);
@@ -54,7 +59,7 @@ namespace MyLibrary
                         var userInputID = Convert.ToInt32(Console.ReadLine());
 
                         var requestedAccount = AccountList[userInputID];  //grabs account from list
-                        var RequestedItem = (ILibraryItem)LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
+                        var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
                         Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
 
                         Console.WriteLine("Press Enter to continue");
@@ -68,7 +73,7 @@ namespace MyLibrary
                         Console.WriteLine("Enter Account Id: ");
                         var userInputID = Convert.ToInt32(Console.ReadLine());
                         var requestedAccount = AccountList[userInputID];  //grabs account
-                        var RequestedItem = (ILibraryItem)LibraryItemList[RequestedCallNumber];  //grabs item from list
+                        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];  //grabs item from list
                         Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));      //checks it in using ILibraryItem check in method
 
                         Console.WriteLine("Press Enter to continue");
@@ -79,7 +84,7 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Item CallNumber to renew: ");
                         string RequestedCallNumber = Console.ReadLine();
-                        var RequestedItem = (ILibraryItem)LibraryItemList[RequestedCallNumber];
+                        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];
                         Console.WriteLine(RequestedItem.Renew(RequestedItem));
 
                         Console.WriteLine("Press Enter to continue");
@@ -89,7 +94,7 @@ namespace MyLibrary
                     if (UserInput == "AddLibraryItem")
                     {
                         Console.WriteLine("Select Item Type:");
-                        Console.WriteLine("\nBook \nCD");
+                        Console.WriteLine("\n Book \n CD \n OverSizedBook \n ");
                         string BookType = Console.ReadLine();
                         bool AskingForType = true;
                         while (AskingForType == true)
@@ -132,11 +137,63 @@ namespace MyLibrary
                                     Console.WriteLine("Enter Barcode");
                                     Int64 Barcode = Convert.ToInt64(Console.ReadLine());
 
-                                    //logic
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
-                                    LibraryItemList.Add(CallNumber, NewBookItem);
-                                    NewBookItem.WriteToFile(NewBookItem);
+                                    Library.LibraryItemList.Add(CallNumber, NewBookItem);
+
+                                    NewBookItem.WriteToTextFile(NewBookItem);
+
                                     Console.WriteLine($" \n One {NewBookItem.Type} added: " + NewBookItem.GetDetails());
+
+                                    Console.WriteLine("Press Enter to continue");
+                                    Console.ReadLine();
+                                    AskingForType = false;
+                                    break;
+
+                                case "OversizedBook":
+                                    string OVCallNumber;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
+                                        try
+                                        {
+                                            OVCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("Invalid CallNumber");
+                                        }
+                                    }
+                                    Console.WriteLine("Enter Item Title");
+                                    string OVTitle = Console.ReadLine();
+                                    Console.WriteLine("Enter Authors Full Name");
+                                    string OVAuthor = Console.ReadLine();
+
+                                    Int64 OVISBN;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter ISBN");
+                                        try
+                                        {
+                                            OVISBN = Book.ParseISBN(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid ISBN.  Must be 10 or 13 characters.");
+                                        }
+                                    }
+                                    
+                                    Console.WriteLine("Enter Barcode");
+                                    Int64 OVBarcode = Convert.ToInt64(Console.ReadLine());
+
+                                    //logic
+                                    Book OVNewBookItem = new Book(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
+                                    Library.LibraryItemList.Add(OVCallNumber, OVNewBookItem);
+
+                                    // Write to text file
+                                    OVNewBookItem.WriteToTextFile(OVNewBookItem);
+                                    Console.WriteLine($" \n One {OVNewBookItem.Type} added: " + OVNewBookItem.GetDetails());
 
                                     Console.WriteLine("Press Enter to continue");
                                     Console.ReadLine();
@@ -167,7 +224,7 @@ namespace MyLibrary
 
                                     //logic
                                     CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor, CDBarcode);
-                                    LibraryItemList.Add(CDCallNumber, NewCDItem);
+                                    Library.LibraryItemList.Add(CDCallNumber, NewCDItem);
                                     Console.WriteLine($" \n one {NewCDItem.Type} added: " + NewCDItem.GetDetails());
 
                                     Console.WriteLine("Press Enter to continue");
@@ -202,7 +259,7 @@ namespace MyLibrary
                         Console.WriteLine("Enter in Call Number or Title");
                         string RequestedItem = Console.ReadLine();
 
-                        Library.SearchLibraryItems(RequestedItem, LibraryItemList);
+                        Library.SearchLibraryItems(RequestedItem, Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -210,7 +267,7 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        Library.DisplayLibraryItems(LibraryItemList);
+                        Library.DisplayLibraryItems(Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
