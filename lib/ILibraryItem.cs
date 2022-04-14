@@ -32,6 +32,7 @@ public interface ILibraryItem
                 }
             }
         }
+
         if (input.Contains("."))
         {
             string[] callNumberParts = input.Split(".");
@@ -41,10 +42,26 @@ public interface ILibraryItem
                 throw new ArgumentOutOfRangeException();
             }
         }
+
         if (input == null)
         {
             throw new ArgumentNullException();
         }
+        return input;
+    }
+
+    public static string ParseBarcodes(string input)
+    {
+        if (input == null)
+        {
+            throw new ArgumentNullException();
+        }
+
+        if (input.Length != 12)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+        
         return input;
     }
 }

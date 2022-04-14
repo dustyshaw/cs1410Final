@@ -131,11 +131,23 @@ namespace MyLibrary
                                         }
                                         catch
                                         {
-                                            Console.WriteLine("invalid ISBN.  Must be 10 or 13 characters.");
+                                            Console.WriteLine("invalid ISBN.  Must be 10 or 13 digits.");
                                         }
                                     }
-                                    Console.WriteLine("Enter Barcode");
-                                    Int64 Barcode = Convert.ToInt64(Console.ReadLine());
+                                    Int64 Barcode;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Barcode");
+                                        try
+                                        {
+                                            Barcode = Book.ParseBarcodes(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid Barcode.  Must be 12 digits");
+                                        }
+                                    }
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
                                     Library.LibraryItemList.Add(CallNumber, NewBookItem);
