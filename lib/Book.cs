@@ -65,6 +65,10 @@ public class Book : ILibraryItem
         {
             throw new ArgumentOutOfRangeException();
         }
+        // if (input is string)
+        // {
+        //     throw new FormatException();
+        // }
         return Int64.Parse(input);
     }
 }

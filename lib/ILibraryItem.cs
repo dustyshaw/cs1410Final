@@ -19,7 +19,7 @@ public interface ILibraryItem
     {
         if (!input.Contains("."))
         {
-            var numMaxCharacters = 25;
+            var numMaxCharacters = 80;
             int i=0;
             char[] characters = input.ToCharArray();
             foreach (char character in characters)

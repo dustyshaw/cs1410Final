@@ -14,10 +14,10 @@ namespace MyLibrary
 
             OversizedBook ovBook = new OversizedBook("989.a1", "Title", 144444444444, "Author Name", 999999999909);
 
+            ItemsJsonFileStorageService itemStorage = new ItemsJsonFileStorageService();
+            AccountJsonFileStorageService accountStorage = new AccountJsonFileStorageService();
 
-            AccountJsonFileStorageService storage = new AccountJsonFileStorageService();
-
-            Library SnowCollegeLibrary = new Library(storage);
+            Library SnowCollegeLibrary = new Library(accountStorage);
             //Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>(); //move to lib.library 
 
             Book newBook = new Book("123.abc", "Wonder", 123456789, "Lewis Carol", 34230000109820);
@@ -232,6 +232,7 @@ namespace MyLibrary
                                     AskingForType = false;
                                     break;
                             }
+                            itemStorage.SaveItems(Library.LibraryItemList);
                         }
                     }
 
@@ -268,6 +269,7 @@ namespace MyLibrary
                     if (UserInput == "DisplayLibraryItems")
                     {
                         Library.DisplayLibraryItems(Library.LibraryItemList);
+                        //Console.WriteLine(itemStorage.LoadItems());
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();

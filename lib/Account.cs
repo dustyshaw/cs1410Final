@@ -7,22 +7,26 @@ public class Account
         this.LastName = _LastName;
         this.ID = _ID;
     }
-    
+
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
 
     public int ID { get; set; }
-    
+
     public List<ILibraryItem> holdList = new List<ILibraryItem>();
 
-    public string DisplayHoldsList()
+    public void DisplayHoldsList()
     {
-        return holdList[0].GetDetails();
+        for (int i = 0; i < holdList.Count; i++)
+        {
+            Console.WriteLine( holdList[i].GetDetails().ToString());
+        }
+        // return holdList[i].GetDetails();
     }
 
     public string GetAccountDetails()
     {
-        return $"\n First Name: {FirstName} \n Last Name: {LastName} \n Account ID: {ID} \n Holds List: {DisplayHoldsList()}";
+        return $"\n First Name: {FirstName} \n Last Name: {LastName} \n Account ID: {ID} \n Holds List: {DisplayHoldsList}";
     }
 }

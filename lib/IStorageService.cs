@@ -42,25 +42,31 @@ public class AccountJsonFileStorageService : IAccountStorageService
     }
 }
 
-// public class ItemsJsonFileStorageService : IAccountStorageService
-// {
-//      Dictionary<string, ICheckoutable> LibraryItemList = new Dictionary<string, ICheckoutable>();
-//     public Dictionary<string, ICheckoutable> LoadItems()
-//     {
-//         if(File.Exists("accounts.json"))
-//         {
-//             var json = File.ReadAllText("accounts.json");
-//             LibraryItemList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ICheckoutable>>(json);
-//         }
-//         return LibraryItemList<string, ICheckoutable>;
-//     }
+public interface IItemStorageService
+{
+    public void SaveItems(Dictionary<string, ILibraryItem> LibraryItem);
+    public Dictionary<string, ILibraryItem> LoadItems();
+}
 
-//     public void SaveAccounts(Dictionary<string, ICheckoutable> LibraryItem)
-//     {
-//         var json = System.Text.Json.JsonSerializer.Serialize(accounts);
-//         File.WriteAllText("accounts.json", json);
-//     }
-// }
+public class ItemsJsonFileStorageService 
+{
+     Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
+    public Dictionary<string, ILibraryItem> LoadItems()
+    {
+        if(File.Exists("items.json"))
+        {
+            var json = File.ReadAllText("items.json");
+            LibraryItemList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ILibraryItem>>(json);
+        }
+        return LibraryItemList;
+    }
+
+    public void SaveItems(Dictionary<string, ILibraryItem> LibraryItem)
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
+        File.WriteAllText("items.json", json);
+    }
+}
 
 //in library class, make a public reference field to the 
 

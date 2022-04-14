@@ -61,3 +61,39 @@
  Item Type: Book 
  Barcode: 9889999 
  Availabilty: CheckedIn
+
+ 
+ CallNumber: 978.1566a 
+ Title: The Guessing Game 
+ Author: Brandon Sanderson 
+ ISBN: 7654387653621 
+ Item Type: Book 
+ Barcode: 8787665 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 876.98a 
+ Title: The Bible 
+ Author: Jod 
+ ISBN: 1098765432 
+ Item Type: Book 
+ Barcode: 77 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 188.a 
+ Title: Title Title 
+ Author: Anaus Name 
+ ISBN: 9876437654 
+ Item Type: Book 
+ Barcode: 9 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 199.8001a 
+ Title: Banana 
+ Author: Bananna 
+ ISBN: 9876549876 
+ Item Type: Book 
+ Barcode: 9 
+ Availabilty: CheckedIn
