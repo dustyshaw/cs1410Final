@@ -97,3 +97,12 @@
  Item Type: Book 
  Barcode: 9 
  Availabilty: CheckedIn
+
+ 
+ CallNumber: 188.a 
+ Title: Title 
+ Author: author 
+ ISBN: 9999999999 
+ Item Type: Book 
+ Barcode: 888 
+ Availabilty: CheckedIn

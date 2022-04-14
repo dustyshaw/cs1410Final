@@ -11,23 +11,10 @@ namespace MyLibrary
 
         static void Main(string[] args)
         {
-
-            OversizedBook ovBook = new OversizedBook("989.a1", "Title", 144444444444, "Author Name", 999999999909);
-
             ItemsJsonFileStorageService itemStorage = new ItemsJsonFileStorageService();
             AccountJsonFileStorageService accountStorage = new AccountJsonFileStorageService();
 
             Library SnowCollegeLibrary = new Library(accountStorage);
-            //Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>(); //move to lib.library 
-
-            Book newBook = new Book("123.abc", "Wonder", 123456789, "Lewis Carol", 34230000109820);
-            Library.LibraryItemList.Add(newBook.CallNumber, newBook);
-
-
-
-            Dictionary<int, Account> AccountList = new Dictionary<int, Account>();
-            Account newAct = new Account("Dusty", "Shaw", 123);
-            AccountList.Add(newAct.ID, newAct);
 
             bool programRunning = true;
             while (programRunning == true)
@@ -58,7 +45,7 @@ namespace MyLibrary
                         Console.WriteLine("Enter Account Id: ");
                         var userInputID = Convert.ToInt32(Console.ReadLine());
 
-                        var requestedAccount = AccountList[userInputID];  //grabs account from list
+                        var requestedAccount = Library.AccountList[userInputID];  //grabs account from list
                         var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
                         Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
 
@@ -72,7 +59,7 @@ namespace MyLibrary
                         string RequestedCallNumber = Console.ReadLine();
                         Console.WriteLine("Enter Account Id: ");
                         var userInputID = Convert.ToInt32(Console.ReadLine());
-                        var requestedAccount = AccountList[userInputID];  //grabs account
+                        var requestedAccount = Library.AccountList[userInputID];  //grabs account
                         var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];  //grabs item from list
                         Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));      //checks it in using ILibraryItem check in method
 
@@ -134,20 +121,20 @@ namespace MyLibrary
                                             Console.WriteLine("invalid ISBN.  Must be 10 or 13 digits.");
                                         }
                                     }
-                                    Int64 Barcode;
-                                    while (true)
-                                    {
-                                        Console.WriteLine("Enter Barcode");
-                                        try
-                                        {
-                                            Barcode = Book.ParseBarcodes(Console.ReadLine());
-                                            break;
-                                        }
-                                        catch
-                                        {
-                                            Console.WriteLine("invalid Barcode.  Must be 12 digits");
-                                        }
-                                    }
+                                    long Barcode = Convert.ToInt64(Console.ReadLine());
+                                    // while (true)
+                                    // {
+                                    //     Console.WriteLine("Enter Barcode");
+                                    //     try
+                                    //     {
+                                    //         Barcode = Book.ParseBarcodes(Console.ReadLine());
+                                    //         break;
+                                    //     }
+                                    //     catch
+                                    //     {
+                                    //         Console.WriteLine("invalid Barcode.  Must be 12 digits");
+                                    //     }
+                                    // }
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
                                     Library.LibraryItemList.Add(CallNumber, NewBookItem);
@@ -259,7 +246,7 @@ namespace MyLibrary
 
                         //logic
                         Account newAccount = new Account(FName, LName, PatronID);
-                        AccountList.Add(PatronID, newAccount);
+                        Library.AccountList.Add(PatronID, newAccount);
 
                         Console.WriteLine("New Patron Added: " + newAccount.GetAccountDetails());
 
@@ -281,7 +268,7 @@ namespace MyLibrary
                     if (UserInput == "DisplayLibraryItems")
                     {
                         Library.DisplayLibraryItems(Library.LibraryItemList);
-                        //Console.WriteLine(itemStorage.LoadItems());
+                        SnowCollegeLibrary.ReadTextFile();
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -289,7 +276,7 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayPatrons")
                     {
-                        Library.DisplayPatrons(AccountList);
+                        Library.DisplayPatrons(Library.AccountList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();

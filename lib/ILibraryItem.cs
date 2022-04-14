@@ -50,18 +50,5 @@ public interface ILibraryItem
         return input;
     }
 
-    public static string ParseBarcodes(string input)
-    {
-        if (input == null)
-        {
-            throw new ArgumentNullException();
-        }
 
-        if (input.Length != 12)
-        {
-            throw new ArgumentOutOfRangeException();
-        }
-        
-        return input;
-    }
 }
