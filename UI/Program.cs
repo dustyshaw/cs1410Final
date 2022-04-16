@@ -42,8 +42,20 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
                         string userInputBook = (Console.ReadLine());
-                        Console.WriteLine("Enter Account Id: ");
-                        var userInputID = Convert.ToInt32(Console.ReadLine());
+                        int userInputID;
+                        while (true)
+                        {
+                            Console.WriteLine("Enter Item patrons ID");
+                            try
+                            {
+                                userInputID = Account.ParsePatronID(Console.ReadLine());
+                                break;
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid input");
+                            }
+                        }
 
                         var requestedAccount = Library.AccountList[userInputID];  //grabs account from list
                         var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
@@ -81,7 +93,7 @@ namespace MyLibrary
                     if (UserInput == "AddLibraryItem")
                     {
                         Console.WriteLine("Select Item Type:");
-                        Console.WriteLine("\n Book \n CD \n OverSizedBook \n ");
+                        Console.WriteLine("\n Book \n CD \n OversizedBook \n ");
                         string BookType = Console.ReadLine();
                         bool AskingForType = true;
                         while (AskingForType == true)
@@ -121,20 +133,21 @@ namespace MyLibrary
                                             Console.WriteLine("invalid ISBN.  Must be 10 or 13 digits.");
                                         }
                                     }
-                                    long Barcode = Convert.ToInt64(Console.ReadLine());
-                                    // while (true)
-                                    // {
-                                    //     Console.WriteLine("Enter Barcode");
-                                    //     try
-                                    //     {
-                                    //         Barcode = Book.ParseBarcodes(Console.ReadLine());
-                                    //         break;
-                                    //     }
-                                    //     catch
-                                    //     {
-                                    //         Console.WriteLine("invalid Barcode.  Must be 12 digits");
-                                    //     }
-                                    // }
+
+                                    Int64 Barcode;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Barcode");
+                                        try
+                                        {
+                                            Barcode = Book.ParseBarcodes(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid Barcode.  Must be 12 digits.");
+                                        }
+                                    }
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
                                     Library.LibraryItemList.Add(CallNumber, NewBookItem);
@@ -182,7 +195,7 @@ namespace MyLibrary
                                             Console.WriteLine("invalid ISBN.  Must be 10 or 13 characters.");
                                         }
                                     }
-                                    
+
                                     Console.WriteLine("Enter Barcode");
                                     Int64 OVBarcode = Convert.ToInt64(Console.ReadLine());
 

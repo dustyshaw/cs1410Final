@@ -5,11 +5,11 @@ public class Library
     public static Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
 
     public static Dictionary<int, Account> AccountList = new Dictionary<int, Account>();
-    public List<Account> accounts = new List<Account>();
+    //public List<Account> accounts = new List<Account>();
 
     public Library(IAccountStorageService storage)
     {
-        List<Account> accounts = new List<Account>();
+        Dictionary<int, Account> accounts = new Dictionary<int, Account>();
     }
 
     public string AddItem(string key, ILibraryItem item)

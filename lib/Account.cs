@@ -20,13 +20,21 @@ public class Account
     {
         for (int i = 0; i < holdList.Count; i++)
         {
-            Console.WriteLine( holdList[i].GetDetails().ToString());
+            Console.WriteLine(holdList[i].GetDetails().ToString());
         }
-        // return holdList[i].GetDetails();
     }
 
     public string GetAccountDetails()
     {
         return $"\n First Name: {FirstName} \n Last Name: {LastName} \n Account ID: {ID} \n Holds List: {DisplayHoldsList}";
+    }
+
+    public static int ParsePatronID(string input)
+    {
+        if (input == null)
+        {
+            throw new ArgumentNullException();
+        }
+        return int.Parse(input);
     }
 }

@@ -106,3 +106,30 @@
  Item Type: Book 
  Barcode: 888 
  Availabilty: CheckedIn
+
+ 
+ CallNumber: 989.a 
+ Title: Photography of the West 
+ Author: Miller Gray 
+ ISBN: 9898789876 
+ Item Type: Book 
+ Barcode: 989999989876 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 187.a09 
+ Title: Title 
+ Author: Author 
+ ISBN: 9898989898989 
+ Item Type: Book 
+ Barcode: 876587658765 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 1 
+ Title: Title 
+ Author: Author 
+ ISBN: 9898989898 
+ Item Type: Book 
+ Barcode: 989898989876 
+ Availabilty: CheckedIn

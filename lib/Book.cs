@@ -54,8 +54,6 @@ public class Book : ILibraryItem
         using StreamWriter file = new("data.txt", append: true);
         await file.WriteLineAsync(item.GetDetails());
     }
-    
-    
 
     public static Int64 ParseISBN(string input)
     {
@@ -74,7 +72,7 @@ public class Book : ILibraryItem
         return Int64.Parse(input);
     }
 
-    public static string ParseBarcodes(string input)
+    public static Int64 ParseBarcodes(string input)
     {
         if (input == null)
         {
@@ -86,6 +84,6 @@ public class Book : ILibraryItem
             throw new ArgumentOutOfRangeException();
         }
 
-        return input;
+        return Int64.Parse(input);
     }
 }
