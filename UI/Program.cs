@@ -150,17 +150,21 @@ namespace MyLibrary
                                     }
 
                                     Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
-                                    Library.LibraryItemList.Add(CallNumber, NewBookItem);
+                                    Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
+                                    var userConfirmation = Console.ReadLine();
+                                    if (userConfirmation == "Y")
+                                    {
+                                        Library.LibraryItemList.Add(CallNumber, NewBookItem);
+                                        NewBookItem.WriteToTextFile(NewBookItem);
 
-                                    NewBookItem.WriteToTextFile(NewBookItem);
-
-                                    Console.WriteLine($" \n One {NewBookItem.Type} added: " + NewBookItem.GetDetails());
-
-                                    Console.WriteLine("Press Enter to continue");
-                                    Console.ReadLine();
+                                    }
+                                    if (userConfirmation == "R")
+                                    {
+                                        AskingForType = false;
+                                        break;
+                                    }
                                     AskingForType = false;
                                     break;
-
                                 case "OversizedBook":
                                     string OVCallNumber;
                                     while (true)
@@ -199,16 +203,21 @@ namespace MyLibrary
                                     Console.WriteLine("Enter Barcode");
                                     Int64 OVBarcode = Convert.ToInt64(Console.ReadLine());
 
-                                    //logic
                                     Book OVNewBookItem = new Book(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
-                                    Library.LibraryItemList.Add(OVCallNumber, OVNewBookItem);
+    
+                                    Console.WriteLine(OVNewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
+                                    var OVuserConfirmation = Console.ReadLine();
+                                    if (OVuserConfirmation == "Y")
+                                    {
+                                        Library.LibraryItemList.Add(OVCallNumber, OVNewBookItem);
+                                        OVNewBookItem.WriteToTextFile(OVNewBookItem);
 
-                                    // Write to text file
-                                    OVNewBookItem.WriteToTextFile(OVNewBookItem);
-                                    Console.WriteLine($" \n One {OVNewBookItem.Type} added: " + OVNewBookItem.GetDetails());
-
-                                    Console.WriteLine("Press Enter to continue");
-                                    Console.ReadLine();
+                                    }
+                                    if (OVuserConfirmation == "R")
+                                    {
+                                        AskingForType = false;
+                                        break;
+                                    }
                                     AskingForType = false;
                                     break;
 
@@ -281,7 +290,7 @@ namespace MyLibrary
                     if (UserInput == "DisplayLibraryItems")
                     {
                         Library.DisplayLibraryItems(Library.LibraryItemList);
-                        SnowCollegeLibrary.ReadTextFile();
+                        //SnowCollegeLibrary.ReadTextFile();
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();

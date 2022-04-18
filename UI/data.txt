@@ -133,3 +133,30 @@
  Item Type: Book 
  Barcode: 989898989876 
  Availabilty: CheckedIn
+
+ 
+ CallNumber: 123.abc 
+ Title: Title 
+ Author: Authors Name 
+ ISBN: 9878764873673 
+ Item Type: Book 
+ Barcode: 876587643287 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 813.6 
+ Title: We Are Okay 
+ Author: Nina Lacour 
+ ISBN: 9784531625846 
+ Item Type: Book 
+ Barcode: 380136521453 
+ Availabilty: CheckedIn
+
+ 
+ CallNumber: 877.a 
+ Title: Title 
+ Author: Author 
+ ISBN: 9897687654 
+ Item Type: Book 
+ Barcode: 987987987987 
+ Availabilty: CheckedIn

@@ -50,5 +50,4 @@ public interface ILibraryItem
         return input;
     }
 
-
 }
