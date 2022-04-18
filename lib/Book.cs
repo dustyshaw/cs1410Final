@@ -55,31 +55,7 @@ public class Book : ILibraryItem
         await file.WriteLineAsync(item.GetDetails());
     }
 
-    public static Int64 ParseISBN(string input)
-    {
-        if (input == null)
-        {
-            throw new ArgumentNullException();
-        }
-        if (input.Length != 10 && input.Length != 13)
-        {
-            throw new ArgumentOutOfRangeException();
-        }
-        return Int64.Parse(input);
-    }
+    
 
-    public static Int64 ParseBarcodes(string input)
-    {
-        if (input == null)
-        {
-            throw new ArgumentNullException();
-        }
-
-        if (input.Length != 12)
-        {
-            throw new ArgumentOutOfRangeException();
-        }
-
-        return Int64.Parse(input);
-    }
+    
 }

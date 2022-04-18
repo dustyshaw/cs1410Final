@@ -19,7 +19,7 @@ public interface ILibraryItem
     {
         if (!input.Contains("."))
         {
-            var numMaxCharacters = 80;
+            var numMaxCharacters = 1000000;
             int i=0;
             char[] characters = input.ToCharArray();
             foreach (char character in characters)
@@ -32,7 +32,6 @@ public interface ILibraryItem
                 }
             }
         }
-
         if (input.Contains("."))
         {
             string[] callNumberParts = input.Split(".");
@@ -50,4 +49,31 @@ public interface ILibraryItem
         return input;
     }
 
+    public static Int64 ParseBarcodes(string input)
+    {
+        if (input == null)
+        {
+            throw new ArgumentNullException();
+        }
+
+        if (input.Length != 12)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
+        return Int64.Parse(input);
+    }
+
+    public static Int64 ParseISBN(string input)
+    {
+        if (input == null)
+        {
+            throw new ArgumentNullException();
+        }
+        if (input.Length != 10 && input.Length != 13)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+        return Int64.Parse(input);
+    }
 }

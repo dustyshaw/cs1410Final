@@ -125,7 +125,7 @@ namespace MyLibrary
                                         Console.WriteLine("Enter ISBN");
                                         try
                                         {
-                                            ISBN = Book.ParseISBN(Console.ReadLine());
+                                            ISBN = ILibraryItem.ParseISBN(Console.ReadLine());
                                             break;
                                         }
                                         catch
@@ -140,7 +140,7 @@ namespace MyLibrary
                                         Console.WriteLine("Enter Barcode");
                                         try
                                         {
-                                            Barcode = Book.ParseBarcodes(Console.ReadLine());
+                                            Barcode = ILibraryItem.ParseBarcodes(Console.ReadLine());
                                             break;
                                         }
                                         catch
@@ -165,6 +165,7 @@ namespace MyLibrary
                                     }
                                     AskingForType = false;
                                     break;
+
                                 case "OversizedBook":
                                     string OVCallNumber;
                                     while (true)
@@ -180,6 +181,7 @@ namespace MyLibrary
                                             Console.WriteLine("Invalid CallNumber");
                                         }
                                     }
+
                                     Console.WriteLine("Enter Item Title");
                                     string OVTitle = Console.ReadLine();
                                     Console.WriteLine("Enter Authors Full Name");
@@ -191,7 +193,7 @@ namespace MyLibrary
                                         Console.WriteLine("Enter ISBN");
                                         try
                                         {
-                                            OVISBN = Book.ParseISBN(Console.ReadLine());
+                                            OVISBN = ILibraryItem.ParseISBN(Console.ReadLine());
                                             break;
                                         }
                                         catch
@@ -206,7 +208,7 @@ namespace MyLibrary
                                         Console.WriteLine("Enter Barcode");
                                         try
                                         {
-                                            Barcode = Book.ParseBarcodes(Console.ReadLine());
+                                            OVBarcode = ILibraryItem.ParseBarcodes(Console.ReadLine());
                                             break;
                                         }
                                         catch
@@ -248,8 +250,20 @@ namespace MyLibrary
                                             Console.WriteLine("Invalid CallNumber");
                                         }
                                     }
-                                    Console.WriteLine("Enter Barcode");
-                                    Int64 CDBarcode = Convert.ToInt64(Console.ReadLine());
+                                    Int64 CDBarcode;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Barcode");
+                                        try
+                                        {
+                                            CDBarcode = ILibraryItem.ParseBarcodes(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid Barcode.  Must be 12 digits.");
+                                        }
+                                    }
                                     Console.WriteLine("Enter Item Title");
                                     string CDTitle = Console.ReadLine();
                                     Console.WriteLine("Enter Artist Name");
