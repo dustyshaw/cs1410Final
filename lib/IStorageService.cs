@@ -16,7 +16,7 @@ public class AccountJsonFileStorageService : IAccountStorageService
         if (File.Exists("accounts.json"))
         {
             var json = File.ReadAllText("accounts.json");
-            return System.Text.Json.JsonSerializer.Deserialize<Dictionary<int,Account>>(json);
+            return System.Text.Json.JsonSerializer.Deserialize<Dictionary<int, Account>>(json);
         }
         return new Dictionary<int, Account>();
     }
@@ -49,8 +49,15 @@ public class ItemsJsonFileStorageService
 
     public void SaveItems(Dictionary<string, ILibraryItem> LibraryItem)
     {
-        var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
-        File.WriteAllText("items.json", json);
+        if (!File.Exists("items.json"))
+        {
+            File.Create("items.json");
+        }
+        else
+        {
+            var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
+            File.WriteAllText("items.json", json);
+        }
     }
 }
 

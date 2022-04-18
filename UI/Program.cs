@@ -102,14 +102,14 @@ namespace MyLibrary
                             {
                                 case "Book":
                                     var NewBookItem = BookMaker.BookMakerforLibrary();
-                                    
+
                                     Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
                                     var userConfirmation = Console.ReadLine();
                                     if (userConfirmation == "Y")
                                     {
                                         Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
                                         itemStorage.SaveItems(Library.LibraryItemList);
-
+                                        Console.WriteLine("Book Saved");
                                     }
                                     if (userConfirmation == "R")
                                     {
