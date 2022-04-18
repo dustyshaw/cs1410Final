@@ -55,7 +55,4 @@ public class Book : ILibraryItem
         await file.WriteLineAsync(item.GetDetails());
     }
 
-    
-
-    
 }
