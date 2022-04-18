@@ -105,16 +105,23 @@ namespace MyLibrary
 
                                     Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
                                     var userConfirmation = Console.ReadLine();
-                                    if (userConfirmation == "Y")
+                                    while (userConfirmation != "Y" || userConfirmation != "R")
                                     {
-                                        Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
-                                        itemStorage.SaveItems(Library.LibraryItemList);
-                                        Console.WriteLine("Book Saved");
-                                    }
-                                    if (userConfirmation == "R")
-                                    {
-                                        AskingForType = false;
-                                        break;
+                                        if (userConfirmation == "Y")
+                                        {
+                                            Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
+                                            itemStorage.SaveItems(Library.LibraryItemList);
+                                            Console.WriteLine("Book Saved");
+                                        }
+                                        if (userConfirmation == "R")
+                                        {
+                                            AskingForType = false;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Incorrect input");
+                                        }
                                     }
                                     AskingForType = false;
                                     break;
@@ -171,7 +178,7 @@ namespace MyLibrary
                                     }
 
                                     OversizedBook OVNewBookItem = new OversizedBook(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
-    
+
                                     Console.WriteLine(OVNewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
                                     var OVuserConfirmation = Console.ReadLine();
                                     if (OVuserConfirmation == "Y")
@@ -294,5 +301,5 @@ namespace MyLibrary
             }
         }
     }
-    
+
 }
