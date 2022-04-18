@@ -200,10 +200,22 @@ namespace MyLibrary
                                         }
                                     }
 
-                                    Console.WriteLine("Enter Barcode");
-                                    Int64 OVBarcode = Convert.ToInt64(Console.ReadLine());
+                                    Int64 OVBarcode;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Barcode");
+                                        try
+                                        {
+                                            Barcode = Book.ParseBarcodes(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid Barcode.  Must be 12 digits.");
+                                        }
+                                    }
 
-                                    Book OVNewBookItem = new Book(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
+                                    OversizedBook OVNewBookItem = new OversizedBook(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
     
                                     Console.WriteLine(OVNewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
                                     var OVuserConfirmation = Console.ReadLine();
