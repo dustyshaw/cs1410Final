@@ -41,10 +41,13 @@ public interface ILibraryItem
                 throw new ArgumentOutOfRangeException();
             }
         }
-
         if (input == null)
         {
             throw new ArgumentNullException();
+        }
+        if(Library.LibraryItemList.ContainsKey(input))
+        {
+            throw new DuplicateWaitObjectException();
         }
         return input;
     }
