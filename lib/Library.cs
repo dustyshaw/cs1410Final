@@ -4,12 +4,11 @@ public class Library
 {
     public static Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
 
-    public static Dictionary<int, Account> AccountList = new Dictionary<int, Account>();
-    //public List<Account> accounts = new List<Account>();
+    public static Dictionary<int, Account> AccountList;
 
     public Library(IAccountStorageService storage)
     {
-        Dictionary<int, Account> accounts = new Dictionary<int, Account>();
+        AccountList = new Dictionary<int, Account>();
     }
 
     public string AddItem(string key, ILibraryItem item)
@@ -59,15 +58,15 @@ public class Library
         }
     }
 
-    public async void ReadTextFile()
-    {
-        string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Public\TestFolder\WriteLines2.txt");
-        System.Console.WriteLine("Contents of data.txt = ");
-        foreach (string line in lines)
-        {
-            // Use a tab to indent each line of the file.
-            Console.WriteLine("\t" + line);
-        }
-    }
+    // public async void ReadTextFile()
+    // {
+    //     string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Public\TestFolder\WriteLines2.txt");
+    //     System.Console.WriteLine("Contents of data.txt = ");
+    //     foreach (string line in lines)
+    //     {
+    //         // Use a tab to indent each line of the file.
+    //         Console.WriteLine("\t" + line);
+    //     }
+    // }
 
 }

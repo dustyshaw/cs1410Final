@@ -103,15 +103,18 @@ namespace MyLibrary
                                 case "Book":
                                     var NewBookItem = BookMaker.BookMakerforLibrary();
 
-                                    Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
+                                    Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var userConfirmation = Console.ReadLine();
-                                    while (userConfirmation != "Y" || userConfirmation != "R")
+
+                                    while (userConfirmation != "Y" && userConfirmation != "R")
                                     {
                                         if (userConfirmation == "Y")
                                         {
                                             Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
                                             itemStorage.SaveItems(Library.LibraryItemList);
-                                            Console.WriteLine("Book Saved");
+                                            Console.WriteLine("item Saved");
+                                            Console.WriteLine("Press enter to continue");
+                                            Console.ReadLine();
                                         }
                                         if (userConfirmation == "R")
                                         {
@@ -127,119 +130,55 @@ namespace MyLibrary
                                     break;
 
                                 case "OversizedBook":
-                                    string OVCallNumber;
-                                    while (true)
-                                    {
-                                        Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
-                                        try
-                                        {
-                                            OVCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
-                                            break;
-                                        }
-                                        catch
-                                        {
-                                            Console.WriteLine("Invalid CallNumber");
-                                        }
-                                    }
+                                    var OVNewBookItem = OversizedBookMaker.OversizedBookMakerForLibrary();
 
-                                    Console.WriteLine("Enter Item Title");
-                                    string OVTitle = Console.ReadLine();
-                                    Console.WriteLine("Enter Authors Full Name");
-                                    string OVAuthor = Console.ReadLine();
-
-                                    Int64 OVISBN;
-                                    while (true)
-                                    {
-                                        Console.WriteLine("Enter ISBN");
-                                        try
-                                        {
-                                            OVISBN = ILibraryItem.ParseISBN(Console.ReadLine());
-                                            break;
-                                        }
-                                        catch
-                                        {
-                                            Console.WriteLine("invalid ISBN.  Must be 10 or 13 characters.");
-                                        }
-                                    }
-
-                                    Int64 OVBarcode;
-                                    while (true)
-                                    {
-                                        Console.WriteLine("Enter Barcode");
-                                        try
-                                        {
-                                            OVBarcode = ILibraryItem.ParseBarcodes(Console.ReadLine());
-                                            break;
-                                        }
-                                        catch
-                                        {
-                                            Console.WriteLine("invalid Barcode.  Must be 12 digits.");
-                                        }
-                                    }
-
-                                    OversizedBook OVNewBookItem = new OversizedBook(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
-
-                                    Console.WriteLine(OVNewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'E' to exit and not save item details : ");
+                                    Console.WriteLine(OVNewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var OVuserConfirmation = Console.ReadLine();
-                                    if (OVuserConfirmation == "Y")
-                                    {
-                                        Library.LibraryItemList.Add(OVCallNumber, OVNewBookItem);
-                                        OVNewBookItem.WriteToTextFile(OVNewBookItem);
 
-                                    }
-                                    if (OVuserConfirmation == "R")
+                                    while (OVuserConfirmation != "Y" && OVuserConfirmation != "R")
                                     {
-                                        AskingForType = false;
-                                        break;
+                                        if (OVuserConfirmation == "Y")
+                                        {
+                                            Library.LibraryItemList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
+                                            itemStorage.SaveItems(Library.LibraryItemList);
+                                            Console.WriteLine("item Saved");
+                                            Console.WriteLine("Press enter to continue");
+                                            Console.ReadLine();
+                                        }
+                                        if (OVuserConfirmation == "R")
+                                        {
+                                            AskingForType = false;
+                                            break;
+                                        }
                                     }
                                     AskingForType = false;
                                     break;
 
                                 case "CD":
-                                    string CDCallNumber;
-                                    while (true)
+                                    CD NewCDItem = CDMaker.CDMakerForLibrary();                                    
+
+                                    Console.WriteLine(NewCDItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
+                                    var CDuserConfirmation = Console.ReadLine();
+
+                                    while (CDuserConfirmation != "Y" && CDuserConfirmation != "R")
                                     {
-                                        Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
-                                        try
+                                        if (CDuserConfirmation == "Y")
                                         {
-                                            CDCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
+                                            Library.LibraryItemList.Add(NewCDItem.CallNumber, NewCDItem);
+                                            itemStorage.SaveItems(Library.LibraryItemList);
+                                            Console.WriteLine("item Saved");
+                                            Console.WriteLine("Press enter to continue");
+                                            Console.ReadLine();
+                                        }
+                                        if (CDuserConfirmation == "R")
+                                        {
+                                            AskingForType = false;
                                             break;
                                         }
-                                        catch
-                                        {
-                                            Console.WriteLine("Invalid CallNumber");
-                                        }
                                     }
-                                    Int64 CDBarcode;
-                                    while (true)
-                                    {
-                                        Console.WriteLine("Enter Barcode");
-                                        try
-                                        {
-                                            CDBarcode = ILibraryItem.ParseBarcodes(Console.ReadLine());
-                                            break;
-                                        }
-                                        catch
-                                        {
-                                            Console.WriteLine("invalid Barcode.  Must be 12 digits.");
-                                        }
-                                    }
-                                    Console.WriteLine("Enter Item Title");
-                                    string CDTitle = Console.ReadLine();
-                                    Console.WriteLine("Enter Artist Name");
-                                    string CDAuthor = Console.ReadLine();
-
-                                    //logic
-                                    CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor, CDBarcode);
-                                    Library.LibraryItemList.Add(CDCallNumber, NewCDItem);
-                                    Console.WriteLine($" \n one {NewCDItem.Type} added: " + NewCDItem.GetDetails());
-
-                                    Console.WriteLine("Press Enter to continue");
-                                    Console.ReadLine();
                                     AskingForType = false;
                                     break;
                             }
-                            itemStorage.SaveItems(Library.LibraryItemList);
                         }
                     }
 
@@ -252,7 +191,6 @@ namespace MyLibrary
                         Console.WriteLine("Enter Patrons ID");
                         int PatronID = Convert.ToInt32(Console.ReadLine());
 
-                        //logic
                         Account newAccount = new Account(FName, LName, PatronID);
                         Library.AccountList.Add(PatronID, newAccount);
 
