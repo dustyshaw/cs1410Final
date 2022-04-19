@@ -19,6 +19,7 @@ namespace MyLibrary
             bool programRunning = true;
             while (programRunning == true)
             {
+                Console.Clear();
                 Console.WriteLine(@"Welcome to the Library App where library workers can keep track of library items,
             check out library items, renew them, and add library patrons.");
                 Console.WriteLine("Enter in one of the following commands (ex. to check out a book, enter the word 'CheckOut'):");
@@ -102,7 +103,7 @@ namespace MyLibrary
                             {
                                 case "Book":
                                     var NewBookItem = BookMaker.BookMakerforLibrary();
-
+                                    Console.Clear();
                                     Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var userConfirmation = Console.ReadLine();
 
@@ -116,6 +117,8 @@ namespace MyLibrary
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
                                             Console.ReadLine();
+                                            AskingForType = false;
+                                            break;
                                         }
                                         if (userConfirmation == "R")
                                         {
@@ -125,7 +128,8 @@ namespace MyLibrary
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Incorrect input");
+                                            Console.WriteLine("Not a valid option.  Enter 'Y' to confirm item details, 'R' to exit and not save item details :");
+                                            userConfirmation = Console.ReadLine();
                                         }
                                     }
                                     AskingForType = false;
@@ -133,6 +137,7 @@ namespace MyLibrary
 
                                 case "OversizedBook":
                                     var OVNewBookItem = OversizedBookMaker.OversizedBookMakerForLibrary();
+                                    Console.Clear();
 
                                     Console.WriteLine(OVNewBookItem.GetDetails() + $"Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var OVuserConfirmation = Console.ReadLine();
@@ -142,11 +147,14 @@ namespace MyLibrary
                                         if (OVuserConfirmation == "Y")
                                         {
                                             OVuserConfirmation = "Y";
-                                            Library.LibraryItemList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
+                                            var casted = (ILibraryItem)OVNewBookItem;
+                                            Library.LibraryItemList.Add(casted.CallNumber, casted);
                                             itemStorage.SaveItems(Library.LibraryItemList);
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
                                             Console.ReadLine();
+                                            AskingForType = false;
+                                            break;
                                         }
                                         if (OVuserConfirmation == "R")
                                         {
@@ -165,6 +173,7 @@ namespace MyLibrary
 
                                 case "CD":
                                     CD NewCDItem = CDMaker.CDMakerForLibrary();
+                                    Console.Clear();
 
                                     Console.WriteLine(NewCDItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var CDuserConfirmation = Console.ReadLine();
@@ -174,11 +183,14 @@ namespace MyLibrary
                                         if (CDuserConfirmation == "Y")
                                         {
                                             CDuserConfirmation = "Y";
-                                            Library.LibraryItemList.Add(NewCDItem.CallNumber, NewCDItem);
+                                            var castedCD = (ILibraryItem)NewCDItem;
+                                            Library.LibraryItemList.Add(castedCD.CallNumber, castedCD);
                                             itemStorage.SaveItems(Library.LibraryItemList);
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
                                             Console.ReadLine();
+                                            AskingForType = false;
+                                            break;
                                         }
                                         if (CDuserConfirmation == "R")
                                         {
@@ -186,8 +198,18 @@ namespace MyLibrary
                                             AskingForType = false;
                                             break;
                                         }
+                                        else
+                                        {
+                                            Console.WriteLine("Not a valid option.  Enter 'Y' to confirm item details, 'R' to exit and not save item details :");
+                                            OVuserConfirmation = Console.ReadLine();
+                                        }
                                     }
                                     AskingForType = false;
+                                    break;
+                                default:
+                                    Console.WriteLine("Invalid option.  Press Enter to try again.");
+                                    Console.ReadLine();
+                                    // AskingForType = false;
                                     break;
                             }
                         }

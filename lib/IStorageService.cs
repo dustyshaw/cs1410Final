@@ -49,15 +49,15 @@ public class ItemsJsonFileStorageService
 
     public void SaveItems(Dictionary<string, ILibraryItem> LibraryItem)
     {
-        if (!File.Exists("items.json"))
-        {
-            File.Create("items.json");
-        }
-        else
-        {
+        // if (!File.Exists("items.json"))
+        // {
+        //     File.Create("items.json");
+        // }
+        
+        //{
             var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
             File.WriteAllText("items.json", json);
-        }
+        //}
     }
 }
 
