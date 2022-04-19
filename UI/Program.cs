@@ -106,10 +106,11 @@ namespace MyLibrary
                                     Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var userConfirmation = Console.ReadLine();
 
-                                    while (userConfirmation != "Y" && userConfirmation != "R")
+                                    while (userConfirmation != "Y" || userConfirmation != "R")
                                     {
                                         if (userConfirmation == "Y")
                                         {
+                                            userConfirmation = "Y";
                                             Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
                                             itemStorage.SaveItems(Library.LibraryItemList);
                                             Console.WriteLine("item Saved");
@@ -118,6 +119,7 @@ namespace MyLibrary
                                         }
                                         if (userConfirmation == "R")
                                         {
+                                            userConfirmation = "R";
                                             AskingForType = false;
                                             break;
                                         }
@@ -132,13 +134,14 @@ namespace MyLibrary
                                 case "OversizedBook":
                                     var OVNewBookItem = OversizedBookMaker.OversizedBookMakerForLibrary();
 
-                                    Console.WriteLine(OVNewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
+                                    Console.WriteLine(OVNewBookItem.GetDetails() + $"Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var OVuserConfirmation = Console.ReadLine();
 
-                                    while (OVuserConfirmation != "Y" && OVuserConfirmation != "R")
+                                    while (OVuserConfirmation != "Y" || OVuserConfirmation != "R")
                                     {
                                         if (OVuserConfirmation == "Y")
                                         {
+                                            OVuserConfirmation = "Y";
                                             Library.LibraryItemList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
                                             itemStorage.SaveItems(Library.LibraryItemList);
                                             Console.WriteLine("item Saved");
@@ -147,15 +150,21 @@ namespace MyLibrary
                                         }
                                         if (OVuserConfirmation == "R")
                                         {
+                                            OVuserConfirmation = "R";
                                             AskingForType = false;
                                             break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Not a valid option.  Enter 'Y' to confirm item details, 'R' to exit and not save item details :");
+                                            OVuserConfirmation = Console.ReadLine();
                                         }
                                     }
                                     AskingForType = false;
                                     break;
 
                                 case "CD":
-                                    CD NewCDItem = CDMaker.CDMakerForLibrary();                                    
+                                    CD NewCDItem = CDMaker.CDMakerForLibrary();
 
                                     Console.WriteLine(NewCDItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var CDuserConfirmation = Console.ReadLine();
@@ -164,6 +173,7 @@ namespace MyLibrary
                                     {
                                         if (CDuserConfirmation == "Y")
                                         {
+                                            CDuserConfirmation = "Y";
                                             Library.LibraryItemList.Add(NewCDItem.CallNumber, NewCDItem);
                                             itemStorage.SaveItems(Library.LibraryItemList);
                                             Console.WriteLine("item Saved");
@@ -172,6 +182,7 @@ namespace MyLibrary
                                         }
                                         if (CDuserConfirmation == "R")
                                         {
+                                            CDuserConfirmation = "R";
                                             AskingForType = false;
                                             break;
                                         }
