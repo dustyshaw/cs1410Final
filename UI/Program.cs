@@ -246,8 +246,7 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        Library.DisplayLibraryItems(Library.LibraryItemList);
-                        //SnowCollegeLibrary.ReadTextFile();
+                        Console.WriteLine(File.ReadAllText("items.json"));
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
