@@ -34,8 +34,8 @@ public class Tests
     public void Testing_CDConstruction()
     {
         Assert.AreEqual("873.a87", newCD.CallNumber);
-        Assert.AreEqual("Circles", newCD.Title);
-        Assert.AreEqual("Mac Miller", newCD.Artist);
+        Assert.AreEqual("Gone With the Wind Soundtrack", newCD.Title);
+        Assert.AreEqual("Johnny Bob", newCD.Artist);
     }
 
     [Test]
