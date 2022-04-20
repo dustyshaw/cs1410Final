@@ -80,6 +80,6 @@ public class Tests
     [Test]
     public void Testing_OVBook_GetDetails_Type()
     {
-        Assert.AreEqual(ItemType.OversizedBook, newOVBook.Type);
+        Assert.AreEqual(ItemType.OversizedBook, newOVBook.GetItemType());
     }
 }
