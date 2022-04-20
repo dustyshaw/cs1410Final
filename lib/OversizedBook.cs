@@ -7,11 +7,10 @@ public class OversizedBook : Book
     public ItemAvailability OVavailability = ItemAvailability.CheckedIn;
     public OversizedBook(string _CallNumber, string _Title, long _ISBN, string _Author, long _Barcode) : base(_CallNumber, _Title, _ISBN, _Author, _Barcode)
     {
-        OVType= ItemType.OversizedBook;
     }
     public string GetDetails()
     {
-        return $"\n \n Item Type: {OVType} \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Barcode: {Barcode} \n Availabilty: {Availability}";
+        return $"\n \n Item Type: {GetItemType()} \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Barcode: {Barcode} \n Availabilty: {Availability}";
     }
     public ItemType GetItemType()
     {

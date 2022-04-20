@@ -36,6 +36,11 @@ public class CD : ILibraryItem
     }
     public string GetDetails()
     {
-        return $"\n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Artist} \n Availability: {this.Availability} \n";
+        return $"\n \n Item Type: {GetItemType()} \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Artist} \n Availability: {this.Availability} \n";
+    }
+
+    public ItemType GetItemType()
+    {
+        return ItemType.CD;
     }
 }

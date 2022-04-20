@@ -76,10 +76,23 @@ public class Tests
     // {
     //     Assert.AreEqual()
     // }
-    
+
     [Test]
-    public void Testing_OVBook_GetDetails_Type()
+    public void Testing_OVBook_GetType()
     {
         Assert.AreEqual(ItemType.OversizedBook, newOVBook.GetItemType());
+    }
+
+    [Test]
+    public void Testing_OVBook_GetDetails()
+    {
+        Assert.AreEqual($"\n \n Item Type: {newOVBook.GetItemType()} \n CallNumber: {newOVBook.CallNumber} \n Title: {newOVBook.Title} \n Author: {newOVBook.Author} \n ISBN: {newOVBook.ISBN} \n Barcode: {newOVBook.Barcode} \n Availabilty: {newOVBook.Availability}"
+                , newOVBook.GetDetails());
+    }
+
+    [Test]
+    public void Testing_CD_GetType()
+    {
+        Assert.AreEqual(ItemType.CD, newCD.GetItemType());
     }
 }
