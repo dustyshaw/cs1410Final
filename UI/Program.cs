@@ -256,9 +256,15 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayPatrons")
                     {
-                        Library.DisplayPatrons(Library.AccountList);
-                        Console.WriteLine(File.ReadAllText("accounts.json"));
-                        
+                        //Library.DisplayPatrons(Library.AccountList);
+                        var accountData = File.ReadAllText("accounts.json");
+                        string[] accountList = accountData.Split(",");
+                        foreach (string account in accountList)
+                        {
+                            Console.WriteLine(account);
+                        }
+                        //Console.WriteLine(File.ReadAllText("accounts.json"));
+
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
