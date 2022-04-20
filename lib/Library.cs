@@ -6,9 +6,16 @@ public class Library
 
     public static Dictionary<int, Account> AccountList;
 
+    public static Dictionary<string, Book> BookList;
+
+    public static Dictionary<string, CD> CDList;
+
     public Library(IAccountStorageService storage)
     {
         AccountList = new Dictionary<int, Account>();
+        BookList = new Dictionary<string, Book>();
+        CDList = new Dictionary<string, CD>();
+
     }
 
     public static void SearchLibraryItems(string RequestedItem, Dictionary<string, ILibraryItem> LibraryItemList)
@@ -44,17 +51,7 @@ public class Library
         }
     }
 
-    public static void DisplayLibraryItems()
-    {
-        var itemData = File.ReadAllText("items.json");
-        string[] items = itemData.Split(",");
-        string trimmeditems = itemData.Trim(new char[] { ':', '{', '}' });
-        foreach (string item in items)
-        {
-            Console.WriteLine(item.Trim(new Char[] { ':', '{', '}' }));
-            Console.WriteLine(trimmeditems);
-        }
-    }
+    
     public static void RenewItem(string RequestedCallNumber)
     {
         var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];
@@ -74,4 +71,5 @@ public class Library
         var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
         Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
     }
+
 }

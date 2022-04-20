@@ -95,4 +95,10 @@ public class Tests
     {
         Assert.AreEqual(ItemType.CD, newCD.GetItemType());
     }
+
+    [Test]
+    public void Testing_Book_GetType()
+    {
+        Assert.AreEqual(ItemType.Book, newBook.GetItemType());
+    }
 }

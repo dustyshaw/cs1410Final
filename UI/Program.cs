@@ -14,6 +14,8 @@ namespace MyLibrary
 
             AccountJsonFileStorageService accountStorage = new AccountJsonFileStorageService();
 
+            BookJsonFileStorageService bookStorage = new BookJsonFileStorageService();
+
             Library SnowCollegeLibrary = new Library(accountStorage);
 
             bool programRunning = true;
@@ -75,6 +77,7 @@ namespace MyLibrary
                         Library.CheckInItem(RequestedCallNumber, userInputID);
 
                         itemStorage.SaveItems(Library.LibraryItemList);
+                        bookStorage.SaveItems(Library.BookList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -88,6 +91,8 @@ namespace MyLibrary
                         Library.RenewItem(RequestedCallNumber);
 
                         itemStorage.SaveItems(Library.LibraryItemList);
+                        bookStorage.SaveItems(Library.BookList);
+
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -115,8 +120,11 @@ namespace MyLibrary
                                         if (userConfirmation == "Y")
                                         {
                                             userConfirmation = "Y";
-                                            Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
-                                            itemStorage.SaveItems(Library.LibraryItemList);
+                                            // Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
+                                            Library.BookList.Add(NewBookItem.CallNumber, NewBookItem);
+                                            // itemStorage.SaveItems(Library.LibraryItemList);
+                                            bookStorage.SaveItems(Library.BookList);
+
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
                                             Console.ReadLine();
@@ -153,6 +161,8 @@ namespace MyLibrary
                                             var casted = (ILibraryItem)OVNewBookItem;
                                             Library.LibraryItemList.Add(casted.CallNumber, casted);
                                             itemStorage.SaveItems(Library.LibraryItemList);
+                                            bookStorage.SaveItems(Library.BookList);
+
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
                                             Console.ReadLine();
@@ -250,7 +260,8 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        Library.DisplayLibraryItems();
+                        Library.DisplayLibraryItems(itemStorage.LoadItems());
+
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
@@ -273,5 +284,4 @@ namespace MyLibrary
             }
         }
     }
-
 }

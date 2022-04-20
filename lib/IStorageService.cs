@@ -50,11 +50,29 @@ public class ItemsJsonFileStorageService : IItemStorageService
         // {
         //     File.Create("items.json");
         // }
-        
+
         //{
-            var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
-            File.WriteAllText("items.json", json);
+        var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
+        File.WriteAllText("items.json", json);
         //}
     }
 }
 
+public class BookJsonFileStorageService
+{
+    public Dictionary<string, Book> LoadItems()
+    {
+        if (File.Exists("books.json"))
+        {
+            var json = File.ReadAllText("books.json");
+            Library.BookList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Book>>(json);
+        }
+        return Library.BookList;
+    }
+
+    public void SaveItems(Dictionary<string, Book> Books)
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(Books);
+        File.WriteAllText("books.json", json);
+    }
+}
