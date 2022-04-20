@@ -1,7 +1,5 @@
 namespace MyLibrary.lib;
 
-//whenever you make a library.cs, you need to pass in a Istorage service
-
 public interface IAccountStorageService
 {
     public void SaveAccounts(Dictionary<int, Account> accounts);
@@ -10,7 +8,6 @@ public interface IAccountStorageService
 
 public class AccountJsonFileStorageService : IAccountStorageService
 {
-    //List<Account> accounts = new List<Account>();
     public Dictionary<int, Account> LoadAccounts()
     {
         if (File.Exists("accounts.json"))
@@ -34,7 +31,7 @@ public interface IItemStorageService
     public Dictionary<string, ILibraryItem> LoadItems();
 }
 
-public class ItemsJsonFileStorageService
+public class ItemsJsonFileStorageService : IItemStorageService
 {
     Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
     public Dictionary<string, ILibraryItem> LoadItems()

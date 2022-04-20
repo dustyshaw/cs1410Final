@@ -34,23 +34,25 @@ public class Library
         }
     }
 
-    public static void DisplayPatrons(Dictionary<int, Account> AccountList)
+    public static void DisplayPatrons()
     {
-        foreach (KeyValuePair<int, Account> item in AccountList)
+        var accountData = File.ReadAllText("accounts.json");
+        string[] accountList = accountData.Split(",");
+        foreach (string account in accountList)
         {
-            Console.WriteLine(item.Value.GetAccountDetails());
+            Console.WriteLine(account);
         }
     }
 
-    // public async void ReadTextFile()
-    // {
-    //     string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Public\TestFolder\WriteLines2.txt");
-    //     System.Console.WriteLine("Contents of data.txt = ");
-    //     foreach (string line in lines)
-    //     {
-    //         // Use a tab to indent each line of the file.
-    //         Console.WriteLine("\t" + line);
-    //     }
-    // }
-
+    public static void DisplayLibraryItems()
+    {
+        var itemData = File.ReadAllText("items.json");
+        string[] items = itemData.Split(",");
+        string trimmeditems = itemData.Trim(new char[] { ':', '{', '}' });
+        foreach (string item in items)
+        {
+            Console.WriteLine(item.Trim(new Char[] { ':', '{', '}' }));
+            Console.WriteLine(trimmeditems);
+        }
+    }
 }

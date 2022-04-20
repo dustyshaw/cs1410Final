@@ -250,31 +250,14 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        //Console.WriteLine(File.ReadAllText("items.json"));
-                        var itemData = File.ReadAllText("items.json");
-                        string[] items = itemData.Split(",");
-                        string trimmeditems = itemData.Trim(new char[] { ':', '{', '}' });
-                        foreach (string item in items)
-                        {
-                            Console.WriteLine(item.Trim(new Char[] { ':', '{', '}' }));
-                            Console.WriteLine(trimmeditems);
-                        }
-
+                        Library.DisplayLibraryItems();
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
 
                     if (UserInput == "DisplayPatrons")
                     {
-                        //Library.DisplayPatrons(Library.AccountList);
-                        var accountData = File.ReadAllText("accounts.json");
-                        string[] accountList = accountData.Split(",");
-                        foreach (string account in accountList)
-                        {
-                            Console.WriteLine(account);
-                        }
-                        //Console.WriteLine(File.ReadAllText("accounts.json"));
-
+                        Library.DisplayPatrons();
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
