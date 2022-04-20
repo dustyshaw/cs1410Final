@@ -8,7 +8,6 @@ namespace MyLibrary
 {
     internal partial class Program
     {
-
         static void Main(string[] args)
         {
             ItemsJsonFileStorageService itemStorage = new ItemsJsonFileStorageService();
@@ -62,6 +61,7 @@ namespace MyLibrary
                         var requestedAccount = Library.AccountList[userInputID];  //grabs account from list
                         var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
                         Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
+                        itemStorage.SaveItems(Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -76,6 +76,7 @@ namespace MyLibrary
                         var requestedAccount = Library.AccountList[userInputID];  //grabs account
                         var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];  //grabs item from list
                         Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));      //checks it in using ILibraryItem check in method
+                        itemStorage.SaveItems(Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -87,6 +88,7 @@ namespace MyLibrary
                         string RequestedCallNumber = Console.ReadLine();
                         var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];
                         Console.WriteLine(RequestedItem.Renew(RequestedItem));
+                        itemStorage.SaveItems(Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -248,7 +250,15 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        Console.WriteLine(File.ReadAllText("items.json"));
+                        //Console.WriteLine(File.ReadAllText("items.json"));
+                        var itemData = File.ReadAllText("items.json");
+                        string[] items = itemData.Split(",");
+                        string trimmeditems = itemData.Trim(new char[] { ':', '{', '}' });
+                        foreach (string item in items)
+                        {
+                            Console.WriteLine(item.Trim(new Char[] { ':', '{', '}' }));
+                            Console.WriteLine(trimmeditems);
+                        }
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
