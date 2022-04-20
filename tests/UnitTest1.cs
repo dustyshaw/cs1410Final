@@ -76,5 +76,10 @@ public class Tests
     // {
     //     Assert.AreEqual()
     // }
-
+    
+    [Test]
+    public void Testing_OVBook_GetDetails_Type()
+    {
+        Assert.AreEqual(ItemType.OversizedBook, newOVBook.Type);
+    }
 }

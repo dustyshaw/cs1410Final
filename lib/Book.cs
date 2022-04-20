@@ -46,7 +46,7 @@ public class Book : ILibraryItem
 
     public string GetDetails()
     {
-        return $"\n \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Item Type: {Type} \n Barcode: {Barcode} \n Availabilty: {Availability}";
+        return $"\n \n Item Type: {this.Type} \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Barcode: {Barcode} \n Availabilty: {Availability}";
     }
 
     public async void WriteToTextFile(ILibraryItem item)
