@@ -11,22 +11,6 @@ public class Library
         AccountList = new Dictionary<int, Account>();
     }
 
-    public string AddItem(string key, ILibraryItem item)
-    {
-        LibraryItemList.Add(key, item);
-        return "item added";
-    }
-
-    public ILibraryItem AddAccount(ILibraryItem item)
-    {
-        throw new Exception();
-    }
-
-    public void SaveAccounts()
-    {
-        //TextFileStorageService.SaveAccounts(accounts);
-    }
-
     public static void SearchLibraryItems(string RequestedItem, Dictionary<string, ILibraryItem> LibraryItemList)
     {
         foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)

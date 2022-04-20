@@ -12,6 +12,7 @@ namespace MyLibrary
         static void Main(string[] args)
         {
             ItemsJsonFileStorageService itemStorage = new ItemsJsonFileStorageService();
+
             AccountJsonFileStorageService accountStorage = new AccountJsonFileStorageService();
 
             Library SnowCollegeLibrary = new Library(accountStorage);
@@ -206,10 +207,10 @@ namespace MyLibrary
                                     }
                                     AskingForType = false;
                                     break;
+
                                 default:
                                     Console.WriteLine("Invalid option.  Press Enter to try again.");
                                     Console.ReadLine();
-                                    // AskingForType = false;
                                     break;
                             }
                         }
@@ -226,6 +227,7 @@ namespace MyLibrary
 
                         Account newAccount = new Account(FName, LName, PatronID);
                         Library.AccountList.Add(PatronID, newAccount);
+                        accountStorage.SaveAccounts(Library.AccountList);
 
                         Console.WriteLine("New Patron Added: " + newAccount.GetAccountDetails());
 
@@ -255,7 +257,8 @@ namespace MyLibrary
                     if (UserInput == "DisplayPatrons")
                     {
                         Library.DisplayPatrons(Library.AccountList);
-
+                        Console.WriteLine(File.ReadAllText("accounts.json"));
+                        
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }

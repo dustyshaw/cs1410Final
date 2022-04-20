@@ -61,5 +61,3 @@ public class ItemsJsonFileStorageService
     }
 }
 
-//in library class, make a public reference field to the 
-
