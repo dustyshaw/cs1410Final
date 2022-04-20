@@ -33,7 +33,7 @@ public class Tests
     [Test]
     public void Testing_CDConstruction()
     {
-        Assert.AreEqual("123.abc", newCD.CallNumber);
+        Assert.AreEqual("873.a87", newCD.CallNumber);
         Assert.AreEqual("Circles", newCD.Title);
         Assert.AreEqual("Mac Miller", newCD.Artist);
     }
