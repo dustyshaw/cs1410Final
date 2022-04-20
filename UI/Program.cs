@@ -42,14 +42,14 @@ namespace MyLibrary
                     if (UserInput == "CheckOut")
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
-                        string userInputBook = (Console.ReadLine());
-                        int userInputID;
+                        string RequestedBookCallNumber = (Console.ReadLine());
+                        int RequestedAccID;
                         while (true)
                         {
                             Console.WriteLine("Enter Item patrons ID");
                             try
                             {
-                                userInputID = Account.ParsePatronID(Console.ReadLine());
+                                RequestedAccID = Account.ParsePatronID(Console.ReadLine());
                                 break;
                             }
                             catch
@@ -57,10 +57,8 @@ namespace MyLibrary
                                 Console.WriteLine("Invalid input");
                             }
                         }
+                        Library.CheckOutItem(RequestedAccID, RequestedBookCallNumber);
 
-                        var requestedAccount = Library.AccountList[userInputID];  //grabs account from list
-                        var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
-                        Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
                         itemStorage.SaveItems(Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
@@ -72,10 +70,10 @@ namespace MyLibrary
                         Console.WriteLine("Enter Item CallNumber to check in: ");
                         string RequestedCallNumber = Console.ReadLine();
                         Console.WriteLine("Enter Account Id: ");
-                        var userInputID = Convert.ToInt32(Console.ReadLine());
-                        var requestedAccount = Library.AccountList[userInputID];  //grabs account
-                        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];  //grabs item from list
-                        Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));      //checks it in using ILibraryItem check in method
+                        int userInputID = Convert.ToInt32(Console.ReadLine());
+
+                        Library.CheckInItem(RequestedCallNumber, userInputID);
+
                         itemStorage.SaveItems(Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
@@ -86,8 +84,9 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter Item CallNumber to renew: ");
                         string RequestedCallNumber = Console.ReadLine();
-                        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];
-                        Console.WriteLine(RequestedItem.Renew(RequestedItem));
+
+                        Library.RenewItem(RequestedCallNumber);
+
                         itemStorage.SaveItems(Library.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
@@ -99,6 +98,7 @@ namespace MyLibrary
                         Console.WriteLine("Select Item Type:");
                         Console.WriteLine("\n Book \n CD \n OversizedBook \n ");
                         string BookType = Console.ReadLine();
+
                         bool AskingForType = true;
                         while (AskingForType == true)
                         {

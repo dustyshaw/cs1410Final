@@ -55,4 +55,23 @@ public class Library
             Console.WriteLine(trimmeditems);
         }
     }
+    public static void RenewItem(string RequestedCallNumber)
+    {
+        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];
+        Console.WriteLine(RequestedItem.Renew(RequestedItem));
+    }
+
+    public static void CheckInItem(string RequestedCallNumber, int userInputID)
+    {
+        var requestedAccount = Library.AccountList[userInputID];  //grabs account
+        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];  //grabs item from list
+        Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));      //checks it in using ILibraryItem check in method
+    }
+
+    public static void CheckOutItem(int userInputID, string userInputBook)
+    {
+        var requestedAccount = Library.AccountList[userInputID];  //grabs account from list
+        var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
+        Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
+    }
 }
