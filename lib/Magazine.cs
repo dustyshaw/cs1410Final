@@ -8,7 +8,7 @@ public class Magazine : ILibraryItem
     public Int64 Barcode { get; set; }
     public string Author { get; set; }
     public DateTime DueDate { get; set; }
-    public ItemType Type = ItemType.Book;
+    public ItemType Type = ItemType.Magazine;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
 

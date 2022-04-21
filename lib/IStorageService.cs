@@ -46,15 +46,8 @@ public class ItemsJsonFileStorageService : IItemStorageService
 
     public void SaveItems(Dictionary<string, ILibraryItem> LibraryItem)
     {
-        // if (!File.Exists("items.json"))
-        // {
-        //     File.Create("items.json");
-        // }
-
-        //{
         var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
         File.WriteAllText("items.json", json);
-        //}
     }
 }
 
@@ -74,5 +67,42 @@ public class BookJsonFileStorageService
     {
         var json = System.Text.Json.JsonSerializer.Serialize(Books);
         File.WriteAllText("books.json", json);
+    }
+}
+
+public class CDJsonFileStorageService
+{
+    public Dictionary<string, CD> LoadItems()
+    {
+
+        var json = File.ReadAllText("CDs.json");
+        Library.CDList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, CD>>(json);
+
+        return Library.CDList;
+    }
+
+    public void SaveItems(Dictionary<string, CD> CDs)
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(CDs);
+        File.WriteAllText("CDs.json", json);
+    }
+}
+
+public class OversizedBookJsonFileStorageService
+{
+    public Dictionary<string, OversizedBook> LoadItems()
+    {
+        if (File.Exists("OversizedBooks.json"))
+        {
+            var json = File.ReadAllText("OversizedBooks.json");
+            Library.OversizedBookList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, OversizedBook>>(json);
+        }
+        return Library.OversizedBookList;
+    }
+
+    public void SaveItems(Dictionary<string, OversizedBook> OversizedBooks)
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(OversizedBooks);
+        File.WriteAllText("OversizedBooks.json", json);
     }
 }

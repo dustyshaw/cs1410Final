@@ -10,12 +10,14 @@ public class Library
 
     public static Dictionary<string, CD> CDList;
 
+    public static Dictionary<string, OversizedBook> OversizedBookList;
+
     public Library(IAccountStorageService storage)
     {
         AccountList = new Dictionary<int, Account>();
         BookList = new Dictionary<string, Book>();
         CDList = new Dictionary<string, CD>();
-
+        OversizedBookList = new Dictionary<string, OversizedBook>();
     }
 
     public static void SearchLibraryItems(string RequestedItem, Dictionary<string, ILibraryItem> LibraryItemList)
@@ -51,7 +53,7 @@ public class Library
         }
     }
 
-    
+
     public static void RenewItem(string RequestedCallNumber)
     {
         var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];
@@ -72,4 +74,11 @@ public class Library
         Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
     }
 
+    public static void SaveAllItems(CDJsonFileStorageService CDStorage, BookJsonFileStorageService bookStorage, OversizedBookJsonFileStorageService OVbookStorage)
+    {
+        //itemStorage.SaveItems(Library.LibraryItemList);
+        CDStorage.SaveItems(Library.CDList);
+        bookStorage.SaveItems(Library.BookList);
+        OVbookStorage.SaveItems(Library.OversizedBookList);
+    }
 }
