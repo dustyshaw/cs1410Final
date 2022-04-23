@@ -311,6 +311,7 @@ namespace MyLibrary
                     if (UserInput == "DisplayPatrons")
                     {
                         SnowCollegeLibrary.DisplayPatrons();
+                        
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
