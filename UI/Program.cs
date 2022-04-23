@@ -220,7 +220,7 @@ namespace MyLibrary
                                             Console.ReadLine();
                                             AskingForType = false;
                                             break;
-                                            
+
                                         }
                                         if (CDuserConfirmation == "R")
                                         {

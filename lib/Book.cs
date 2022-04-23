@@ -7,17 +7,11 @@ public class Book : ILibraryItem
     public Int64 Barcode { get; set; }
     public string Author { get; set; }
     public DateTime DueDate { get; set; }
-    public ItemType Type = ItemType.Book;
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
 
     public Book()
     {
-        // this.CallNumber = _CallNumber;
-        // this.Title = _Title;
-        // this.ISBN = _ISBN;
-        // this.Author = _Author;
-        // this.Barcode = _Barcode;
     }
 
     public string CheckOut(ILibraryItem item, Account account)
@@ -49,11 +43,11 @@ public class Book : ILibraryItem
         return $"\n \n Item Type: {GetItemType()} \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Author} \n ISBN: {ISBN} \n Barcode: {Barcode} \n Availabilty: {Availability}";
     }
 
-    // public async void WriteToTextFile(ILibraryItem item)
-    // {
-    //     using StreamWriter file = new("data.txt", append: true);
-    //     await file.WriteLineAsync(item.GetDetails());
-    // }
+    public async void WriteToTextFile(ILibraryItem item)
+    {
+        using StreamWriter file = new("data.txt", append: true);
+        await file.WriteLineAsync(item.GetDetails());
+    }
 
     public ItemType GetItemType()
     {

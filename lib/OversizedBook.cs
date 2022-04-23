@@ -2,7 +2,6 @@ namespace MyLibrary.lib;
 
 public class OversizedBook : Book
 {
-    ItemType OVType = ItemType.OversizedBook;
     public ItemAvailability OVAvailability { get; set; }
     public ItemAvailability OVavailability = ItemAvailability.CheckedIn;
     public OversizedBook() : base()

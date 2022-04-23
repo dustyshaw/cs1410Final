@@ -37,7 +37,11 @@ public class CDMaker
         Console.WriteLine("Enter Artist Name");
         string CDAuthor = Console.ReadLine();
 
-        CD NewCDItem = new CD(CDCallNumber, CDTitle, CDAuthor, CDBarcode);
+        CD NewCDItem = new CD();
+        NewCDItem.Artist = CDAuthor;
+        NewCDItem.Barcode = CDBarcode;
+        NewCDItem.CallNumber = CDCallNumber;
+        NewCDItem.Availability = ItemAvailability.CheckedIn;
 
         return NewCDItem;
 

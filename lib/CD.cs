@@ -8,24 +8,23 @@ public class CD : ILibraryItem
     public Int64 Barcode { get; set; }
     public DateTime DueDate { get; set; }
     public ItemAvailability Availability { get; set; }
-    public ItemType Type = ItemType.CD;
-    public CD(string _CallNumber, string _title, string _artist, Int64 _Barcode)
+    public CD()
     {
-        this.CallNumber = _CallNumber;
-        this.Title = _title;
-        this.Artist = _artist;
     }
     public string CheckOut(ILibraryItem item, Account account)
     {
-        var bookitem = (CD)item;
-        bookitem.Availability = ItemAvailability.CheckedOut;
+        var castedItem = (CD)item;
+        castedItem.Availability = ItemAvailability.CheckedOut;
+        var DueDate = DateTime.Today.AddDays(21);
+        account.holdList.Add(castedItem);
 
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + ".");
     }
     public string CheckIn(ILibraryItem item, Account account)
     {
-        var bookitem = (CD)item;
-        bookitem.Availability = ItemAvailability.CheckedIn;
+        var castedItem = (CD)item;
+        account.holdList.Remove(castedItem);
+        castedItem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
     }
     public string Renew(ILibraryItem item)
@@ -36,7 +35,13 @@ public class CD : ILibraryItem
     }
     public string GetDetails()
     {
-        return $"\n \n Item Type: {GetItemType()} \n CallNumber: {CallNumber} \n Title: {Title} \n Author: {Artist} \n Availability: {this.Availability} \n";
+        return $"\n \n Item Type: {GetItemType()} \n CallNumber: {CallNumber} \n Title: {Title} \n Artist: {Artist} \n Availability: {this.Availability} \n";
+    }
+
+    public async void WriteToTextFile(ILibraryItem item)
+    {
+        using StreamWriter file = new("data.txt", append: true);
+        await file.WriteLineAsync(item.GetDetails());
     }
 
     public ItemType GetItemType()
