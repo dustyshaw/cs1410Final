@@ -210,6 +210,7 @@ namespace MyLibrary
 
                                             CDuserConfirmation = "Y";
                                             SnowCollegeLibrary.LibraryItemList.Add(NewCDItem.CallNumber, NewCDItem);
+                                            SnowCollegeLibrary.CDList.Add(NewCDItem.CallNumber, NewCDItem);
 
                                             SnowCollegeLibrary.SaveBooks();
                                             SnowCollegeLibrary.SaveCDs();
@@ -290,7 +291,12 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        SnowCollegeLibrary.DisplayLibraryItems(SnowCollegeLibrary.LibraryItemList);
+                        //SnowCollegeLibrary.DisplayLibraryItems(SnowCollegeLibrary.LibraryItemList);
+                        SnowCollegeLibrary.LoadBooks();
+                        foreach (var item in SnowCollegeLibrary.BookList)
+                        {
+                            Console.WriteLine(item);
+                        }
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();

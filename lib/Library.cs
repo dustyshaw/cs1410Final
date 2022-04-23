@@ -18,9 +18,11 @@ public class Library
     {
         LibraryItemList = new Dictionary<string, ILibraryItem>();
         AccountList = new Dictionary<int, Account>();
+
         BookList = itemStorage.LoadBooks();
-        CDList = new Dictionary<string, CD>();
-        OversizedBookList = new Dictionary<string, OversizedBook>();
+        CDList = itemStorage.LoadCDs();
+        OversizedBookList = itemStorage.LoadOversizedBooks();
+        
         this.itemStorage = itemStorage;
     }
 
@@ -93,5 +95,10 @@ public class Library
     public void SaveOversizedBooks()
     {
         itemStorage.SaveOversizedBooks(OversizedBookList);
+    }
+
+    public Dictionary<string, Book> LoadBooks()
+    {
+        return itemStorage.LoadBooks();
     }
 }
