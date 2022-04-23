@@ -93,7 +93,7 @@ public class Tests
         newBook.CheckOut((ILibraryItem)newBook, newAccount);
         newBook2.CheckOut((ILibraryItem)newBook2, newAccount);
         Assert.AreEqual(newBook, newAccount.holdList[0]);
-        Assert.AreEqual(newBook2, newAccount.holdList[0]);
+        Assert.AreEqual(newBook2, newAccount.holdList[1]);
     }
 
     [Test]
