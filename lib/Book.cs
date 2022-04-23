@@ -11,13 +11,13 @@ public class Book : ILibraryItem
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
 
-    public Book(string _CallNumber, string _Title, Int64 _ISBN, string _Author, Int64 _Barcode)
+    public Book()
     {
-        this.CallNumber = _CallNumber;
-        this.Title = _Title;
-        this.ISBN = _ISBN;
-        this.Author = _Author;
-        this.Barcode = _Barcode;
+        // this.CallNumber = _CallNumber;
+        // this.Title = _Title;
+        // this.ISBN = _ISBN;
+        // this.Author = _Author;
+        // this.Barcode = _Barcode;
     }
 
     public string CheckOut(ILibraryItem item, Account account)

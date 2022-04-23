@@ -52,7 +52,13 @@ public class BookMaker
             }
         }
 
-        Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
+        // Book NewBookItem = new Book(CallNumber, Title, ISBN, Author, Barcode);
+        Book NewBookItem = new Book();
+        NewBookItem.Author = Author;
+        NewBookItem.CallNumber = CallNumber;
+        NewBookItem.Title = Title;
+        NewBookItem.ISBN = ISBN;
+        NewBookItem.Barcode = Barcode;
         return NewBookItem;
     }
 }

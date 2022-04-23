@@ -53,7 +53,13 @@ public class OversizedBookMaker
                 Console.WriteLine("invalid Barcode.  Must be 12 digits.");
             }
         }
-        OversizedBook OVNewBookItem = new OversizedBook(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
+        // OversizedBook OVNewBookItem = new OversizedBook(OVCallNumber, OVTitle, OVISBN, OVAuthor, OVBarcode);
+        OversizedBook OVNewBookItem = new OversizedBook();
+        OVNewBookItem.Author = OVAuthor;
+        OVNewBookItem.Title = OVTitle;
+        OVNewBookItem.Barcode = OVBarcode;
+        OVNewBookItem.CallNumber = OVCallNumber;
+        OVNewBookItem.Availability = ItemAvailability.CheckedIn;
         return OVNewBookItem;
     }
 }
