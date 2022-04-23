@@ -81,6 +81,22 @@ public class Tests
     }
 
     [Test]
+    public void Testing_Patron_HoldList_After_2CheckOuts()
+    {
+        Book newBook2 = new Book();
+        newBook2.CallNumber = "555.aaa";
+        newBook2.Author = "John Doe";
+        newBook2.Barcode = 1234567890;
+        newBook2.Title = "Book2";
+        newBook2.ISBN = 123456789070;
+
+        newBook.CheckOut((ILibraryItem)newBook, newAccount);
+        newBook2.CheckOut((ILibraryItem)newBook2, newAccount);
+        Assert.AreEqual(newBook, newAccount.holdList[0]);
+        Assert.AreEqual(newBook2, newAccount.holdList[0]);
+    }
+
+    [Test]
     public void Testing_Patron_HoldList_After_CheckIn()
     {
         //tests if patrons hold list is empty after checking in one item.
