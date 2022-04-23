@@ -120,7 +120,7 @@ public class Tests
         newBook.CheckIn((ILibraryItem)newBook, newAccount);
 
         Assert.AreEqual(1, newAccount.holdList.Count);
-        Assert.AreEqual(newBook2, newAccount.holdList[1]);
+        Assert.AreEqual(newBook2, newAccount.holdList[0]);
     }
 
     [Test]
