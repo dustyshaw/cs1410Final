@@ -101,4 +101,10 @@ public class Library
     {
         return itemStorage.LoadBooks();
     }
+
+    public Dictionary<string, OversizedBook> LoadOVBooks()
+    {
+        return itemStorage.LoadOversizedBooks();
+    }
+
 }

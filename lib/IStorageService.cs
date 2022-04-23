@@ -69,7 +69,15 @@ public class ItemsJsonFileStorageService : IItemStorageService
     public void SaveCDs(Dictionary<string, CD> cds)
     {
         var json = System.Text.Json.JsonSerializer.Serialize(cds);
-        File.WriteAllText("CDs.json", json);
+        if (File.Exists("CDs.json"))
+        {
+            File.WriteAllText("CDs.json", json);
+        }
+        else
+        {
+            File.Create("CDs.json");
+            File.WriteAllText("CDs.json", json);
+        }
     }
 
     public Dictionary<string, OversizedBook> LoadOversizedBooks()

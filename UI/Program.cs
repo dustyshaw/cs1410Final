@@ -295,7 +295,12 @@ namespace MyLibrary
                         SnowCollegeLibrary.LoadBooks();
                         foreach (var item in SnowCollegeLibrary.BookList)
                         {
-                            
+                            Console.WriteLine(item.Value.GetDetails());
+                        }
+
+                        SnowCollegeLibrary.LoadOVBooks();
+                        foreach (var item in SnowCollegeLibrary.OversizedBookList)
+                        {
                             Console.WriteLine(item.Value.GetDetails());
                         }
 
