@@ -99,19 +99,29 @@ public class Tests
     [Test]
     public void Testing_Patron_HoldList_After_CheckIn()
     {
-        //tests if patrons hold list is empty after checking in one item.
+        newBook.CheckOut((ILibraryItem)newBook, newAccount);
         newBook.CheckIn((ILibraryItem)newBook, newAccount);
         Assert.AreEqual(newAccount.holdList.Count, 0);
     }
 
-    //example of test cases
-    // [TestCase("144.a23")]
-    // [TestCase("999.a")]
-    // [TestCase("888.abckjsigh1000")]
-    // public void Testing_CallNumber_Exceptions(string CallNumber)
-    // {
-    //     Assert.AreEqual()
-    // }
+    [Test]
+    public void Testing_Patron_HoldList_After_CheckIn_OneItem()
+    {
+        Book newBook2 = new Book();
+        newBook2.CallNumber = "555.aaa";
+        newBook2.Author = "John Doe";
+        newBook2.Barcode = 1234567890;
+        newBook2.Title = "Book2";
+        newBook2.ISBN = 123456789070;
+
+        newBook.CheckOut((ILibraryItem)newBook, newAccount);
+        newBook2.CheckOut((ILibraryItem)newBook2, newAccount);
+
+        newBook.CheckIn((ILibraryItem)newBook, newAccount);
+
+        Assert.AreEqual(1, newAccount.holdList.Count);
+        Assert.AreEqual(newBook2, newAccount.holdList[1]);
+    }
 
     [Test]
     public void Testing_OVBook_GetType()
@@ -137,4 +147,5 @@ public class Tests
     {
         Assert.AreEqual(ItemType.Book, newBook.GetItemType());
     }
+
 }
