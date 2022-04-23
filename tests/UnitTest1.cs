@@ -9,9 +9,29 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        newBook = new Book("587.B35", "Gone With the Wind", 1245670000000, "Margaret Mitchell", 34230000109820);
-        newOVBook = new OversizedBook("989.a98", "Photos of the Ages", 1989763876, "Carmal Machiato", 9998987698798);
-        newCD = new CD("873.a87", "Gone With the Wind Soundtrack", "Johnny Bob", 90876095876);
+       // "587.B35", "Gone With the Wind", 1245670000000, "Margaret Mitchell", 34230000109820
+        newBook = new Book();
+        newBook.CallNumber = "587.B35";
+        newBook.Author = "Margaret Mitchell";
+        newBook.Barcode = 1245670000000;
+        newBook.Title = "Gone With the Wind";
+        newBook.ISBN = 34230000109820;
+
+        //"989.a98", "Photos of the Ages", 1989763876, "Carmal Machiato", 9998987698798
+        newOVBook = new OversizedBook();
+        newOVBook.CallNumber = "989.a98";
+        newOVBook.Title = "Photos of the Ages";
+        newOVBook.Barcode = 1989763876;
+        newOVBook.Author = "Carmal Machiato";
+        newOVBook.ISBN = 9998987698798;
+
+        //"873.a87", "Gone With the Wind Soundtrack", "Johnny Bob", 90876095876
+        newCD = new CD();
+        newCD.CallNumber = "873.a87";
+        newCD.Title = "Gone With the Wind Soundtrack";
+        newCD.Artist = "Johnny Bob";
+        newCD.Barcode = 90876095876;
+
         newAccount = new Account("Dusty", "Shaw", 12345);
     }
 
