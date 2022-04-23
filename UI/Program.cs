@@ -241,6 +241,7 @@ namespace MyLibrary
                                 default:
                                     Console.WriteLine("Invalid option.  Press Enter to try again.");
                                     Console.ReadLine();
+                                    AskingForType = false;
                                     break;
                             }
                         }
@@ -312,7 +313,6 @@ namespace MyLibrary
                     {
                         SnowCollegeLibrary.DisplayPatrons();
                         
-
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }

@@ -59,7 +59,6 @@ public class Library
         foreach (string account in accountList)
         {
             Console.WriteLine(account);
-            
         }
     }
 
