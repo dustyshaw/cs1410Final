@@ -15,7 +15,7 @@ public class Tests
         newBook.Author = "Margaret Mitchell";
         newBook.Barcode = 1245670000000;
         newBook.Title = "Gone With the Wind";
-        newBook.ISBN = 34230000109820;
+        newBook.ISBN = 3423000010982;
 
         //"989.a98", "Photos of the Ages", 1989763876, "Carmal Machiato", 9998987698798
         newOVBook = new OversizedBook();
@@ -46,7 +46,7 @@ public class Tests
     {
         Assert.AreEqual("587.B35", newBook.CallNumber);
         Assert.AreEqual("Gone With the Wind", newBook.Title);
-        Assert.AreEqual(1245670000000, newBook.ISBN);
+        Assert.AreEqual(3423000010982, newBook.ISBN);
         Assert.AreEqual("Margaret Mitchell", newBook.Author);
     }
 
