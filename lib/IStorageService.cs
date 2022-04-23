@@ -27,82 +27,64 @@ public class AccountJsonFileStorageService : IAccountStorageService
 
 public interface IItemStorageService
 {
-    public void SaveItems(Dictionary<string, ILibraryItem> LibraryItem);
-    public Dictionary<string, ILibraryItem> LoadItems();
+    void SaveBooks(Dictionary<string, Book> books);
+    Dictionary<string, Book> LoadBooks();
+
+    void SaveCDs(Dictionary<string, CD> cds);
+    Dictionary<string, CD> LoadCDs();
+
+    void SaveOversizedBooks(Dictionary<string, OversizedBook> oversizedbooks);
+    Dictionary<string, OversizedBook> LoadOversizedBooks();
+
 }
 
 public class ItemsJsonFileStorageService : IItemStorageService
 {
-    Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
-    public Dictionary<string, ILibraryItem> LoadItems()
-    {
-        if (File.Exists("items.json"))
-        {
-            var json = File.ReadAllText("items.json");
-            LibraryItemList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ILibraryItem>>(json);
-        }
-        return LibraryItemList;
-    }
-
-    public void SaveItems(Dictionary<string, ILibraryItem> LibraryItem)
-    {
-        var json = System.Text.Json.JsonSerializer.Serialize(LibraryItem);
-        File.WriteAllText("items.json", json);
-    }
-}
-
-public class BookJsonFileStorageService
-{
-    public Dictionary<string, Book> LoadItems()
+    public Dictionary<string, Book> LoadBooks()
     {
         if (File.Exists("books.json"))
         {
             var json = File.ReadAllText("books.json");
-            Library.BookList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Book>>(json);
+            return System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Book>>(json);
         }
-        return Library.BookList;
+        return new Dictionary<string, Book>();
     }
 
-    public void SaveItems(Dictionary<string, Book> Books)
+    public void SaveBooks(Dictionary<string, Book> books)
     {
-        var json = System.Text.Json.JsonSerializer.Serialize(Books);
+        var json = System.Text.Json.JsonSerializer.Serialize(books);
         File.WriteAllText("books.json", json);
     }
-}
 
-public class CDJsonFileStorageService
-{
-    public Dictionary<string, CD> LoadItems()
+    public Dictionary<string, CD> LoadCDs()
     {
-
-        var json = File.ReadAllText("CDs.json");
-        Library.CDList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, CD>>(json);
-
-        return Library.CDList;
+        if (File.Exists("CDs.json"))
+        {
+            var json = File.ReadAllText("CDs.json");
+            return System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, CD>>(json);
+        }
+        return new Dictionary<string, CD>();
     }
 
-    public void SaveItems(Dictionary<string, CD> CDs)
+    public void SaveCDs(Dictionary<string, CD> cds)
     {
-        var json = System.Text.Json.JsonSerializer.Serialize(CDs);
+        var json = System.Text.Json.JsonSerializer.Serialize(cds);
         File.WriteAllText("CDs.json", json);
     }
-}
 
-public class OversizedBookJsonFileStorageService
-{
-    public Dictionary<string, OversizedBook> LoadItems()
+    public Dictionary<string, OversizedBook> LoadOversizedBooks()
     {
         if (File.Exists("OversizedBooks.json"))
         {
             var json = File.ReadAllText("OversizedBooks.json");
-            Library.OversizedBookList = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, OversizedBook>>(json);
+            return System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, OversizedBook>>(json);
         }
-        return Library.OversizedBookList;
+        return new Dictionary<string, OversizedBook>();
     }
 
-    public void SaveItems(Dictionary<string, OversizedBook> OversizedBooks)
+    public void SaveOversizedBooks(Dictionary<string, OversizedBook> oversizedbooks)
     {
-        var json = System.Text.Json.JsonSerializer.Serialize(OversizedBooks);
+        var json = System.Text.Json.JsonSerializer.Serialize(oversizedbooks);
         File.WriteAllText("OversizedBooks.json", json);
     }
 }

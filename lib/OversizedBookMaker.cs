@@ -2,7 +2,7 @@ using MyLibrary.lib;
 
 public class OversizedBookMaker
 {
-    public static OversizedBook OversizedBookMakerForLibrary()
+    public static OversizedBook OversizedBookMakerForLibrary(Library SnowCollegeLibrary)
     {
         string OVCallNumber;
         while (true)
@@ -10,7 +10,7 @@ public class OversizedBookMaker
             Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
             try
             {
-                OVCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
+                OVCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine(), SnowCollegeLibrary);
                 break;
             }
             catch

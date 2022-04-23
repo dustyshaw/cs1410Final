@@ -15,12 +15,12 @@ public interface ILibraryItem
 
     public string GetDetails();
 
-    public static string ParseCallNumbers(string input)
+    public static string ParseCallNumbers(string input, Library SnowCollegeLibrary)
     {
         if (!input.Contains("."))
         {
             var numMaxCharacters = 1000000;
-            int i=0;
+            int i = 0;
             char[] characters = input.ToCharArray();
             foreach (char character in characters)
             {
@@ -45,7 +45,7 @@ public interface ILibraryItem
         {
             throw new ArgumentNullException();
         }
-        if(Library.LibraryItemList.ContainsKey(input))
+        if (SnowCollegeLibrary.LibraryItemList.ContainsKey(input))
         {
             throw new DuplicateWaitObjectException();
         }
@@ -78,5 +78,21 @@ public interface ILibraryItem
             throw new ArgumentOutOfRangeException();
         }
         return Int64.Parse(input);
+    }
+
+    public static string ParseSearchRequest(string input, Library SnowCollegeLibrary)
+    {
+        foreach (KeyValuePair<string, ILibraryItem> item in SnowCollegeLibrary.LibraryItemList)
+        {
+            if (item.Value.Title != input)
+            {
+                throw new KeyNotFoundException();
+            }
+            if (item.Key != input)
+            {
+                throw new KeyNotFoundException();
+            }
+        }
+        return input;
     }
 }

@@ -2,25 +2,30 @@ namespace MyLibrary.lib;
 
 public class Library
 {
-    public static Dictionary<string, ILibraryItem> LibraryItemList = new Dictionary<string, ILibraryItem>();
+    public Dictionary<string, ILibraryItem> LibraryItemList ;
 
-    public static Dictionary<int, Account> AccountList;
+    public Dictionary<int, Account> AccountList;
 
-    public static Dictionary<string, Book> BookList;
+    public Dictionary<string, Book> BookList;
 
-    public static Dictionary<string, CD> CDList;
+    public Dictionary<string, CD> CDList;
 
-    public static Dictionary<string, OversizedBook> OversizedBookList;
+    public Dictionary<string, OversizedBook> OversizedBookList;
 
-    public Library(IAccountStorageService storage)
+    private readonly IItemStorageService itemStorage;
+
+    public Library(IAccountStorageService storage, IItemStorageService itemStorage)
     {
+        LibraryItemList = new Dictionary<string, ILibraryItem>();
         AccountList = new Dictionary<int, Account>();
-        BookList = new Dictionary<string, Book>();
+        BookList = itemStorage.LoadBooks();
         CDList = new Dictionary<string, CD>();
         OversizedBookList = new Dictionary<string, OversizedBook>();
+        this.itemStorage = itemStorage;
     }
 
-    public static void SearchLibraryItems(string RequestedItem, Dictionary<string, ILibraryItem> LibraryItemList)
+    //looks through each library item and checks if the title or the call number given matches any items in the list
+    public void SearchLibraryItems(string RequestedItem, Dictionary<string, ILibraryItem> LibraryItemList)
     {
         foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
         {
@@ -35,15 +40,17 @@ public class Library
         }
     }
 
-    public static void DisplayLibraryItems(Dictionary<string, ILibraryItem> LibraryItemList)
+    //this method was for when my library items were not being stored in a json file and just in a dictionary that would reset every time the program ran.
+    public void DisplayLibraryItems(Dictionary<string, ILibraryItem> LibraryItemList)
     {
         foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
         {
             Console.WriteLine(item.Value.GetDetails());
         }
+        
     }
 
-    public static void DisplayPatrons()
+    public void DisplayPatrons()
     {
         var accountData = File.ReadAllText("accounts.json");
         string[] accountList = accountData.Split(",");
@@ -53,32 +60,38 @@ public class Library
         }
     }
 
-
-    public static void RenewItem(string RequestedCallNumber)
+    public void RenewItem(string RequestedCallNumber, Library SnowCollegeLibrary)
     {
-        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];
+        var RequestedItem = (ILibraryItem)SnowCollegeLibrary.LibraryItemList[RequestedCallNumber];
         Console.WriteLine(RequestedItem.Renew(RequestedItem));
     }
 
-    public static void CheckInItem(string RequestedCallNumber, int userInputID)
+    public void CheckInItem(string RequestedCallNumber, int userInputID, Library SnowCollegeLibrary)
     {
-        var requestedAccount = Library.AccountList[userInputID];  //grabs account
-        var RequestedItem = (ILibraryItem)Library.LibraryItemList[RequestedCallNumber];  //grabs item from list
+        var requestedAccount = SnowCollegeLibrary.AccountList[userInputID];  //grabs account
+        var RequestedItem = (ILibraryItem)SnowCollegeLibrary.LibraryItemList[RequestedCallNumber];  //grabs item from list
         Console.WriteLine(RequestedItem.CheckIn(RequestedItem, requestedAccount));      //checks it in using ILibraryItem check in method
     }
 
-    public static void CheckOutItem(int userInputID, string userInputBook)
+    public void CheckOutItem(int userInputID, string userInputBook, Library SnowCollegeLibrary)
     {
-        var requestedAccount = Library.AccountList[userInputID];  //grabs account from list
-        var RequestedItem = (ILibraryItem)Library.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
+        var requestedAccount = SnowCollegeLibrary.AccountList[userInputID];  //grabs account from list
+        var RequestedItem = (ILibraryItem)SnowCollegeLibrary.LibraryItemList[userInputBook];  //converts item to icheckoutable and grabs item from libraryItem list
         Console.WriteLine(RequestedItem.CheckOut(RequestedItem, requestedAccount)); //checkout returns a confirmation that item is checked out
     }
 
-    public static void SaveAllItems(CDJsonFileStorageService CDStorage, BookJsonFileStorageService bookStorage, OversizedBookJsonFileStorageService OVbookStorage)
+    public void SaveBooks()
     {
-        //itemStorage.SaveItems(Library.LibraryItemList);
-        CDStorage.SaveItems(Library.CDList);
-        bookStorage.SaveItems(Library.BookList);
-        OVbookStorage.SaveItems(Library.OversizedBookList);
+        itemStorage.SaveBooks(BookList);
+    }
+
+    public void SaveCDs()
+    {
+        itemStorage.SaveCDs(CDList);
+    }
+
+    public void SaveOversizedBooks()
+    {
+        itemStorage.SaveOversizedBooks(OversizedBookList);
     }
 }

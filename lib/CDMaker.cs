@@ -2,7 +2,7 @@ using MyLibrary.lib;
 
 public class CDMaker
 {
-    public static CD CDMakerForLibrary()
+    public static CD CDMakerForLibrary(Library SnowCollegeLibrary)
     {
         string CDCallNumber;
         while (true)
@@ -10,7 +10,7 @@ public class CDMaker
             Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
             try
             {
-                CDCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
+                CDCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine(), SnowCollegeLibrary);
                 break;
             }
             catch

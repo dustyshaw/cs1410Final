@@ -2,7 +2,7 @@ using MyLibrary.lib;
 
 public class BookMaker
 {
-    public static Book BookMakerforLibrary()
+    public static Book BookMakerforLibrary(Library SnowCollegeLibrary)
     {
         string CallNumber;
         while (true)
@@ -10,7 +10,7 @@ public class BookMaker
             Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
             try
             {
-                CallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine());
+                CallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine(), SnowCollegeLibrary);
                 break;
             }
             catch

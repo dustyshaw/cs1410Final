@@ -15,13 +15,7 @@ namespace MyLibrary
 
             AccountJsonFileStorageService accountStorage = new AccountJsonFileStorageService();
 
-            BookJsonFileStorageService bookStorage = new BookJsonFileStorageService();
-
-            CDJsonFileStorageService CDStorage = new CDJsonFileStorageService();
-
-            OversizedBookJsonFileStorageService OVbookStorage = new OversizedBookJsonFileStorageService();
-
-            Library SnowCollegeLibrary = new Library(accountStorage);
+            Library SnowCollegeLibrary = new Library(accountStorage, itemStorage);
 
             bool programRunning = true;
             while (programRunning == true)
@@ -66,10 +60,12 @@ namespace MyLibrary
                         }
 
                         // Library handles user input entered above and takes care of checking item out
-                        Library.CheckOutItem(RequestedAccID, RequestedBookCallNumber);
+                        SnowCollegeLibrary.CheckOutItem(RequestedAccID, RequestedBookCallNumber, SnowCollegeLibrary);
 
                         //Library takes care of saving all items
-                        Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
+                        SnowCollegeLibrary.SaveBooks();
+                        SnowCollegeLibrary.SaveCDs();
+                        SnowCollegeLibrary.SaveOversizedBooks();
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -82,11 +78,11 @@ namespace MyLibrary
                         Console.WriteLine("Enter Account Id: ");
                         int userInputID = Convert.ToInt32(Console.ReadLine());
 
-                        Library.CheckInItem(RequestedCallNumber, userInputID);
+                        SnowCollegeLibrary.CheckInItem(RequestedCallNumber, userInputID, SnowCollegeLibrary);
 
-                        itemStorage.SaveItems(Library.LibraryItemList);
-
-                        Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
+                        SnowCollegeLibrary.SaveBooks();
+                        SnowCollegeLibrary.SaveCDs();
+                        SnowCollegeLibrary.SaveOversizedBooks();
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -97,10 +93,11 @@ namespace MyLibrary
                         Console.WriteLine("Enter Item CallNumber to renew: ");
                         string RequestedCallNumber = Console.ReadLine();
 
-                        Library.RenewItem(RequestedCallNumber);
+                        SnowCollegeLibrary.RenewItem(RequestedCallNumber, SnowCollegeLibrary);
 
-                        itemStorage.SaveItems(Library.LibraryItemList);
-                        Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
+                        SnowCollegeLibrary.SaveBooks();
+                        SnowCollegeLibrary.SaveCDs();
+                        SnowCollegeLibrary.SaveOversizedBooks();
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -118,7 +115,7 @@ namespace MyLibrary
                             switch (BookType)
                             {
                                 case "Book":
-                                    var NewBookItem = BookMaker.BookMakerforLibrary();
+                                    var NewBookItem = BookMaker.BookMakerforLibrary(SnowCollegeLibrary);
                                     Console.Clear();
                                     Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var userConfirmation = Console.ReadLine();
@@ -128,10 +125,11 @@ namespace MyLibrary
                                         if (userConfirmation == "Y")
                                         {
                                             userConfirmation = "Y";
-                                            Library.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
-                                            Library.BookList.Add(NewBookItem.CallNumber, NewBookItem);
 
-                                            Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
+                                            //New book is added to lists and then saved to a file by SnowCollegeLibrary
+                                            SnowCollegeLibrary.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
+                                            SnowCollegeLibrary.BookList.Add(NewBookItem.CallNumber, NewBookItem);
+                                            SnowCollegeLibrary.SaveBooks();
 
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
@@ -141,6 +139,7 @@ namespace MyLibrary
                                         }
                                         if (userConfirmation == "R")
                                         {
+                                            // Gives the user to exit the block and not saving the book.
                                             userConfirmation = "R";
                                             AskingForType = false;
                                             break;
@@ -155,7 +154,9 @@ namespace MyLibrary
                                     break;
 
                                 case "OversizedBook":
-                                    var OVNewBookItem = OversizedBookMaker.OversizedBookMakerForLibrary();
+
+                                    // "OversizedBookMaker" makes the book for whatever library is passed in. 
+                                    var OVNewBookItem = OversizedBookMaker.OversizedBookMakerForLibrary(SnowCollegeLibrary);
                                     Console.Clear();
 
                                     Console.WriteLine(OVNewBookItem.GetDetails() + $"Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
@@ -166,12 +167,13 @@ namespace MyLibrary
                                         if (OVuserConfirmation == "Y")
                                         {
                                             OVuserConfirmation = "Y";
-                                            var casted = (ILibraryItem)OVNewBookItem;
-                                            Library.LibraryItemList.Add(casted.CallNumber, casted);
-                                            itemStorage.SaveItems(Library.LibraryItemList);
+                                            //var casted = (ILibraryItem)OVNewBookItem;
 
-                                            Library.OversizedBookList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
-                                            Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
+                                            SnowCollegeLibrary.LibraryItemList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
+                                            //itemStorage.SaveItems(SnowCollegeLibrary.LibraryItemList);
+
+                                            //Library.OversizedBookList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
+                                            //Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
 
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
@@ -195,7 +197,7 @@ namespace MyLibrary
                                     break;
 
                                 case "CD":
-                                    CD NewCDItem = CDMaker.CDMakerForLibrary();
+                                    CD NewCDItem = CDMaker.CDMakerForLibrary(SnowCollegeLibrary);
                                     Console.Clear();
 
                                     Console.WriteLine(NewCDItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
@@ -205,18 +207,20 @@ namespace MyLibrary
                                     {
                                         if (CDuserConfirmation == "Y")
                                         {
-                                            CDuserConfirmation = "Y";
-                                            var castedCD = (ILibraryItem)NewCDItem;
-                                            Library.LibraryItemList.Add(castedCD.CallNumber, castedCD);
 
-                                            Library.CDList.Add(NewCDItem.CallNumber, NewCDItem);
-                                            Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
+                                            CDuserConfirmation = "Y";
+                                            SnowCollegeLibrary.LibraryItemList.Add(NewCDItem.CallNumber, NewCDItem);
+
+                                            SnowCollegeLibrary.SaveBooks();
+                                            SnowCollegeLibrary.SaveCDs();
+                                            SnowCollegeLibrary.SaveOversizedBooks();
 
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
                                             Console.ReadLine();
                                             AskingForType = false;
                                             break;
+                                            
                                         }
                                         if (CDuserConfirmation == "R")
                                         {
@@ -251,8 +255,8 @@ namespace MyLibrary
                         int PatronID = Convert.ToInt32(Console.ReadLine());
 
                         Account newAccount = new Account(FName, LName, PatronID);
-                        Library.AccountList.Add(PatronID, newAccount);
-                        accountStorage.SaveAccounts(Library.AccountList);
+                        SnowCollegeLibrary.AccountList.Add(PatronID, newAccount);
+                        accountStorage.SaveAccounts(SnowCollegeLibrary.AccountList);
 
                         Console.WriteLine("New Patron Added: " + newAccount.GetAccountDetails());
 
@@ -260,12 +264,25 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
+                    //not working if I enter something wrong
                     if (UserInput == "SearchLibraryItems")
                     {
-                        Console.WriteLine("Enter in Call Number or Title");
-                        string RequestedItem = Console.ReadLine();
-
-                        Library.SearchLibraryItems(RequestedItem, Library.LibraryItemList);
+                        //Console.WriteLine("Enter in Call Number or Title");
+                        string RequestedItem;
+                        while (true)
+                        {
+                            Console.WriteLine("Enter a call number or title:");
+                            try
+                            {
+                                RequestedItem = ILibraryItem.ParseSearchRequest(Console.ReadLine(), SnowCollegeLibrary);
+                                break;
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid input");
+                            }
+                        }
+                        SnowCollegeLibrary.SearchLibraryItems(RequestedItem, SnowCollegeLibrary.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -273,7 +290,7 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayLibraryItems")
                     {
-                        Library.DisplayLibraryItems(itemStorage.LoadItems());
+                        SnowCollegeLibrary.DisplayLibraryItems(SnowCollegeLibrary.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -281,7 +298,7 @@ namespace MyLibrary
 
                     if (UserInput == "DisplayPatrons")
                     {
-                        Library.DisplayPatrons();
+                        SnowCollegeLibrary.DisplayPatrons();
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
