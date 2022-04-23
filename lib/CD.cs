@@ -20,6 +20,7 @@ public class CD : ILibraryItem
 
         return ("Item successfully checked out to: " + account.FirstName + " " + account.LastName + ".");
     }
+
     public string CheckIn(ILibraryItem item, Account account)
     {
         var castedItem = (CD)item;
@@ -27,12 +28,14 @@ public class CD : ILibraryItem
         castedItem.Availability = ItemAvailability.CheckedIn;
         return ("Item successfully checked in.");
     }
+
     public string Renew(ILibraryItem item)
     {
         var bookitem = (CD)item;
         this.DueDate = DateTime.Today.AddDays(21);
         return ("Item successfully renewed. Now due on: " + DueDate);
     }
+
     public string GetDetails()
     {
         return $"\n \n Item Type: {GetItemType()} \n CallNumber: {CallNumber} \n Title: {Title} \n Artist: {Artist} \n Availability: {this.Availability} \n";

@@ -295,7 +295,8 @@ namespace MyLibrary
                         SnowCollegeLibrary.LoadBooks();
                         foreach (var item in SnowCollegeLibrary.BookList)
                         {
-                            Console.WriteLine(item);
+                            
+                            Console.WriteLine(item.Value.GetDetails());
                         }
 
                         Console.WriteLine("Press Enter to continue");
