@@ -35,11 +35,12 @@ public class Library
             {
                 Console.WriteLine(item.Value.GetDetails().ToString());
             }
-            else
+            if (item.Key == RequestedItem)
             {
                 Console.WriteLine(LibraryItemList[RequestedItem].GetDetails());
             }
         }
+    
     }
 
     //this method was for when my library items were not being stored in a json file and just in a dictionary that would reset every time the program ran.

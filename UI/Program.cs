@@ -269,21 +269,21 @@ namespace MyLibrary
                     //not working if I enter something wrong
                     if (UserInput == "SearchLibraryItems")
                     {
-                        //Console.WriteLine("Enter in Call Number or Title");
-                        string RequestedItem;
-                        while (true)
-                        {
-                            Console.WriteLine("Enter a call number or title:");
-                            try
-                            {
-                                RequestedItem = ILibraryItem.ParseSearchRequest(Console.ReadLine(), SnowCollegeLibrary);
-                                break;
-                            }
-                            catch
-                            {
-                                Console.WriteLine("Invalid input");
-                            }
-                        }
+                        Console.WriteLine("Enter in Call Number or Title");
+                        string RequestedItem = Console.ReadLine();
+                        // while (true)
+                        // {
+                        //     Console.WriteLine("Enter a call number or title:");
+                        //     try
+                        //     {
+                        //         RequestedItem = ILibraryItem.ParseSearchRequest(Console.ReadLine(), SnowCollegeLibrary);
+                        //         break;
+                        //     }
+                        //     catch
+                        //     {
+                        //         Console.WriteLine("Invalid input");
+                        //     }
+                        // }
                         SnowCollegeLibrary.SearchLibraryItems(RequestedItem, SnowCollegeLibrary.LibraryItemList);
 
                         Console.WriteLine("Press Enter to continue");

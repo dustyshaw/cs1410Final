@@ -84,14 +84,15 @@ public interface ILibraryItem
     {
         foreach (KeyValuePair<string, ILibraryItem> item in SnowCollegeLibrary.LibraryItemList)
         {
-            if (item.Value.Title != input)
+            if (item.Value.Title != input && item.Key != input)
             {
                 throw new KeyNotFoundException();
             }
-            if (item.Key != input)
-            {
-                throw new KeyNotFoundException();
-            }
+            
+            // if (item.Key != input)
+            // {
+            //     throw new KeyNotFoundException();
+            // }
         }
         return input;
     }
