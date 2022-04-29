@@ -8,9 +8,7 @@ public class CD : ILibraryItem
     public Int64 Barcode { get; set; }
     public DateTime DueDate { get; set; }
     public ItemAvailability Availability { get; set; }
-    public CD()
-    {
-    }
+    
     public string CheckOut(ILibraryItem item, Account account)
     {
         var castedItem = (CD)item;

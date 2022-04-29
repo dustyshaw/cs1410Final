@@ -15,6 +15,7 @@ namespace MyLibrary
 
             AccountJsonFileStorageService accountStorage = new AccountJsonFileStorageService();
 
+
             Library SnowCollegeLibrary = new Library(accountStorage, itemStorage);
 
             bool programRunning = true;
@@ -39,7 +40,6 @@ namespace MyLibrary
                 var UserInput = Console.ReadLine();
                 if (UserInput != "Exit")
                 {
-
                     if (UserInput == "CheckOut")
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
@@ -203,7 +203,6 @@ namespace MyLibrary
 
                                 case "OversizedBook":
 
-                                    // "OversizedBookMaker" makes the book for whatever library is passed in. 
                                     var OVNewBookItem = OversizedBookMaker.OversizedBookMakerForLibrary(SnowCollegeLibrary);
                                     Console.Clear();
 
@@ -221,6 +220,10 @@ namespace MyLibrary
 
                                             //Library.OversizedBookList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
                                             //Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
+
+                                            SnowCollegeLibrary.SaveBooks();
+                                            SnowCollegeLibrary.SaveCDs();
+                                            SnowCollegeLibrary.SaveOversizedBooks();
 
                                             Console.WriteLine("item Saved");
                                             Console.WriteLine("Press enter to continue");
@@ -276,6 +279,8 @@ namespace MyLibrary
                                     string CDTitle = Console.ReadLine();
                                     Console.WriteLine("Enter Artist Name");
                                     string CDAuthor = Console.ReadLine();
+
+                                    //logic seperated into a "cdmaker" file.  
                                     CD NewCDItem = CDMaker.CDMakerForLibrary(CDTitle, CDAuthor, CDBarcode, CDCallNumber);
                                     Console.Clear();
 
