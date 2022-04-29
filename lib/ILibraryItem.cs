@@ -82,17 +82,37 @@ public interface ILibraryItem
 
     public static string ParseSearchRequest(string input, Library SnowCollegeLibrary)
     {
-        foreach (KeyValuePair<string, ILibraryItem> item in SnowCollegeLibrary.LibraryItemList)
+        // foreach (KeyValuePair<string, ILibraryItem> item in SnowCollegeLibrary.LibraryItemList)
+        // {
+        //     if (item.Value.Title != input && item.Key != input)
+        //     {
+        //         throw new KeyNotFoundException();
+        //     }
+
+        //     // if (item.Key != input)
+        //     // {
+        //     //     throw new KeyNotFoundException();
+        //     // }
+        // }
+        // bool valueExists = SnowCollegeLibrary.LibraryItemList.ContainsValue(input);
+        bool keyExists = SnowCollegeLibrary.LibraryItemList.ContainsKey(input);
+        if (keyExists != true)
         {
-            if (item.Value.Title != input && item.Key != input)
+            throw new KeyNotFoundException();
+        }
+        else
+        {
+            SnowCollegeLibrary.LoadBooks();
+            foreach (var item in SnowCollegeLibrary.BookList)
             {
-                throw new KeyNotFoundException();
+                return item.Value.GetDetails();
             }
-            
-            // if (item.Key != input)
-            // {
-            //     throw new KeyNotFoundException();
-            // }
+
+            SnowCollegeLibrary.LoadOVBooks();
+            foreach (var item in SnowCollegeLibrary.OversizedBookList)
+            {
+                return item.Value.GetDetails();
+            }
         }
         return input;
     }

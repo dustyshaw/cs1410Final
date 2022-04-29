@@ -40,7 +40,7 @@ public class Library
                 return LibraryItemList[RequestedItem].GetDetails();
             }
         }
-        return "";
+        return "hi";
     }
 
     //this method was for when my library items were not being stored in a json file and just in a dictionary that would reset every time the program ran.

@@ -355,20 +355,15 @@ namespace MyLibrary
                     {
                         Console.WriteLine("Enter in Call Number or Title");
                         string RequestedItem = Console.ReadLine();
-                        // while (true)
-                        // {
-                        //     Console.WriteLine("Enter a call number or title:");
-                        //     try
-                        //     {
-                        //         RequestedItem = ILibraryItem.ParseSearchRequest(Console.ReadLine(), SnowCollegeLibrary);
-                        //         break;
-                        //     }
-                        //     catch
-                        //     {
-                        //         Console.WriteLine("Invalid input");
-                        //     }
-                        // }
-                        SnowCollegeLibrary.SearchLibraryItems(RequestedItem, SnowCollegeLibrary.LibraryItemList);
+                        bool keyExists = SnowCollegeLibrary.LibraryItemList.ContainsKey(RequestedItem);
+                        if (keyExists != true)
+                        {
+                            throw new KeyNotFoundException();
+                        }
+                        else
+                        {
+                            SnowCollegeLibrary.SearchLibraryItems(RequestedItem, SnowCollegeLibrary.LibraryItemList);
+                        }
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
@@ -388,6 +383,8 @@ namespace MyLibrary
                         {
                             Console.WriteLine(item.Value.GetDetails());
                         }
+
+
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
