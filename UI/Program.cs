@@ -175,7 +175,6 @@ namespace MyLibrary
                                             userConfirmation = "Y";
 
                                             //New book is added to lists and then saved to a file by SnowCollegeLibrary
-                                            SnowCollegeLibrary.LibraryItemList.Add(NewBookItem.CallNumber, NewBookItem);
                                             SnowCollegeLibrary.BookList.Add(NewBookItem.CallNumber, NewBookItem);
                                             SnowCollegeLibrary.SaveBooks();
 
@@ -215,10 +214,9 @@ namespace MyLibrary
                                         {
                                             OVuserConfirmation = "Y";
 
-                                            SnowCollegeLibrary.LibraryItemList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
-                                            //itemStorage.SaveItems(SnowCollegeLibrary.LibraryItemList);
+                                           //itemStorage.SaveItems(SnowCollegeLibrary.LibraryItemList);
 
-                                            //Library.OversizedBookList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
+                                            SnowCollegeLibrary.OversizedBookList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
                                             //Library.SaveAllItems(CDStorage, bookStorage, OVbookStorage);
 
                                             SnowCollegeLibrary.SaveBooks();
@@ -293,7 +291,6 @@ namespace MyLibrary
                                         {
 
                                             CDuserConfirmation = "Y";
-                                            SnowCollegeLibrary.LibraryItemList.Add(NewCDItem.CallNumber, NewCDItem);
                                             SnowCollegeLibrary.CDList.Add(NewCDItem.CallNumber, NewCDItem);
 
                                             SnowCollegeLibrary.SaveBooks();
@@ -350,20 +347,22 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
-                    //not working if I enter something wrong
+                    //not working if I enter something wrong  Not working even if I enter the correct thing
                     if (UserInput == "SearchLibraryItems")
                     {
                         Console.WriteLine("Enter in Call Number or Title");
                         string RequestedItem = Console.ReadLine();
-                        bool keyExists = SnowCollegeLibrary.LibraryItemList.ContainsKey(RequestedItem);
-                        if (keyExists != true)
+                        
+                        try
                         {
-                            throw new KeyNotFoundException();
+                            var item = SnowCollegeLibrary.SearchLibraryItems(RequestedItem);
+                            Console.WriteLine(item.GetDetails());
                         }
-                        else
+                        catch
                         {
-                            SnowCollegeLibrary.SearchLibraryItems(RequestedItem, SnowCollegeLibrary.LibraryItemList);
+                            Console.WriteLine("Item not found.  Try again.");
                         }
+
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();

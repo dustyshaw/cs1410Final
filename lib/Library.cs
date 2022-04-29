@@ -2,7 +2,26 @@ namespace MyLibrary.lib;
 
 public class Library
 {
-    public Dictionary<string, ILibraryItem> LibraryItemList ;
+    public Dictionary<string, ILibraryItem> LibraryItemList
+    {
+        get
+        {
+            var items = new Dictionary<string, ILibraryItem>();
+            foreach (var book in BookList)
+            {
+                items.Add(book.Key, book.Value);
+            }
+            foreach (var cd in CDList)
+            {
+                items.Add(cd.Key, cd.Value);
+            }
+            foreach (var oversized in OversizedBookList)
+            {
+                items.Add(oversized.Key, oversized.Value);
+            }
+            return items;
+        }
+    }
 
     public Dictionary<int, Account> AccountList;
 
@@ -16,42 +35,39 @@ public class Library
 
     public Library(IAccountStorageService storage, IItemStorageService itemStorage)
     {
-        LibraryItemList = new Dictionary<string, ILibraryItem>();
         AccountList = new Dictionary<int, Account>();
 
         BookList = itemStorage.LoadBooks();
         CDList = itemStorage.LoadCDs();
         OversizedBookList = itemStorage.LoadOversizedBooks();
-        
+
         this.itemStorage = itemStorage;
     }
 
     //looks through each library item and checks if the title or the call number given matches any items in the list
-    public string SearchLibraryItems(string RequestedItem, Dictionary<string, ILibraryItem> LibraryItemList)
+    public ILibraryItem SearchLibraryItems(string RequestedItem)
     {
-        foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
+        bool keyExists = LibraryItemList.ContainsKey(RequestedItem);
+
+        if (keyExists != true)
         {
-            if (item.Value.Title == RequestedItem)
-            {
-                return item.Value.GetDetails().ToString();
-            }
-            if (item.Key == RequestedItem)
-            {
-                return LibraryItemList[RequestedItem].GetDetails();
-            }
+            throw new KeyNotFoundException();
         }
-        return "hi";
+        else
+        {
+           return LibraryItemList[RequestedItem];
+        }
     }
 
     //this method was for when my library items were not being stored in a json file and just in a dictionary that would reset every time the program ran.
-    public string DisplayLibraryItems(Dictionary<string, ILibraryItem> LibraryItemList)
-    {
-        foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
-        {
-            return item.Value.GetDetails();
-        }
-        return "";
-    }
+    // public string DisplayLibraryItems(Dictionary<string>)
+    // {
+    //     foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
+    //     {
+    //         return item.Value.GetDetails();
+    //     }
+    //     return "";
+    // }
 
     public string DisplayPatrons()
     {
@@ -67,7 +83,7 @@ public class Library
     public string RenewItem(string RequestedCallNumber, Library SnowCollegeLibrary)
     {
         var RequestedItem = (ILibraryItem)SnowCollegeLibrary.LibraryItemList[RequestedCallNumber];  //grabs item by call number and casts it as a generic lib item
-        return RequestedItem.Renew(RequestedItem);                                      
+        return RequestedItem.Renew(RequestedItem);
     }
 
     public string CheckInItem(string RequestedCallNumber, int userInputID, Library SnowCollegeLibrary)
