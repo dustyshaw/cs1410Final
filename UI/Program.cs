@@ -62,7 +62,7 @@ namespace MyLibrary
                         // Library handles user input entered above and takes care of checking item out
                         SnowCollegeLibrary.CheckOutItem(RequestedAccID, RequestedBookCallNumber, SnowCollegeLibrary);
 
-                        //Library takes care of saving all items
+                        //Library saves all items
                         SnowCollegeLibrary.SaveBooks();
                         SnowCollegeLibrary.SaveCDs();
                         SnowCollegeLibrary.SaveOversizedBooks();
@@ -115,7 +115,55 @@ namespace MyLibrary
                             switch (BookType)
                             {
                                 case "Book":
-                                    var NewBookItem = BookMaker.BookMakerforLibrary(SnowCollegeLibrary);
+                                    string CallNumber;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
+                                        try
+                                        {
+                                            CallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine(), SnowCollegeLibrary);
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("Invalid CallNumber");
+                                        }
+                                    }
+                                    Console.WriteLine("Enter Item Title");
+                                    string Title = Console.ReadLine();
+                                    Console.WriteLine("Enter Authors Full Name");
+                                    string Author = Console.ReadLine();
+                                    Int64 ISBN;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter ISBN");
+                                        try
+                                        {
+                                            ISBN = ILibraryItem.ParseISBN(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid ISBN.  Must be 10 or 13 digits.");
+                                        }
+                                    }
+
+                                    Int64 Barcode;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Barcode");
+                                        try
+                                        {
+                                            Barcode = ILibraryItem.ParseBarcodes(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid Barcode.  Must be 12 digits.");
+                                        }
+                                    }
+
+                                    var NewBookItem = BookMaker.BookMakerforLibrary(CallNumber, Title, Author, Barcode, ISBN);
                                     Console.Clear();
                                     Console.WriteLine(NewBookItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
                                     var userConfirmation = Console.ReadLine();
@@ -167,7 +215,6 @@ namespace MyLibrary
                                         if (OVuserConfirmation == "Y")
                                         {
                                             OVuserConfirmation = "Y";
-                                            //var casted = (ILibraryItem)OVNewBookItem;
 
                                             SnowCollegeLibrary.LibraryItemList.Add(OVNewBookItem.CallNumber, OVNewBookItem);
                                             //itemStorage.SaveItems(SnowCollegeLibrary.LibraryItemList);
@@ -197,7 +244,39 @@ namespace MyLibrary
                                     break;
 
                                 case "CD":
-                                    CD NewCDItem = CDMaker.CDMakerForLibrary(SnowCollegeLibrary);
+                                    string CDCallNumber;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Item CallNumber.  This is usually found in the front cover of your book (ex. 578.3S)");
+                                        try
+                                        {
+                                            CDCallNumber = ILibraryItem.ParseCallNumbers(Console.ReadLine(), SnowCollegeLibrary);
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("Invalid CallNumber");
+                                        }
+                                    }
+                                    Int64 CDBarcode;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Enter Barcode");
+                                        try
+                                        {
+                                            CDBarcode = ILibraryItem.ParseBarcodes(Console.ReadLine());
+                                            break;
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("invalid Barcode.  Must be 12 digits.");
+                                        }
+                                    }
+                                    Console.WriteLine("Enter Item Title");
+                                    string CDTitle = Console.ReadLine();
+                                    Console.WriteLine("Enter Artist Name");
+                                    string CDAuthor = Console.ReadLine();
+                                    CD NewCDItem = CDMaker.CDMakerForLibrary(CDTitle, CDAuthor, CDBarcode, CDCallNumber);
                                     Console.Clear();
 
                                     Console.WriteLine(NewCDItem.GetDetails() + " \n Enter 'Y' to confirm item details, 'R' to exit and not save item details : ");
@@ -312,7 +391,7 @@ namespace MyLibrary
                     if (UserInput == "DisplayPatrons")
                     {
                         SnowCollegeLibrary.DisplayPatrons();
-                        
+
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }

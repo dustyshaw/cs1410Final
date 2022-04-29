@@ -10,9 +10,6 @@ public class Book : ILibraryItem
     public ItemAvailability Availability { get; set; }
     public ItemAvailability availability = ItemAvailability.CheckedIn;
 
-    public Book()
-    {
-    }
 
     public string CheckOut(ILibraryItem item, Account account)
     {
