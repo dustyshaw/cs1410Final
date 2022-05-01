@@ -24,7 +24,7 @@ namespace MyLibrary
                 Console.Clear();
                 Console.WriteLine(@"Welcome to the Library App where library workers can keep track of library items,
             check out library items, renew them, and add library patrons.");
-                Console.WriteLine("Enter in one of the following commands (ex. to check out a book, enter the word 'CheckOut'):");
+                Console.WriteLine("Enter in one of the following commands (ex. to check out a book, enter a 1):");
                 Console.WriteLine(@"
                 1. CheckOut
                 2. CheckIn
@@ -37,10 +37,10 @@ namespace MyLibrary
                 9. Exit -- Exits program
                 ");
 
-                var UserInput = Console.ReadLine();
-                if (UserInput != "Exit")
+                var UserInput = Convert.ToInt32(Console.ReadLine());
+                if (UserInput != 9)
                 {
-                    if (UserInput == "CheckOut")
+                    if (UserInput == 1)
                     {
                         Console.WriteLine("Enter Item CallNumber to check out: ");
                         string RequestedBookCallNumber = (Console.ReadLine());
@@ -71,7 +71,7 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
-                    if (UserInput == "CheckIn")
+                    if (UserInput == 2)
                     {
                         Console.WriteLine("Enter Item CallNumber to check in: ");
                         string RequestedCallNumber = Console.ReadLine();
@@ -88,7 +88,7 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
-                    if (UserInput == "Renew")
+                    if (UserInput == 3)
                     {
                         Console.WriteLine("Enter Item CallNumber to renew: ");
                         string RequestedCallNumber = Console.ReadLine();
@@ -103,18 +103,18 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
-                    if (UserInput == "AddLibraryItem")
+                    if (UserInput == 4)
                     {
                         Console.WriteLine("Select Item Type:");
-                        Console.WriteLine("\n Book \n CD \n OversizedBook \n ");
-                        string BookType = Console.ReadLine();
+                        Console.WriteLine("\n 1. Book \n 2. OversizedBook \n 3. CD \n ");
+                        int BookType = Convert.ToInt32(Console.ReadLine());
 
                         bool AskingForType = true;
                         while (AskingForType == true)
                         {
                             switch (BookType)
                             {
-                                case "Book":
+                                case 1:
                                     string CallNumber;
                                     while (true)
                                     {
@@ -200,7 +200,7 @@ namespace MyLibrary
                                     AskingForType = false;
                                     break;
 
-                                case "OversizedBook":
+                                case 2:
 
                                     var OVNewBookItem = OversizedBookMaker.OversizedBookMakerForLibrary(SnowCollegeLibrary);
                                     Console.Clear();
@@ -244,7 +244,7 @@ namespace MyLibrary
                                     AskingForType = false;
                                     break;
 
-                                case "CD":
+                                case 3:
                                     string CDCallNumber;
                                     while (true)
                                     {
@@ -328,7 +328,7 @@ namespace MyLibrary
                         }
                     }
 
-                    if (UserInput == "AddNewPatron")
+                    if (UserInput == 5)
                     {
                         Console.WriteLine("Enter Patrons First Name: ");
                         string FName = Console.ReadLine();
@@ -348,7 +348,7 @@ namespace MyLibrary
                     }
 
                     //not working if I enter something wrong  Not working even if I enter the correct thing
-                    if (UserInput == "SearchLibraryItems")
+                    if (UserInput == 6)
                     {
                         Console.WriteLine("Enter in Call Number or Title");
                         string RequestedItem = Console.ReadLine();
@@ -368,7 +368,7 @@ namespace MyLibrary
                         Console.ReadLine();
                     }
 
-                    if (UserInput == "DisplayLibraryItems")
+                    if (UserInput == 7)
                     {
                         //SnowCollegeLibrary.DisplayLibraryItems(SnowCollegeLibrary.LibraryItemList);
                         SnowCollegeLibrary.LoadBooks();
@@ -383,13 +383,11 @@ namespace MyLibrary
                             Console.WriteLine(item.Value.GetDetails());
                         }
 
-
-
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
                     }
 
-                    if (UserInput == "DisplayPatrons")
+                    if (UserInput == 8)
                     {
                         SnowCollegeLibrary.DisplayPatrons();
 

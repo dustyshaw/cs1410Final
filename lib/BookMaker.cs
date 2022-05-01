@@ -2,7 +2,7 @@ using MyLibrary.lib;
 
 public class BookMaker
 {
-    public static Book BookMakerforLibrary(string Title, string Author, string CallNumber, Int64 ISBN, Int64 Barcode)
+    public static Book BookMakerforLibrary(string CallNumber, string Title, string Author, Int64 Barcode, Int64 ISBN)
     {
         Book NewBookItem = new Book();
         NewBookItem.Author = Author;
