@@ -59,16 +59,6 @@ public class Library
         }
     }
 
-    //this method was for when my library items were not being stored in a json file and just in a dictionary that would reset every time the program ran.
-    // public string DisplayLibraryItems(Dictionary<string>)
-    // {
-    //     foreach (KeyValuePair<string, ILibraryItem> item in LibraryItemList)
-    //     {
-    //         return item.Value.GetDetails();
-    //     }
-    //     return "";
-    // }
-
     public string DisplayPatrons()
     {
         var accountData = File.ReadAllText("accounts.json");    //reads from json file and returns account objects
@@ -77,7 +67,7 @@ public class Library
         {
             return account;
         }
-        return "";
+        return accountData;
     }
 
     public string RenewItem(string RequestedCallNumber, Library SnowCollegeLibrary)

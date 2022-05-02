@@ -389,7 +389,7 @@ namespace MyLibrary
 
                     if (UserInput == 8)
                     {
-                        SnowCollegeLibrary.DisplayPatrons();
+                        Console.WriteLine(SnowCollegeLibrary.DisplayPatrons());
 
                         Console.WriteLine("Press Enter to continue");
                         Console.ReadLine();
